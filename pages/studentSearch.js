@@ -1,14 +1,24 @@
-import Head from 'next/head'
-import Student from '../components/studentListItem';
-import styles from '../styles/StudentSearch.module.css'
+import Head from "next/head";
+import Student from "../components/studentListItem";
+import styles from "../styles/StudentSearch.module.css";
+import Link from "next/link";
 
-export default function studentSearch(){
-    return (
-        <div>
-            <Student firstName="John" lastName="Doe" id="id"/>
-            <h1>This is the student search page</h1>
+const buttonColor = "#0F5787";
 
-            <button className={styles.button}>Add New</button>
-        </div>
-    )
+export default function studentSearch() {
+  return (
+    <div>
+      <Student firstName="John" lastName="Doe" id="id" />
+      <h1>This is the student search page</h1>
+
+      <Link href="/">
+        <button
+          className={styles.button}
+          style={{ backgroundColor: buttonColor }}
+        >
+          Add New
+        </button>
+      </Link>
+    </div>
+  );
 }

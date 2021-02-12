@@ -8,6 +8,10 @@ const studentListItem = ({ firstName, lastName, id, img }) => {
     )
 }
 
+studentListItem.defaultProps = {
+    img: "" //TODO
+}
+
 studentListItem.propTypes = {
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
