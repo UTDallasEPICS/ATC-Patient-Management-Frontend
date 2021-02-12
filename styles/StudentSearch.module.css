@@ -1,5 +1,5 @@
 .button {
-  background-color: '#0F5787';
+  background-color: "#0F5787";
   /* display: inline-block; */
   /* background: #000; */
   color: #fff;
@@ -11,4 +11,13 @@
   text-decoration: none;
   font-size: 15px;
   font-family: inherit;
+}
+
+.level {
+  list-style-type: none;
+  overflow: hidden;
+  padding: 5px 0;
+}
+.levelItem{
+  float: left;
 }

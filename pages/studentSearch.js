@@ -8,8 +8,13 @@ const buttonColor = "#0F5787";
 export default function studentSearch() {
   return (
     <div>
-      <Student firstName="John" lastName="Doe" id="id" />
-      <h1>This is the student search page</h1>
+      <div>
+        <Student firstName="John" lastName="Doe" id="id" />
+      </div>
+      <div>
+        <h1>This is the student search page</h1>
+      </div>
+
 
       <Link href="/">
         <button
