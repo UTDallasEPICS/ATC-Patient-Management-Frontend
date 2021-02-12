@@ -11,7 +11,7 @@ const studentListItem = ({ firstName, lastName, id, img }) => {
         </div>
         <div className={styles.levelItem} style={{paddingLeft: "10px"}}>
           <p>
-            Student: {firstName} {lastName}
+            {firstName} {lastName}
           </p>
         </div>
       </div>
