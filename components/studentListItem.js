@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import Avatar from "../components/Avatar";
+import Avatar from "./Avatar";
 import styles from "../styles/StudentSearch.module.css";
 
-const studentListItem = ({ firstName, lastName, id, img }) => {
+const StudentListItem = ({ firstName, lastName, id, img }) => {
   return (
     <div>
       <div className={styles.level}>
@@ -19,14 +19,14 @@ const studentListItem = ({ firstName, lastName, id, img }) => {
   );
 };
 
-studentListItem.defaultProps = {
+StudentListItem.defaultProps = {
   img: "/default-avatar.jpg",
 };
 
-studentListItem.propTypes = {
+StudentListItem.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
 };
 
-export default studentListItem;
+export default StudentListItem;

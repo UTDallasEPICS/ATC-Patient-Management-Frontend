@@ -1,3 +1,12 @@
+.studentSearchPage {
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center;
+  flex-direction: column; */
+  /* margin: auto;
+  max-width: 960px; */
+}
+
 .button {
   background-color: "#0F5787";
   /* display: inline-block; */
@@ -20,4 +29,12 @@
 }
 .levelItem{
   float: left;
+}
+
+.searchBox {
+  margin-top: 20px;
+  width: 300px;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
 }

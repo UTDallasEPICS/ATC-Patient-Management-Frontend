@@ -1,22 +1,35 @@
 import Head from "next/head";
-import Student from "../components/studentListItem";
+// import Student from "../components/StudentListItem";
 import styles from "../styles/StudentSearch.module.css";
 import Link from "next/link";
+import StudentList from "../components/StudentList";
+import { useState } from "react";
 
 const buttonColor = "#0F5787";
 
-export default function studentSearch() {
+export default function studentSearch({ students }) {
+  const [searchTerm, setSearchTerm] = useState("");
   return (
-    <div>
+    <div className={styles.studentSearchPage}>
+      <input
+        className={styles.searchBox}
+        type="text"
+        placeholder="Search Student..."
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
+      />
+
       <div>
-        <Student firstName="John" lastName="Doe" id="id" />
+        {/* <Student firstName="John" lastName="Doe" id="id"/>
         <Student firstName="John" lastName="Doe" id="id" img="https://picsum.photos/200/300"/>
-        <Student firstName="John" lastName="Doe" id="id" img="https://picsum.photos/200"/>
+        <Student firstName="John" lastName="Doe" id="id" img="https://picsum.photos/400"/> */}
+
+        <StudentList students={students} searchTerm={searchTerm}/>
       </div>
       <div>
         <h1>This is the student search page</h1>
       </div>
-
 
       <Link href="/">
         <button
@@ -29,3 +42,36 @@ export default function studentSearch() {
     </div>
   );
 }
+
+export const getServerSideProps = async () => {
+  // const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=6`)
+  // // const res = await fetch(`https://randomuser.me/api/`)
+  // const students = await res.json()
+
+  const students = [
+    {
+      id: 1,
+      firstName: "Billy",
+      lastName: "Doe",
+      img: "",
+    },
+    {
+      id: 2,
+      firstName: "Billy",
+      lastName: "Joel",
+      img: "https://picsum.photos/200/300",
+    },
+    {
+      id: 3,
+      firstName: "Johnny",
+      lastName: "Lennon",
+      img: "https://picsum.photos/200",
+    },
+  ];
+
+  return {
+    props: {
+      students,
+    },
+  };
+};
