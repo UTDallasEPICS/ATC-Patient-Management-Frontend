@@ -1,5 +1,3 @@
-import Head from "next/head";
-// import Student from "../components/StudentListItem";
 import styles from "../styles/StudentSearch.module.css";
 import Link from "next/link";
 import StudentList from "../components/StudentList";
@@ -21,7 +19,7 @@ export default function studentSearch({ students }) {
       />
 
       <div>
-        <StudentList students={students} searchTerm={searchTerm}/>
+        <StudentList students={students} searchTerm={searchTerm} />
       </div>
       <div>
         <h1>This is the student search page</h1>
@@ -62,6 +60,11 @@ export const getServerSideProps = async () => {
       firstName: "Johnny",
       lastName: "Lennon",
       img: "https://picsum.photos/200",
+    },
+    {
+      id: 4,
+      firstName: "Lily",
+      lastName: "Marshall",
     },
   ];
 

@@ -7,16 +7,16 @@ const StudentListItem = ({ firstName, lastName, id, img }) => {
   return (
     <div>
       <Link href="/">
-      <div className={styles.level}>
-        <div className={styles.levelItem}>
-          <Avatar img={img}></Avatar>
+        <div className={styles.level}>
+          <div className={styles.levelItem}>
+            <Avatar img={img}></Avatar>
+          </div>
+          <div className={styles.levelItem} style={{ paddingLeft: "10px" }}>
+            <p>
+              {firstName} {lastName}
+            </p>
+          </div>
         </div>
-        <div className={styles.levelItem} style={{paddingLeft: "10px"}}>
-          <p>
-            {firstName} {lastName}
-          </p>
-        </div>
-      </div>
       </Link>
     </div>
   );
