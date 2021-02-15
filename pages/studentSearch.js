@@ -2,34 +2,41 @@ import styles from "../styles/StudentSearch.module.css";
 import Link from "next/link";
 import StudentList from "../components/StudentList";
 import { useState } from "react";
+import Header from "../components/Header";
 
 const buttonColor = "#0F5787";
 
 export default function studentSearch({ students }) {
   const [searchTerm, setSearchTerm] = useState("");
   return (
-    <div className={styles.studentSearchPage}>
-      <input
-        className={styles.searchBox}
-        type="text"
-        placeholder="Search Student..."
-        onChange={(e) => {
-          setSearchTerm(e.target.value);
-        }}
-      />
+    <div>
+      <Header pageTitle="Student Search">
 
-      <div>
-        <StudentList students={students} searchTerm={searchTerm} />
+      </Header>
+
+      <div className={styles.studentSearchPage}>
+        <input
+          className={styles.searchBox}
+          type="text"
+          placeholder="Search Student..."
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+        />
+
+        <div>
+          <StudentList students={students} searchTerm={searchTerm} />
+        </div>
+
+        <Link href="/">
+          <button
+            className={styles.button}
+            style={{ backgroundColor: buttonColor }}
+          >
+            Add New
+          </button>
+        </Link>
       </div>
-
-      <Link href="/">
-        <button
-          className={styles.button}
-          style={{ backgroundColor: buttonColor }}
-        >
-          Add New
-        </button>
-      </Link>
     </div>
   );
 }
