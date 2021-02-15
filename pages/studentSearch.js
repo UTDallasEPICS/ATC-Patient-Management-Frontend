@@ -21,10 +21,6 @@ export default function studentSearch({ students }) {
       />
 
       <div>
-        {/* <Student firstName="John" lastName="Doe" id="id"/>
-        <Student firstName="John" lastName="Doe" id="id" img="https://picsum.photos/200/300"/>
-        <Student firstName="John" lastName="Doe" id="id" img="https://picsum.photos/400"/> */}
-
         <StudentList students={students} searchTerm={searchTerm}/>
       </div>
       <div>

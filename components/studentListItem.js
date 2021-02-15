@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import Avatar from "./Avatar";
 import styles from "../styles/StudentSearch.module.css";
+import Link from "next/link";
 
 const StudentListItem = ({ firstName, lastName, id, img }) => {
   return (
     <div>
+      <Link href="/">
       <div className={styles.level}>
         <div className={styles.levelItem}>
           <Avatar img={img}></Avatar>
@@ -15,6 +17,7 @@ const StudentListItem = ({ firstName, lastName, id, img }) => {
           </p>
         </div>
       </div>
+      </Link>
     </div>
   );
 };
