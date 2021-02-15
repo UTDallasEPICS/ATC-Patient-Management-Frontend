@@ -32,7 +32,7 @@ export default function studentSearch({ students }) {
           <StudentList students={students} searchTerm={searchTerm} />
         </div>
 
-        <Link href="/">
+        <Link href="/newStudent">
           <button
             className={styles.button}
             style={{ backgroundColor: buttonColor }}

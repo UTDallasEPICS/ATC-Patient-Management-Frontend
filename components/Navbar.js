@@ -70,10 +70,10 @@ const Navbar = ({ pageTitle }) => {
           </button>
           <div className={styles.content}>
             <ul className={styles.indentedMenu}>
-              <Link href="/">
+              <Link href="/studentSearch">
                 <li className={styles.link}>Search</li>
               </Link>
-              <Link href="/">
+              <Link href="/newStudent">
                 <li className={styles.link}>Add new</li>
               </Link>
             </ul>
