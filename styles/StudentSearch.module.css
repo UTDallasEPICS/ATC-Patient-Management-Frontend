@@ -1,6 +1,8 @@
 .container {
-  display: flex;
+  display: block; 
   flex-direction: column;
+  overflow-y: hidden;
+  /* border: 1px solid red;  */
 }
 
 .studentSearchPage {
@@ -73,3 +75,5 @@
     overflow-y: visible;
   }
 }
+
+body .container { overflow-y: hidden; }

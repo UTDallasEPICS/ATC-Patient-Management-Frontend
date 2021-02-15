@@ -1,5 +1,4 @@
 .banner {
-  /* margin-top: 0 !important; */
   padding-top: 10px;
 
   background-color: #0f5787;
@@ -10,7 +9,6 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* text-align: center; */
 }
 
 .pageTitle {
@@ -161,7 +159,7 @@
  {
    position: absolute;
    width: 300px;
-   height: 150vh;
+   overflow-y: hidden;
    margin: -100px 0 0 -50px;
    padding: 50px;
    padding-top: 125px;
