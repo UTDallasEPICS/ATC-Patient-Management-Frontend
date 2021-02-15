@@ -3,13 +3,24 @@
 
   background-color: #0f5787;
   margin-right:0;
-  /* height: ; */
+  height: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* text-align: center; */
 }
 
 .pageTitle {
   color: white;
   font-size: larger;
   text-align: center;
+  z-index: 3;
+
+  /* display: inline-block; */
+  /* vertical-align: middle; */
+  /* justify-content: center; */
 }
 
 /*
@@ -37,9 +48,9 @@
  .menuToggle
  {
    display: block;
-   position: relative;
-   top: 50px;
-   left: 50px;
+   position: absolute;
+   left: 10px;
+  
    
    z-index: 1;
    
@@ -57,7 +68,7 @@
  
  .link:hover
  {
-   color: tomato;
+   /* color: tomato; */
  }
  
  
@@ -178,3 +189,43 @@
  {
    transform: none;
  }
+
+ .indentedMenu {
+    list-style-type:none;
+    background: #0f5787;
+    margin-left: -30px;
+ }
+
+ /* Style the button that is used to open and close the collapsible content */
+.collapsible {
+    background: #0f5787;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    outline: none;
+    padding-left: 0;
+    color: white;
+  }
+  
+  /* Style the collapsible content. Note: hidden by default */
+  .content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    /* background-color: #f1f1f1; */
+  }
+
+ 
+
+ /* .indentedLink
+ {
+   text-decoration: none;
+   color: white;
+   
+   transition: color 0.3s ease;
+ }
+
+ .indetedLink:hover
+ {
+   color: tomato;
+ } */
