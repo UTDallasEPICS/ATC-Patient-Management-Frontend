@@ -1,0 +1,60 @@
+.textArea {
+    margin-top: 20px;
+    min-height: 40px;
+    font-size: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+  
+    border-radius: 15px;
+    border: 1px solid gray;
+   
+    padding-top: 20px;
+    padding-bottom: 0;
+  
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.textArea::-webkit-scrollbar {
+    display: none;
+  }
+
+.searchBox {
+    margin-top: 20px;
+    height: 40px;
+    font-size: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+  
+    border-radius: 15px;
+    border: 1px solid gray;
+    padding: 20px;
+  
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+
+    /* overflow-wrap: break-word !important; */
+    /* word-wrap: break-word;
+        word-break: break-all; */
+  }
+  
+  .searchBox:hover {
+    border: 2px solid gray;
+  }
+
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+  }
+
+  @media screen and (min-width: 768px) {
+    .inputs {
+      padding-left: 20vw;
+      padding-right: 20vw;
+    }
+  }
