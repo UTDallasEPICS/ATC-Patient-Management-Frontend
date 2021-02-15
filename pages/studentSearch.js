@@ -48,8 +48,8 @@ export const getServerSideProps = async () => {
     },
     {
       id: 2,
-      firstName: "Billy",
-      lastName: "Joel",
+      firstName: "Alison",
+      lastName: "Cooper",
       img: "https://picsum.photos/200/300",
     },
     {
@@ -65,29 +65,30 @@ export const getServerSideProps = async () => {
     },
     {
       id: 5,
-      firstName: "Lily",
+      firstName: "Alice",
       lastName: "Marshall",
     },
     {
       id: 6,
       firstName: "Lily",
-      lastName: "Marshall",
+      lastName: "Cooper",
     },
     {
       id: 7,
-      firstName: "Lily",
-      lastName: "Marshall",
+      firstName: "Billie",
+      lastName: "Doe",
     },
     {
       id: 8,
-      firstName: "Lily",
-      lastName: "Marshall",
+      firstName: "Billy",
+      lastName: "Elrond",
     },
     {
       id: 9,
       firstName: "Lily",
       lastName: "Marshall",
     },
+    
   ];
 
   return {
