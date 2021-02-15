@@ -8,13 +8,15 @@ const StudentList = ({ students, searchTerm }) => {
     <div className={styles.studentList}>
       {students
         .filter((student) => {
-          if (searchTerm == "") return student;
-          else if (
+          if (searchTerm == "") {
+            return student;
+          } else if (
             (student.firstName + " " + student.lastName)
               .toLowerCase()
               .includes(searchTerm.toLowerCase())
-          )
+          ) {
             return student;
+          }
         })
         .map((student) => (
           <StudentListItem

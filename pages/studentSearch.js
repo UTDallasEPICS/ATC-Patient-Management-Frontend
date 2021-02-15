@@ -8,7 +8,7 @@ const buttonColor = "#0F5787";
 export default function studentSearch({ students }) {
   const [searchTerm, setSearchTerm] = useState("");
   return (
-    <div className={styles.container}>
+    <div className={styles.studentSearchPage}>
       <input
         className={styles.searchBox}
         type="text"
@@ -64,47 +64,7 @@ export const getServerSideProps = async () => {
       lastName: "Marshall",
     },
     {
-      id: 4,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-    {
-      id: 4,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-    {
-      id: 4,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-    {
-      id: 4,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-    {
-      id: 4,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-    {
-      id: 4,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-    {
-      id: 4,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-    {
-      id: 4,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-    {
-      id: 4,
+      id: 5,
       firstName: "Lily",
       lastName: "Marshall",
     },

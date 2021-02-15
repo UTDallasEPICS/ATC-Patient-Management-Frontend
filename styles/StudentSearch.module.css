@@ -1,4 +1,4 @@
-.container {
+.studentSearchPage {
   display: flex;
   justify-content: center;
   /* align-items: center; */
@@ -26,7 +26,7 @@
   font-size: 15px;
   font-family: inherit;
   
-  max-width: 500px;
+  /* max-width: 10000vh; */
   margin: auto;
 }
 
@@ -59,17 +59,16 @@
 }
 
 .studentList{
+
+  /*Todo: stick these two in a media query that only makes them apply to mobile  */
   max-height: 75vh;
-  overflow: scroll;
-
-  /* border-color: #f7f7f7;
-  border-width: 5px;
-  border-style: solid;
-  border-radius: 2%; */
-
+  overflow-y: scroll;
+  /*  */
   padding-left: 10px;
   padding-right: 10px;
 
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+
