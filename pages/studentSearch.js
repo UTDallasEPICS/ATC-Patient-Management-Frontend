@@ -88,8 +88,19 @@ export const getServerSideProps = async () => {
       firstName: "Lily",
       lastName: "Marshall",
     },
-    
   ];
+
+  students.sort(function (a, b) {
+    const aName = a.firstName + a.lastName;
+    const bName = b.firstName + b.lastName;
+    if (aName < bName) {
+      return -1;
+    }
+    if (aName > bName) {
+      return 1;
+    }
+    return 0;
+  });
 
   return {
     props: {

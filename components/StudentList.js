@@ -10,17 +10,6 @@ const StudentList = ({ students, searchTerm }) => {
       style={
         students.length > 9 ? { overflowY: "scroll", maxHeight: "75vh" } : {}
       }
-      {...students.sort(function (a, b) {
-        const aName = a.firstName + a.lastName;
-        const bName = b.firstName + b.lastName;
-        if (aName < bName) {
-          return -1;
-        }
-        if (aName > bName) {
-          return 1;
-        }
-        return 0;
-      })}
     >
       {students
         .filter((student) => {
