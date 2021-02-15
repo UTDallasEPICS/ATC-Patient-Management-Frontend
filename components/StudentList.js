@@ -5,7 +5,12 @@ import styles from "../styles/StudentSearch.module.css";
 
 const StudentList = ({ students, searchTerm }) => {
   return (
-    <div className={styles.studentList}>
+    <div
+      className={styles.studentList}
+      style={
+        students.length > 9 ? { overflowY: "scroll", maxHeight: "75vh" } : {}
+      }
+    >
       {students
         .filter((student) => {
           if (searchTerm == "") {
