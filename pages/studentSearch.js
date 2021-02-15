@@ -2,7 +2,8 @@ import styles from "../styles/StudentSearch.module.css";
 import Link from "next/link";
 import StudentList from "../components/StudentList";
 import { useState } from "react";
-import Header from "../components/Header";
+import Navbar from "../components/Navbar";
+import Head from 'next/head'
 
 const buttonColor = "#0F5787";
 
@@ -10,9 +11,14 @@ export default function studentSearch({ students }) {
   const [searchTerm, setSearchTerm] = useState("");
   return (
     <div>
-      <Header pageTitle="Student Search">
+       <Head>
+        <title>Student Search</title>
+        <link rel="icon" href="/atc-logo.png" />
+      </Head>
 
-      </Header>
+      <Navbar pageTitle="Student Search">
+
+      </Navbar>
 
       <div className={styles.studentSearchPage}>
         <input

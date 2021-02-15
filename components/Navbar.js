@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 import styles from '../styles/Header.module.css'
 
-const Header = ({ pageTitle }) => {
+const Navbar = ({ pageTitle }) => {
     return (
-        <div className={styles.banner} style={{backgroundColor: "green", marginTop: "-25px"}}>
+        <div className={styles.banner} style={{backgroundColor: "green", padding: 0}}>
             <h1>{pageTitle}</h1>
         </div>
     )
 }
 
-Header.propTypes = {
+Navbar.propTypes = {
     pageTitle: PropTypes.string.isRequired,
   };
 
-export default Header
+export default Navbar
