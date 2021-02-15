@@ -1,22 +1,21 @@
 import Navbar from "../components/Navbar";
 import { useState } from "react";
 import styles from "../styles/NewStudent.module.css";
+import Link from "next/link";
 
 export default function newStudent() {
   const [name, setName] = useState();
   const [age, setAge] = useState();
   const [otherInfo, setOtherInfo] = useState("");
 
-//   let textarea = document.querySelector(".resizeTa");
-//   textarea.addEventListener("keyup", () => {
-//     textarea.style.height = calcHeight(textarea.value) + "px";
-//   });
+  //   let textarea = document.querySelector(".resizeTa");
+  //   textarea.addEventListener("keyup", () => {
+  //     textarea.style.height = calcHeight(textarea.value) + "px";
+  //   });
 
-
-    const resize =  (e) => {
-        console.log(e.target.value)
-        e.target.style.height = calcHeight(e.target.value);
-    }
+  const resize = (e) => {
+    e.target.style.height = calcHeight(e.target.value);
+  };
   return (
     <div>
       <Navbar pageTitle="New Student" />
@@ -34,7 +33,7 @@ export default function newStudent() {
           type="text"
           placeholder="Age..."
           onChange={(e) => {
-            setName(e.target.value);
+            setAge(e.target.value);
           }}
         />
         <textarea
@@ -43,10 +42,14 @@ export default function newStudent() {
           type="text"
           placeholder="Other Info..."
           onChange={(e) => {
-            setName(e.target.value);
-            resize(e)
+            setOtherInfo(e.target.value);
+            resize(e);
           }}
         />
+
+        <Link href="/">
+          <button className={styles.button}>Done</button>
+        </Link>
       </div>
     </div>
   );
@@ -58,8 +61,12 @@ const textAreaBorder = 2;
 
 function calcHeight(value) {
   let numberOfLineBreaks = (value.match(/\n/g) || []).length;
-  console.log(numberOfLineBreaks)
   // min-height + lines x line-height + padding + border
-  let newHeight = 40 + numberOfLineBreaks * textAreaLineHeight + textAreaPadding + textAreaBorder + "px";
+  let newHeight =
+    40 +
+    numberOfLineBreaks * textAreaLineHeight +
+    textAreaPadding +
+    textAreaBorder +
+    "px";
   return newHeight;
 }

@@ -58,3 +58,17 @@
       padding-right: 20vw;
     }
   }
+
+  .button {
+    background-color: #0F5787;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px !important;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: inherit;
+    margin: auto;
+  }
