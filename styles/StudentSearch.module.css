@@ -1,14 +1,21 @@
 .container {
   display: flex;
   flex-direction: column;
+  /* min-height: 100vh; */
 }
 
 .studentSearchPage {
   display: flex;
   flex-direction: column;
+  width: 80%;
+  margin: auto;
+}
 
-  padding-left: 25vw;
-  padding-right: 25vw;
+@media screen and (min-width: 768px) {
+  .studentSearchPage {
+    padding-left: 15vw;
+    padding-right: 15vw;
+  }
 }
 
 .button {

@@ -4,7 +4,7 @@ import styles from '../styles/Navbar.module.css'
 const Navbar = ({ pageTitle }) => {
     return (
         <div className={styles.banner}>
-            <h1>{pageTitle}</h1>
+            <h1 className={styles.pageTitle}>{pageTitle}</h1>
         </div>
     )
 }

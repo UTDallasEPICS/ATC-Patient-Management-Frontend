@@ -1,7 +1,12 @@
 .banner {
-    margin-top: 0 !important;
+    /* margin-top: 0 !important; */
 
-    background-color: green !important;
-    height: 50px;
-    text-decoration: underline;
+    background-color: #0F5787 !important;
+    /* height: ; */
+}
+
+.pageTitle {
+    color: white;
+    font-size: larger;
+    text-align: center;
 }
