@@ -1,9 +1,10 @@
 .banner {
   /* margin-top: 0 !important; */
+  padding-top: 10px;
 
   background-color: #0f5787;
   margin-right:0;
-  height: 100px;
+  height: 110px;
 
   display: flex;
   align-items: center;

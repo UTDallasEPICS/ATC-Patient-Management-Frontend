@@ -8,7 +8,7 @@ const StudentList = ({ students, searchTerm }) => {
     <div
       className={styles.studentList}
       style={
-        students.length > 9 ? { overflowY: "scroll", maxHeight: "75vh" } : {}
+        students.length > 7 ? { overflowY: "scroll", maxHeight: "60vh" } : {}
       }
     >
       {students

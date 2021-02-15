@@ -3,6 +3,8 @@ import styles from "../styles/Navbar.module.css";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import Link from "next/link";
 import { useState } from "react";
+import { TransitionGroup } from "react-transition-group";
+
 
 const Navbar = ({ pageTitle }) => {
   const [collapsed, setCollapsed] = useState(true);
