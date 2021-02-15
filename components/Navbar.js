@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import styles from '../styles/Header.module.css'
+import styles from '../styles/Navbar.module.css'
 
 const Navbar = ({ pageTitle }) => {
     return (
-        <div className={styles.banner} style={{backgroundColor: "green", padding: 0}}>
+        <div className={styles.banner}>
             <h1>{pageTitle}</h1>
         </div>
     )

@@ -10,7 +10,7 @@ const buttonColor = "#0F5787";
 export default function studentSearch({ students }) {
   const [searchTerm, setSearchTerm] = useState("");
   return (
-    <div>
+    <div className={styles.container}>
       <Head>
         <title>Student Search</title>
         <link rel="icon" href="/atc-logo.png" />
