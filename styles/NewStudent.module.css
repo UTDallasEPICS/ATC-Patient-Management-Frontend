@@ -48,8 +48,9 @@
   .inputs {
     display: flex;
     flex-direction: column;
+    text-align: center;
     width: 80%;
-    margin: auto;
+    margin: 20px auto 20px auto;
   }
 
   @media screen and (min-width: 768px) {

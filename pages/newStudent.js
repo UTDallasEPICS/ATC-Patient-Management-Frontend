@@ -2,6 +2,8 @@ import Navbar from "../components/Navbar";
 import { useState } from "react";
 import styles from "../styles/NewStudent.module.css";
 import Link from "next/link";
+import Avatar from '../components/Avatar'
+
 
 export default function newStudent() {
   const [name, setName] = useState();
@@ -20,6 +22,8 @@ export default function newStudent() {
     <div>
       <Navbar pageTitle="New Student" />
       <div className={styles.inputs}>
+        <Avatar diameter="150px"/>
+
         <input
           className={styles.searchBox}
           type="text"
