@@ -1,10 +1,11 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import StudentListItem from "../components/StudentListItem";
+import styles from "../styles/StudentSearch.module.css";
 
 const StudentList = ({ students, searchTerm }) => {
   return (
-    <>
+    <div className={styles.studentList}>
       {students
         .filter((student) => {
           if (searchTerm == "") return student;
@@ -24,7 +25,7 @@ const StudentList = ({ students, searchTerm }) => {
             img={student.img}
           />
         ))}
-    </>
+    </div>
   );
 };
 

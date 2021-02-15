@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const StudentListItem = ({ firstName, lastName, id, img }) => {
   return (
-    <div>
+    <div style={{marginLeft: 0}}>
       <Link href="/">
         <div className={styles.level}>
           <div className={styles.levelItem}>

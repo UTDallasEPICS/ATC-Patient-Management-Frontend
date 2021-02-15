@@ -8,7 +8,7 @@ const buttonColor = "#0F5787";
 export default function studentSearch({ students }) {
   const [searchTerm, setSearchTerm] = useState("");
   return (
-    <div className={styles.studentSearchPage}>
+    <div className={styles.container}>
       <input
         className={styles.searchBox}
         type="text"
@@ -20,9 +20,6 @@ export default function studentSearch({ students }) {
 
       <div>
         <StudentList students={students} searchTerm={searchTerm} />
-      </div>
-      <div>
-        <h1>This is the student search page</h1>
       </div>
 
       <Link href="/">
@@ -60,6 +57,51 @@ export const getServerSideProps = async () => {
       firstName: "Johnny",
       lastName: "Lennon",
       img: "https://picsum.photos/200",
+    },
+    {
+      id: 4,
+      firstName: "Lily",
+      lastName: "Marshall",
+    },
+    {
+      id: 4,
+      firstName: "Lily",
+      lastName: "Marshall",
+    },
+    {
+      id: 4,
+      firstName: "Lily",
+      lastName: "Marshall",
+    },
+    {
+      id: 4,
+      firstName: "Lily",
+      lastName: "Marshall",
+    },
+    {
+      id: 4,
+      firstName: "Lily",
+      lastName: "Marshall",
+    },
+    {
+      id: 4,
+      firstName: "Lily",
+      lastName: "Marshall",
+    },
+    {
+      id: 4,
+      firstName: "Lily",
+      lastName: "Marshall",
+    },
+    {
+      id: 4,
+      firstName: "Lily",
+      lastName: "Marshall",
+    },
+    {
+      id: 4,
+      firstName: "Lily",
+      lastName: "Marshall",
     },
     {
       id: 4,

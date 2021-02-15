@@ -1,10 +1,15 @@
-.studentSearchPage {
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center;
-  flex-direction: column; */
+.container {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
   /* margin: auto;
   max-width: 960px; */
+  max-width: 500px;
+  margin: auto;
+
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .button {
@@ -20,6 +25,9 @@
   text-decoration: none;
   font-size: 15px;
   font-family: inherit;
+  
+  max-width: 500px;
+  margin: auto;
 }
 
 .level {
@@ -33,8 +41,35 @@
 
 .searchBox {
   margin-top: 20px;
-  width: 300px;
+  /* width: 300px; */
   height: 40px;
   font-size: 20px;
   padding-left: 10px;
+
+  border-radius: 15px;
+  border: 1px solid gray;
+  padding: 20px; 
+
+  outline: none;
+ 
+}
+
+.searchBox:hover {
+  border: 2px solid gray;
+}
+
+.studentList{
+  max-height: 75vh;
+  overflow: scroll;
+
+  /* border-color: #f7f7f7;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 2%; */
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
