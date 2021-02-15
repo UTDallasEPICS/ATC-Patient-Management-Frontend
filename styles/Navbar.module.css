@@ -213,7 +213,23 @@
     display: none;
     overflow: hidden;
     /* background-color: #f1f1f1; */
+    /* transform: rotate(0) translate(0, 0); */
   }
+
+  .revert {
+    /* -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear; */
+    /* transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+               background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+               opacity 0.55s ease; */
+    
+  }
+
+.caret {
+    padding-top: 5px;
+}
 
  
 
