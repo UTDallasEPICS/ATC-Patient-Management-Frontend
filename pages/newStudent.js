@@ -6,7 +6,8 @@ import Avatar from "../components/Avatar";
 import { useForm } from "react-hook-form";
 
 export default function newStudent() {
-  const [name, setName] = useState();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [age, setAge] = useState();
   const [otherInfo, setOtherInfo] = useState("");
 
@@ -24,24 +25,31 @@ export default function newStudent() {
   return (
     <div>
       <Navbar pageTitle="New Student" />
-      <div >
-
+      <div>
         <form className={styles.inputs} onSubmit={handleSubmit(onSubmit)}>
-
-        <Avatar diameter="150px" />
-          <input ref={register} type="file" name="profilePicture"/>
+          <Avatar diameter="150px" />
+          <input ref={register} type="file" name="profilePicture" />
 
           <input
             className={styles.searchBox}
             type="text"
-            placeholder="Name..."
+            placeholder="First Name..."
             onChange={(e) => {
-              setName(e.target.value);
+              setFirstName(e.target.value);
+            }}
+          />
+
+          <input
+            className={styles.searchBox}
+            type="text"
+            placeholder="Last Name..."
+            onChange={(e) => {
+              setLastName(e.target.value);
             }}
           />
           <input
             className={styles.searchBox}
-            type="text"
+            type="number"
             placeholder="Age..."
             onChange={(e) => {
               setAge(e.target.value);
