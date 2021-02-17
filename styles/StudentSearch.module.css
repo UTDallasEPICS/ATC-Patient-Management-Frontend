@@ -61,7 +61,7 @@
 
 .studentList {
   max-height: 75vh;
-  overflow-y: scroll;
+  overflow: auto;
   padding-left: 10px;
   padding-right: 10px;
 

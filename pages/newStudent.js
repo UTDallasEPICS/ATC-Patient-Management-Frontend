@@ -28,7 +28,7 @@ export default function newStudent() {
       <div>
         <form className={styles.inputs} onSubmit={handleSubmit(onSubmit)}>
           <Avatar diameter="150px" />
-          <input ref={register} type="file" name="profilePicture" />
+          <input ref={register} type="file" name="profilePicture"/>
 
           <input
             className={styles.searchBox}
