@@ -27,8 +27,19 @@ export default function newStudent() {
       <Navbar pageTitle="New Student" />
       <div>
         <form className={styles.inputs} onSubmit={handleSubmit(onSubmit)}>
-          <Avatar diameter="150px" />
-          <input ref={register} type="file" name="profilePicture"/>
+          <div className={styles.parent}>
+            <Avatar diameter="150px" />
+            <div className={styles.child}>
+              <input
+                id="image_upload"
+                name="image_upload"
+                ref={register}
+                type="file"
+                accept="image/*"
+                className={styles.imageInput}
+              />
+            </div>
+          </div>
 
           <input
             className={styles.searchBox}
