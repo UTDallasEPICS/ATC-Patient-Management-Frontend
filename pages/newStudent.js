@@ -13,10 +13,6 @@ export default function newStudent() {
 
   const { register, handleSubmit } = useForm();
 
-  const resize = (e) => {
-    e.target.style.height = calcHeight(e.target.value);
-  };
-
   const onSubmit = (data) => {
     console.log(data);
     //here is where the POST request will happen
@@ -73,7 +69,6 @@ export default function newStudent() {
             placeholder="Other Info..."
             onChange={(e) => {
               setOtherInfo(e.target.value);
-              resize(e);
             }}
           />
           <button className={styles.button}>Done</button>
@@ -83,18 +78,3 @@ export default function newStudent() {
   );
 }
 
-const textAreaLineHeight = 20;
-const textAreaPadding = 12;
-const textAreaBorder = 2;
-
-function calcHeight(value) {
-  let numberOfLineBreaks = (value.match(/\n/g) || []).length;
-  // min-height + lines x line-height + padding + border
-  let newHeight =
-    40 +
-    numberOfLineBreaks * textAreaLineHeight +
-    textAreaPadding +
-    textAreaBorder +
-    "px";
-  return newHeight;
-}
