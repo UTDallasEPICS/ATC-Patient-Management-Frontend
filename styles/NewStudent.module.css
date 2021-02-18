@@ -83,12 +83,41 @@
 }
 
 .imageInput {
-  width: 90px;
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+
+.imageInputLabel {
+  width: 140px;
 
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* width: 200px; */
-  height: 25px;
+  text-align: center;
+
+  border: 2px solid;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+
+
+
+  color: white;
+  border-color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* opacity: .4; */
+}
+
+.imageInputLabel:hover {
+  /* border-color: #0f5787;
+  color: #0f5787; */
+  /* opacity: .2; */
+  /* background-color: rgba(0, 0, 0, 1); */
+
+  filter: drop-shadow(-3px 11px 44px rgba(0, 0, 0, 1));
+  /* background-color: #0f5787; */
 }

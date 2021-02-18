@@ -10,6 +10,7 @@ export default function newStudent() {
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState();
   const [otherInfo, setOtherInfo] = useState("");
+  const [imgPreview, setImagePreview] = useState("/default-avatar.jpg");
 
   const { register, handleSubmit } = useForm();
 
@@ -18,14 +19,32 @@ export default function newStudent() {
     //here is where the POST request will happen
   };
 
+  const updateImageDisplay = (e) => {
+    // console.log("image changed");
+    // console.log(e.target.files);
+    if (e.target.files.length > 0) {
+      const file = e.target.files[0];
+      if (validFileType(file)) {
+        const imgSRC = URL.createObjectURL(file);
+        setImagePreview(imgSRC);
+      }
+
+      console.log(imgPreview);
+    }
+  };
+
   return (
     <div>
       <Navbar pageTitle="New Student" />
       <div>
         <form className={styles.inputs} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.parent}>
-            <Avatar diameter="150px" />
+            <Avatar diameter="175px" img={imgPreview} />
+
             <div className={styles.child}>
+              <label htmlFor="image_upload" className={styles.imageInputLabel}>
+                <strong>Upload Picture (Optional)</strong>
+              </label>
               <input
                 id="image_upload"
                 name="image_upload"
@@ -33,6 +52,7 @@ export default function newStudent() {
                 type="file"
                 accept="image/*"
                 className={styles.imageInput}
+                onChange={updateImageDisplay}
               />
             </div>
           </div>
@@ -78,3 +98,20 @@ export default function newStudent() {
   );
 }
 
+
+const imageFileTypes = [
+  "image/apng",
+  "image/bmp",
+  // "image/gif",
+  "image/jpeg",
+  "image/pjpeg",
+  "image/png",
+  // "image/svg+xml",
+  // "image/tiff",
+  // "image/webp",
+  // "image/x-icon"
+];
+
+const validFileType = (file) => {
+  return imageFileTypes.includes(file.type);
+}
