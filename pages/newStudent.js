@@ -20,16 +20,12 @@ export default function newStudent() {
   };
 
   const updateImageDisplay = (e) => {
-    // console.log("image changed");
-    // console.log(e.target.files);
     if (e.target.files.length > 0) {
       const file = e.target.files[0];
       if (validFileType(file)) {
         const imgSRC = URL.createObjectURL(file);
         setImagePreview(imgSRC);
       }
-
-      console.log(imgPreview);
     }
   };
 
@@ -98,7 +94,6 @@ export default function newStudent() {
   );
 }
 
-
 const imageFileTypes = [
   "image/apng",
   "image/bmp",
@@ -114,4 +109,4 @@ const imageFileTypes = [
 
 const validFileType = (file) => {
   return imageFileTypes.includes(file.type);
-}
+};
