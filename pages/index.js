@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import React, { useState } from 'react'
-import Login from './login.js'
-import Welcome from './welcome.js'
+import Login from '../components/Login.js'
+import Welcome from '../components/Welcome.js'
 
 
 export default function Home() {
@@ -32,8 +32,8 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>ATC Data App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Login</title>
+        <link rel="icon" href="/atc-logo.png" />
       </Head>
 
       {user.username != '' ? <Welcome /> : <Login loginf = {LoginFunct} error = {error}/> }  

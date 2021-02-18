@@ -1,9 +1,9 @@
 import Navbar from "../components/Navbar";
 import { useState } from "react";
 import styles from "../styles/NewStudent.module.css";
-import Link from "next/link";
 import Avatar from "../components/Avatar";
 import { useForm } from "react-hook-form";
+import Head from "next/head";
 
 export default function newStudent() {
   const [firstName, setFirstName] = useState("");
@@ -31,6 +31,11 @@ export default function newStudent() {
 
   return (
     <div>
+      <Head>
+        <title>New Student</title>
+        <link rel="icon" href="/atc-logo.png" />
+      </Head>
+
       <Navbar pageTitle="New Student" />
       <div>
         <form className={styles.inputs} onSubmit={handleSubmit(onSubmit)}>
