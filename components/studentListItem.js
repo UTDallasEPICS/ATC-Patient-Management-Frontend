@@ -9,7 +9,7 @@ const StudentListItem = ({ firstName, lastName, id, img }) => {
       <Link href="/">
         <div className={styles.level}>
           <div className={styles.levelItem}>
-            <Avatar img={img}></Avatar>
+            <Avatar img={img}/>
           </div>
           <div className={styles.levelItem} style={{ paddingLeft: "10px" }}>
             <p>
