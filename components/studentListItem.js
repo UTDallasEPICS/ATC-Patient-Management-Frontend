@@ -2,14 +2,15 @@ import PropTypes from "prop-types";
 import Avatar from "./Avatar";
 import styles from "../styles/StudentSearch.module.css";
 import Link from "next/link";
+import ListItem from "@material-ui/core/ListItem";
 
 const StudentListItem = ({ firstName, lastName, id, img }) => {
   return (
-    <div style={{ marginLeft: 0 }}>
-      <Link href="/">
+    <Link href="/">
+      <ListItem button key={id}>
         <div className={styles.level}>
           <div className={styles.levelItem}>
-            <Avatar img={img}/>
+            <Avatar img={img} />
           </div>
           <div className={styles.levelItem} style={{ paddingLeft: "10px" }}>
             <p>
@@ -17,8 +18,8 @@ const StudentListItem = ({ firstName, lastName, id, img }) => {
             </p>
           </div>
         </div>
-      </Link>
-    </div>
+      </ListItem>
+    </Link>
   );
 };
 
