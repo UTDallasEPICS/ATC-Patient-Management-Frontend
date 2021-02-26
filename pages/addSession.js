@@ -25,6 +25,10 @@ export const getServerSideProps = async ({ query }) => {
 
   const program = {
     studentID: query.studentID,
+    behaviors: [{title: "LISTENER RESPONDING", description:" Will follow 20 1-step instructions, each for 3 trials a session across three consecutive sessions.", type: "probe", trialsPerEntry: 3, entries:["Shoulders", "Wiggle Fingers", "Pat Lap", "Touch Knees", "Stick Tongue"]}, 
+                {},
+                {title: "touch arm"},             
+              ],
   };
 
   return {
