@@ -1,0 +1,15 @@
+.container {
+  display: flex !important;
+  /* flex-direction: column ; */
+  margin-top: 20px;
+}
+
+.centeredButton {
+  /* display: block !important; */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 10rem !important;
+
+  background-color: var(--color-primary) !important;
+  color: white !important;
+}

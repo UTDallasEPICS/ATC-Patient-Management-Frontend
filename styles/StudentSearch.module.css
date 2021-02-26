@@ -2,7 +2,6 @@
   display: block; 
   flex-direction: column;
   overflow-y: hidden;
-  /* border: 1px solid red;  */
 }
 
 .studentSearchPage {
