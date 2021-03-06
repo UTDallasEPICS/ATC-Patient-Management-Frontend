@@ -1,0 +1,8 @@
+.oi {
+    margin-bottom: -10px;
+    border-style: solid;
+    border-color: gray;
+    border-width: .75px;
+    padding-bottom: 10px;
+    overflow: scroll;
+}
