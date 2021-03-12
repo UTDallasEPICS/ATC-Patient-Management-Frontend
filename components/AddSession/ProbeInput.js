@@ -15,7 +15,7 @@ const ProbeInput = ({ title, trialsPerEntry }) => {
     <Card className={styles.probeEntry}>
       <p>{title}</p>
 
-      <Grid container spacing={1}>
+      <Grid container spacing={1} style={{width:"75%", margin:"auto"}}>
         {[...Array(trialsPerEntry)].map((e, i) => (
           <Grid item>
             <input

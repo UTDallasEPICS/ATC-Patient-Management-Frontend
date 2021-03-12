@@ -17,7 +17,7 @@ const addSession = ({ program }) => {
           variant="contained"
           color="inherit"
           className="primaryButton"
-          style={{ width: "20vh", margin: "auto" }}
+          style={{ width: "20vh", margin: "auto", marginBottom:"80px" }}
         >
           Submit Session
         </Button>
@@ -39,7 +39,21 @@ export const getServerSideProps = async ({ query }) => {
         description:
           " Will follow 20 1-step instructions, each for 3 trials a session across three consecutive sessions.",
         type: "probe",
-        trialsPerEntry: 10,
+        trialsPerEntry: 3,
+        entries: [
+          "Shoulders",
+          "Wiggle Fingers",
+          "Pat Lap",
+          "Touch Knees",
+          "Stick Tongue",
+        ],
+      },
+      {
+        title: "LISTENER RESPONDING",
+        description:
+          " Will follow 20 1-step instructions, each for 3 trials a session across three consecutive sessions.",
+        type: "probe",
+        trialsPerEntry: 14,
         entries: [
           "Shoulders",
           "Wiggle Fingers",
