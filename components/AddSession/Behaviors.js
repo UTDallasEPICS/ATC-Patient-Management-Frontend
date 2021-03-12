@@ -5,7 +5,7 @@ export default function Behaviors({ behaviors }) {
   return (
     <div>
       {behaviors.map(( behavior ) => (
-        <Behavior key={behavior.title} data={behavior}/>
+        <Behavior data={behavior}/>
       ))}
     </div>
   );

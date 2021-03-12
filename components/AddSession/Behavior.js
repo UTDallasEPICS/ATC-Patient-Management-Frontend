@@ -14,7 +14,9 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 export default function Behavior({ data }) {
-  const { trialsPerEntry, title, entries, description, type } = data;
+  const { trialsPerEntry, title, description, type } = data;
+  const entries = data.entries || [""];
+
   return (
     <div className={styles.behaviorBox}>
     {/* <Card variant="outlined">*/}
@@ -40,7 +42,7 @@ export default function Behavior({ data }) {
       <Grid container xs={12}>
         <Grid container justify="center" spacing={2}>
           {entries.map((entry) => (
-            <Grid item key={entry} item>
+            <Grid item>
               <ProbeInput title={entry} trialsPerEntry={trialsPerEntry}/>
             </Grid>
           ))}
@@ -51,3 +53,4 @@ export default function Behavior({ data }) {
      </div>
   );
 }
+

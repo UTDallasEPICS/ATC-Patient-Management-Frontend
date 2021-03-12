@@ -3,12 +3,18 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import styles from "../styles/AddSession.module.css";
 import Behaviors from "../components/AddSession/Behaviors";
+import Head from "next/head";
 
 const addSession = ({ program }) => {
   const { studentID, firstName, lastName, behaviors } = program;
 
   return (
     <div>
+      <Head>
+        <title>Add Session</title>
+        <link rel="icon" href="/atc-logo.png" />
+      </Head>
+
       <Navbar pageTitle="Add Session" />
       <Container className={styles.container}>
         <Behaviors behaviors={behaviors} />
@@ -51,16 +57,16 @@ export const getServerSideProps = async ({ query }) => {
       {
         title: "LISTENER RESPONDING",
         description:
-          " Will follow 20 1-step instructions, each for 3 trials a session across three consecutive sessions.",
+          "Make eye contact when name is called first with a visual cue, then without a visual cue",
         type: "probe",
-        trialsPerEntry: 2,
-        entries: [
-          "Shoulders",
-          "Wiggle Fingers",
-          "Pat Lap",
-          "Touch Knees",
-          "Stick Tongue",
-        ],
+        trialsPerEntry: 10,
+      },
+      {
+        title: "LISTENER RESPONDING",
+        description:
+          "Make eye contact when name is called first with a visual cue, then without a visual cue",
+        type: "probe",
+        trialsPerEntry: 1,
       },
     ],
   };
