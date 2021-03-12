@@ -5,6 +5,7 @@ import Login from '../components/Login.js'
 import Welcome from '../components/Welcome.js'
 
 
+
 export default function Home() {
   const sampUser = {
     username: 'epics', 
@@ -36,9 +37,8 @@ export default function Home() {
         <link rel="icon" href="/atc-logo.png" />
       </Head>
 
-      {user.username != '' ? <Welcome /> : <Login loginf = {LoginFunct} error = {error}/> }  
-
-
+      <img className={styles.loginLogo} src="/logo.jpeg" alt="logo" /> <br />
+      <Login loginf = {LoginFunct} error = {error}/>
 
 
     </div>

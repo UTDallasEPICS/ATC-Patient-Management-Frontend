@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+
+  
+.btn {
+    display: inline-block;
+    background: #105688;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: inherit;
+    position: relative;
+    top: 20px;
+  }
+
+
+  .buttonGrid {
+      text-align: center;
+  }
+  .buttonGrid2 {
+    text-align: center;
+}
+  
+  
+  .info {
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 500;
+  }
+
+
+  .picture {
+    position: relative;
+    top: 10px;
+    text-align: center;          
+  }
+
+  .label {
+    font-size: 12px;
+    display: block; 
+    font-family: inherit;
+    color: #666; 
+    margin-bottom: 5px; 
+    transition: 0.4s; 
+    text-align: center;
+  }
