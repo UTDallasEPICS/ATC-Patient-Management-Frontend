@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import styles from '../styles/login.module.css'
+import Link from 'next/link'
 
 //Gets Login function and error function to help loggin in logic
 const Login = ({ loginf, error}) => {
@@ -22,8 +23,10 @@ const Login = ({ loginf, error}) => {
                     <label htmlfor= "password">Password:</label>
                     <input type= "text" name= "password" id= "password" onChange={e => setDetails({...details, password: e.target.value})} value ={details.password}/> 
                 </div> 
-
-                <input className = {styles.btn} type = "submit" value = "Sign In" />
+                <Link href="/studentSearch">
+                <input className = {styles.btn} type = "submit" value = "Sign In" /> 
+                </Link> 
+                
                 <button className = {styles.btn}>Forgot Password</button> 
             </form>
             
