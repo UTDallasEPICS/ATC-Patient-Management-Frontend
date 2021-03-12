@@ -17,10 +17,9 @@ const ProbeInput = ({ title, trialsPerEntry }) => {
 
       <Grid container spacing={1} justify="center">
         {[...Array(trialsPerEntry)].map((e, i) => (
-          <Grid item>
+          <Grid item key={i}>
             <input
               className={styles.checkbox}
-              key={i}
               type="checkbox"
               name="nameOfChoice"
               value="1"

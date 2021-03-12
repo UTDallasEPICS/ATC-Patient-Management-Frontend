@@ -41,7 +41,7 @@ export const getServerSideProps = async ({ query }) => {
     lastName: "Doe",
     behaviors: [
       {
-        title: "LISTENER RESPONDING",
+        title: "Following Steps",
         description:
           " Will follow 20 1-step instructions, each for 3 trials a session across three consecutive sessions.",
         type: "probe",
@@ -53,13 +53,15 @@ export const getServerSideProps = async ({ query }) => {
           "Touch Knees",
           "Stick Tongue",
         ],
+        tags: ["Listener Reponding"],
       },
       {
-        title: "LISTENER RESPONDING",
+        title: "Responding to Name",
         description:
           "Make eye contact when name is called first with a visual cue, then without a visual cue",
         type: "probe",
         trialsPerEntry: 10,
+        tags: ["Listener Reponding", "Visual Cues"],
       },
       {
         title: "LISTENER RESPONDING",

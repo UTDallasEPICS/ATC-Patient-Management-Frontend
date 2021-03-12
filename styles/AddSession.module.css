@@ -4,7 +4,7 @@
   margin-top: 20px;
 }
 
-.behaviorBox{
+.behaviorBox {
   border-radius: 25px;
   border: 2px solid var(--color-primary);
   margin-bottom: 20px;
@@ -19,13 +19,13 @@
   font-weight: bold;
 }
 
-.paper{
+.paper {
   background-color: green;
   height: 140;
-  width: 100
+  width: 100;
 }
 
-.probeEntry{
+.probeEntry {
   /* border-radius: 10px;
   border: 2px solid var(--color-primary); */
 
@@ -43,4 +43,18 @@
 
   height: 20px !important;
   width: 20px !important;
+}
+
+.tagsSection {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+
+  padding: 5px;
+  margin: 0;
+}
+
+.tagItem{
+  margin: 5px !important;
 }
