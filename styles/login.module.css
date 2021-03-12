@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap'); */
 
- .btn {
+ /* .btn {
   display: inline-block;
   background: #105688;
   color: #fff;
@@ -13,28 +13,35 @@
   font-family: inherit;
   position: relative;
   top: 20px;
-}
+} */
 
-.loginData label {
+/* .loginData label {
   font-size: 12px;
   display: block; 
   font-family: inherit;
   color: #666; 
   margin-bottom: 5px; 
   transition: 0.4s; 
-}
+} */
 
-.loginData input {
+/* .loginData input {
     display: block;
     padding: 10px 35px;
     background-color: #F8F8F8; 
     border-radius: 8px; 
     transition: 0.4s; 
-  }
+  } */
 
 .loginLogo {
     position: relative;
-    bottom: 50px;
-    width: 220px ; 
-    height: 150px;
+    width: 100%;
+    margin: auto;
+    top: 5px;
+    /* bottom: 50px; */
+    /* width: 220px ; 
+    height: 150px; */
+}
+
+.loginData {
+  margin-bottom: 4vh;
 }

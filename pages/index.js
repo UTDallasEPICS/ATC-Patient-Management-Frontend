@@ -37,9 +37,8 @@ export default function Home() {
         <link rel="icon" href="/atc-logo.png" />
       </Head>
 
-      {user.username != '' ? <Welcome /> : <Login loginf = {LoginFunct} error = {error}/> }  
-
-
+      <img className={styles.loginLogo} src="/logo.jpeg" alt="logo" /> <br />
+      <Login loginf = {LoginFunct} error = {error}/>
 
 
     </div>
