@@ -16,6 +16,7 @@
 
 .behaviorTitle {
   text-align: center;
+  font-weight: bold;
 }
 
 .paper{
@@ -27,4 +28,15 @@
 .probeEntry{
   /* border-radius: 10px;
   border: 2px solid var(--color-primary); */
+
+  text-align: center;
+  padding: 10px;
+}
+
+.checkbox {
+  /* padding: 5px !important; */
+  margin: 0 !important;
+
+  height: 20px !important;
+  width: 20px !important;
 }

@@ -6,24 +6,29 @@ import styles from "../../styles/AddSession.module.css";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import Grid from "@material-ui/core/Grid";
+
 
 const ProbeInput = ({ title, trialsPerEntry }) => {
+  console.log(title);
   return (
-    <div className={styles.probeEntry}>
-      <div>
-        {_.times(trialsPerEntry, () => (
-          <Card>
-            <FormControlLabel
-              value="top"
-              control={<Checkbox color="primary" />}
-              label={title}
-              labelPlacement="top"
-            />
-          </Card>
+    <Card className={styles.probeEntry}>
+      <p>{title}</p>
+
+      <Grid container spacing={1}>
+        {[...Array(trialsPerEntry)].map((e, i) => (
+          <Grid item>
+            <input
+              className={styles.checkbox}
+              key={i}
+              type="checkbox"
+              name="nameOfChoice"
+              value="1"
+            ></input>
+          </Grid>
         ))}
-      </div>
-      ;
-    </div>
+      </Grid>
+    </Card>
   );
 };
 
