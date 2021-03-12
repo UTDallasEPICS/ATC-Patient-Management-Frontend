@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import styles from "../styles/login.module.css";
+import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -76,14 +76,15 @@ const Login = ({ loginf, error }) => {
           </FormControl>
         </div>
 
-        <Button variant="contained" color="primary">
-          Primary
-        </Button>
-
         <Link href="/studentSearch">
-          <input className={styles.btn} type="submit" value="Sign In" />
+          <Button type="submit" variant="contained" className="primaryButton" style={{width:"100%"}}>
+            Sign In
+          </Button>
         </Link>
-        <button className={styles.btn}>Forgot Password</button>
+
+        <Button className="" style={{ width:"100%", marginTop:"2vh"}}>
+          Forgot Password?
+        </Button>
       </form>
     </div>
   );

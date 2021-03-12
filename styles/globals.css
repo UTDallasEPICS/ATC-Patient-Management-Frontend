@@ -16,6 +16,11 @@ body {
   background-color: var(--color-primary) !important;
 }
 
+.primaryButton {
+  background-color: var(--color-primary) !important;
+  color: white !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;
