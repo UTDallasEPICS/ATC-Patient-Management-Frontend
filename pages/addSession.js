@@ -53,7 +53,7 @@ export const getServerSideProps = async ({ query }) => {
         description:
           " Will follow 20 1-step instructions, each for 3 trials a session across three consecutive sessions.",
         type: "probe",
-        trialsPerEntry: 14,
+        trialsPerEntry: 2,
         entries: [
           "Shoulders",
           "Wiggle Fingers",
