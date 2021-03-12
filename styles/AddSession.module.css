@@ -1,15 +1,30 @@
 .container {
   display: flex !important;
-  flex-direction: column ;
+  flex-direction: column;
   margin-top: 20px;
 }
 
-.centeredButton {
-  /* display: block !important; */
-  margin-left: auto !important;
-  margin-right: auto !important;
-  width: 10rem !important;
+.behaviorBox{
+  border-radius: 25px;
+  border: 2px solid var(--color-primary);
+  margin-bottom: 20px;
 
-  background-color: var(--color-primary) !important;
-  color: white !important;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.behaviorTitle {
+  text-align: center;
+}
+
+.paper{
+  background-color: green;
+  height: 140;
+  width: 100
+}
+
+.probeEntry{
+  /* border-radius: 10px;
+  border: 2px solid var(--color-primary); */
 }

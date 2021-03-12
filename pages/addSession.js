@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import styles from "../styles/AddSession.module.css";
+import Behaviors from "../components/AddSession/Behaviors";
 
 const addSession = ({ program }) => {
   const { studentID, firstName, lastName, behaviors } = program;
@@ -10,16 +11,13 @@ const addSession = ({ program }) => {
     <div>
       <Navbar pageTitle="Add Session" />
       <Container className={styles.container}>
-        <div>
-          {behaviors.map((behavior) => (
-            <h1>{behavior.title}</h1>
-          ))}
-        </div>
+        <Behaviors behaviors={behaviors} />
 
         <Button
           variant="contained"
           color="inherit"
-          className={styles.centeredButton}
+          className="primaryButton"
+          style={{ width: "20vh", margin: "auto" }}
         >
           Submit Session
         </Button>
@@ -50,8 +48,6 @@ export const getServerSideProps = async ({ query }) => {
           "Stick Tongue",
         ],
       },
-      { title: "Behavior 2" },
-      { title: "Behavior 3" },
     ],
   };
 
