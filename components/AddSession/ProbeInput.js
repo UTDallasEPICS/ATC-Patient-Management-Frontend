@@ -20,9 +20,17 @@ const ProbeInput = ({ title, trialsPerEntry }) => {
           <Grid item key={i}>
             <input
               className={styles.checkbox}
-              type="checkbox"
-              name="nameOfChoice"
-              value="1"
+              type="text"
+              name="triState"
+              readOnly={true}
+              value=' ' 
+              onClick={ (e) => {
+                switch(e.target.value.charAt(0)){
+                  case ' ': e.target.value = '+'; break;
+                  case '-': e.target.value = '+'; break;
+                  case '+': e.target.value = '-'; break;
+                }
+              }}
             ></input>
           </Grid>
         ))}
