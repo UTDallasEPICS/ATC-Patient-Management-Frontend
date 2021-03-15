@@ -46,8 +46,6 @@ const ProbeInput = ({ title, trialsPerEntry }) => {
                     switchValue("-", i);
                     break;
                 }
-
-                console.log(checkedData);
               }}
             >
               <p className={styles.probeEntryText}>{checkedData[i]}</p>

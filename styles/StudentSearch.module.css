@@ -19,7 +19,7 @@
 }
 
 .button {
-  background-color: "#0F5787";
+  background-color: var(--color-primary) !important;
   color: #fff;
   border: none;
   padding: 10px 20px;
