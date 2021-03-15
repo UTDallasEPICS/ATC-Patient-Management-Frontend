@@ -3,10 +3,6 @@ import Grid from "@material-ui/core/Grid";
 import ProbeInput from "./ProbeInput";
 import DurationInput from "./DurationInput";
 import FrenquencyInput from "./FrequencyInput";
-import Card from "@material-ui/core/Card";
-
-import Paper from "@material-ui/core/Paper";
-
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -16,7 +12,8 @@ import Chip from "@material-ui/core/Chip";
 import Divider from "@material-ui/core/Divider";
 
 export default function Behavior({ data }) {
-  const { trialsPerEntry, title, description, type } = data;
+  const {title, description, type } = data;
+  const trialsPerEntry = data.trialsPerEntry || 1;
   const entries = data.entries || [""];
   const tags = data.tags || [""];
   console.log(type);
@@ -25,7 +22,8 @@ export default function Behavior({ data }) {
     switch (type) {
       case "probe":
         return <ProbeInput title={entry} trialsPerEntry={trialsPerEntry} />;
-        break;
+      case "duration":
+        return <DurationInput title={entry} trialsPerEntry={trialsPerEntry} />;
     }
   };
 
