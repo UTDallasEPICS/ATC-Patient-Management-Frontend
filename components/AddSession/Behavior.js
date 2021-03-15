@@ -13,13 +13,21 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Chip from "@material-ui/core/Chip";
-import Divider from "@material-ui/core/Divider"
+import Divider from "@material-ui/core/Divider";
 
 export default function Behavior({ data }) {
   const { trialsPerEntry, title, description, type } = data;
   const entries = data.entries || [""];
   const tags = data.tags || [""];
-  console.log(tags);
+  console.log(type);
+
+  const generateInput = (entry) => {
+    switch (type) {
+      case "probe":
+        return <ProbeInput title={entry} trialsPerEntry={trialsPerEntry} />;
+        break;
+    }
+  };
 
   return (
     <div className={styles.behaviorBox}>
@@ -41,13 +49,12 @@ export default function Behavior({ data }) {
       <Grid container justify="center" spacing={2}>
         {entries.map((entry, i) => (
           <Grid item key={i}>
-            <ProbeInput title={entry} trialsPerEntry={trialsPerEntry} />
+            {generateInput(entry)}
           </Grid>
         ))}
       </Grid>
 
-      
-      <Divider style={{marginTop:"40px"}}/>
+      <Divider style={{ marginTop: "40px" }} />
       <ul className={styles.tagsSection}>
         {tags.map((tag, i) => {
           return (
