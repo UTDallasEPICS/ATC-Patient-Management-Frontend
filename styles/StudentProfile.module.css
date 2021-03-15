@@ -32,6 +32,11 @@
       font-weight: 500;
   }
 
+  .bg {
+    color: #105688 impo !important; 
+    text-align: center; 
+  }
+
 
   .picture {
     position: relative;

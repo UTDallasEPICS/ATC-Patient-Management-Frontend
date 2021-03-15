@@ -5,6 +5,8 @@ import Avatar from "../components/Avatar";
 import OtherInfo from "../components/OtherInfo"; 
 import styles from "../styles/StudentProfile.module.css"
 import Divider from '@material-ui/core/Divider';
+import Button from "@material-ui/core/Button";
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 
 const studentProfile = ({ student }) => {
@@ -29,6 +31,15 @@ const studentProfile = ({ student }) => {
             <Divider variant="middle" />
             <p className = {styles.label}>Other Info:</p>
             <OtherInfo info = {student.otherInfo}/>
+            <div className ={styles.bg}>
+            <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
+                <Button >Edit</Button>
+                <Button >New Session</Button>
+                <Button >View Reports</Button> 
+                <Button >Archive</Button>
+            </ButtonGroup>
+            </div>
+           
             <div className = {styles.buttonGrid}>
                 <button className={styles.btn}>Edit</button>
                 <button className={styles.btn} >Archive</button> <br/>
@@ -58,7 +69,7 @@ export const getServerSideProps = async () => {
         dob: "December 15, 1422",
         phone: "999-999-9999", 
         email: "epics@atc.com",
-        otherInfo: "Student has peanut allergy."
+        otherInfo: "Parent Phone: 828-902-2828"
       }
       return {
         props: {
