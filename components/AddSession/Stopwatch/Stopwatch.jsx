@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import StopwatchDisplay from "./StopwatchDisplay.jsx";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import styles from "../../../styles/AddSession.module.css";
 
 class Stopwatch extends React.Component {
   constructor(props) {
@@ -10,7 +13,7 @@ class Stopwatch extends React.Component {
       running: false,
       currentTimeMs: 0,
       currentTimeSec: 0,
-      currentTimeMin: 0
+      currentTimeMin: 0,
     };
   }
 
@@ -53,26 +56,28 @@ class Stopwatch extends React.Component {
     this.setState({
       currentTimeMs: 0,
       currentTimeSec: 0,
-      currentTimeMin: 0
+      currentTimeMin: 0,
     });
   };
 
   render() {
     return (
-      <div className={"stopwatch"}>
-        <h2 ref="header">Stopwatch</h2>
-        {this.state.running === false && (
-          <button onClick={this.start}>START</button>
-        )}
-        {this.state.running === true && (
-          <button onClick={this.stop}>STOP</button>
-        )}
-        <button onClick={this.reset}>RESET</button>
-        <StopwatchDisplay
-          ref="display"
-          {...this.state}
-          formatTime={this.formatTime}
-        />
+      <div>
+        <h2 ref="header">Duration:</h2>
+        <Card className={styles.durationInputBox}>
+          {this.state.running === false && (
+            <Button onClick={this.start}>START</Button>
+          )}
+          {this.state.running === true && (
+            <Button onClick={this.stop}>STOP</Button>
+          )}
+          <Button onClick={this.reset}>RESET</Button>
+          <StopwatchDisplay
+            ref="display"
+            {...this.state}
+            formatTime={this.formatTime}
+          />
+        </Card>
       </div>
     );
   }
