@@ -10,8 +10,18 @@ const ProbeInput = ({ title, trialsPerEntry }) => {
   useEffect(() => initializeArray(trialsPerEntry), [trialsPerEntry]);
   const initializeArray = (trialsPerEntry) => {
     for (var i = 0; i < trialsPerEntry; i++) {
-      setCheckedData(checkedData => [...checkedData, " "]);
+      setCheckedData((checkedData) => [...checkedData, " "]);
     }
+  };
+
+  const switchValue = (value, i) => {
+    setCheckedData((checkedData) => {
+      let items = [...checkedData];
+      let item = items[i];
+      item = value;
+      items[i] = item;
+      return items;
+    });
   };
 
   return (
@@ -21,44 +31,26 @@ const ProbeInput = ({ title, trialsPerEntry }) => {
       <Grid container spacing={1} justify="center">
         {[...Array(trialsPerEntry)].map((e, i) => (
           <Grid item key={i}>
-            <input
-              className={styles.checkbox}
-              type="text"
-              name="triState"
-              readOnly={true}
-              value="+"
-              onClick={(e) => {
-                switch (e.target.value.charAt(0)) {
-                  case " ":
-                    e.target.value = "+";
-                    break;
-                  case "-":
-                    e.target.value = "+";
-                    break;
-                  case "+":
-                    e.target.value = "-";
-                    break;
-                }
-              }}
-            ></input>
-
             <Button
+              className = {styles.probeInputBox}
               variant="outlined"
               onClick={() => {
-                switch(checkedData[i]){
-                  case " ": setCheckedData(checkedData => { 
-                    let items = [...checkedData];
-                    let item = items[i];
-                    item = "+";
-                    items[i] = item;
-                    return items;
-                  }); break;//checkedData[i] = "+"; break;
+                switch (checkedData[i]) {
+                  case " ":
+                    switchValue("+", i);
+                    break;
+                  case "-":
+                    switchValue("+", i);
+                    break;
+                  case "+":
+                    switchValue("-", i);
+                    break;
                 }
 
-                console.log(checkedData)
+                console.log(checkedData);
               }}
             >
-              {checkedData[i]}
+              <p className={styles.probeEntryText}>{checkedData[i]}</p>
             </Button>
           </Grid>
         ))}
