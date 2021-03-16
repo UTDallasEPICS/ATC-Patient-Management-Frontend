@@ -25,6 +25,9 @@
     text-align: center;
 }
   
+  .buttonGroup {
+    color: #105688 !important;
+  }
   
   .info {
       text-align: center;
@@ -33,7 +36,7 @@
   }
 
   .bg {
-    color: #105688 impo !important; 
+    text-decoration-color: #105688 impo !important; 
     text-align: center; 
   }
 
