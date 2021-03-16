@@ -69,7 +69,18 @@
 }
 
 .durationInputBox {
-  padding: 0;
+  padding: 4px;
   width: 100%;
   height: 100%;
+}
+
+.addStopwatchButton {
+  /* margin-left: (50% - 25px)!important;
+  width: 25px; */
+
+  /* display: table;
+  margin: auto;
+  margin-top: 20px; */
+  /* border: 1px solid black !important; */
+  background-color: var(--color-primary) !important;
 }

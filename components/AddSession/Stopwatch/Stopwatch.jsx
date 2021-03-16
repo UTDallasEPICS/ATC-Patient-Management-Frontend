@@ -63,7 +63,6 @@ class Stopwatch extends React.Component {
   render() {
     return (
       <div>
-        <h2 ref="header">Duration:</h2>
         <Card className={styles.durationInputBox}>
           {this.state.running === false && (
             <Button onClick={this.start}>START</Button>
