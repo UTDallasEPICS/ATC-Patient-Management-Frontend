@@ -41,6 +41,7 @@ class Stopwatch extends React.Component {
   };
 
   pace = () => {
+    console.log(this.props.i)
     this.setState({ currentTimeMs: this.state.currentTimeMs + 10 });
     if (this.state.currentTimeMs >= 1000) {
       this.setState({ currentTimeSec: this.state.currentTimeSec + 1 });
