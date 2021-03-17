@@ -21,7 +21,6 @@ const studentProfile = ({ student }) => {
     const handleClickOpen = () => {
         setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
     };
@@ -43,7 +42,7 @@ const studentProfile = ({ student }) => {
             <p className = {styles.label}>Date of Birth:</p> <p className = {styles.info}> {student.dob}</p> 
             <p className = {styles.label}>Phone Number:</p> <p className = {styles.info}>  {student.phone}</p> 
             <p className = {styles.label}>Email: </p> <p className = {styles.info}> {student.email}</p>
-            <Divider variant="middle" />
+            <Divider variant="middle" />  
             <p className = {styles.label}>Other Info:</p>
             <OtherInfo info = {student.otherInfo}/>
             <div className ={styles.bg}>
@@ -65,7 +64,7 @@ const studentProfile = ({ student }) => {
         <DialogTitle id="alert-dialog-title">{"Are you sure you want to archive this student?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            When archiving a student you will no longer be able to view any of the records of the student. To regain access you will have to get access from an administration.
+            When archiving a student you will no longer be able to view any of the records of the student. To regain access you will have to get access from an administrator.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
