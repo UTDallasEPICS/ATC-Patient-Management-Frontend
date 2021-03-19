@@ -193,7 +193,7 @@ const Navbar = ({ pageTitle, window, children }) => {
         </Hidden>
       </nav>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
+        <div className={classes.toolbar} style={{paddingBottom: "70px"}} />
         {children}
       </main>
     </div>
