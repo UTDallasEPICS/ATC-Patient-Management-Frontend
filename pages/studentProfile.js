@@ -24,6 +24,17 @@ const studentProfile = ({ student }) => {
     const handleClose = () => {
         setOpen(false);
     };
+
+  //State for handling when other info is being pressed 
+  const [otherInfoOpen, setOtherInfo] = React.useState(false); 
+  //Opens other info 
+  const openOtherInfo = () =>{
+    setOtherInfo(true);
+  }
+  //Close Other Info
+  const closeOtherInfo =() => {
+    setOtherInfo(false); 
+  }
     
     return (
         <div className={styles.container}>
@@ -44,15 +55,20 @@ const studentProfile = ({ student }) => {
             <p className = {styles.label}>Email: </p> <p className = {styles.info}> {student.email}</p>
             <Divider variant="middle" />  
             <p className = {styles.label}>Other Info:</p>
-            <OtherInfo info = {student.otherInfo}/>
+            <div className={styles.bg}>
+            <Button variant="outlined" color="primary" onClick={openOtherInfo} className={styles.buttonGroup}>
+              Other Info
+            </Button>
+            </div>
             <div className ={styles.bg}>
             <br/>
-            <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
-                <Button className= {styles.buttonGroup}>Edit</Button>
-                <Button className= {styles.buttonGroup}>New Session</Button>
-                <Button className= {styles.buttonGroup}>View Reports</Button> 
-                <Button className= {styles.buttonGroup} onClick={handleClickOpen}>Archive</Button>
-            </ButtonGroup>
+                <Button className= {styles.buttonGroup1}>Edit</Button>
+                <Button className= {styles.buttonGroup2}>New Session</Button>
+                <br/>
+
+                <Button className= {styles.buttonGroup1} onClick={handleClickOpen}>Archive</Button>
+                <Button className= {styles.buttonGroup2}>View Reports</Button> 
+            
             </div>
 
          <Dialog
@@ -75,6 +91,25 @@ const studentProfile = ({ student }) => {
             <Link href="/studentSearch">
             Yes
             </Link>
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={otherInfoOpen}
+        onClose={closeOtherInfo}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        >
+        <DialogTitle id="alert-dialog-title">{"Other Info:"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {student.otherInfo}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeOtherInfo} color="primary" autoFocus className={styles.buttonGroup}>
+            Close
           </Button>
         </DialogActions>
       </Dialog>

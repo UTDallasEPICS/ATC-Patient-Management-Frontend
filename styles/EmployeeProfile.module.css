@@ -21,16 +21,29 @@
 }
 
 .buttonGroup {
-    color: #105688 !important;
+    color: #105688 !important; 
+    
+  } 
+
+.menuButtonGroup {
+    background-color: var(--color-primary) !important;
+    color: white !important;
+    margin-right: 10px  !important;
   }
 
 .bg {
     text-align: center;
+
+}
+.bgOther {
+  text-align: center;
+  margin-bottom: 20px  !important;
+
 }
 
 .closeButton {
     position: "relative"  !important;
-    left: 35% !important;
+    left: 40% !important;
     /*top: 10px !important; */
     color: grey !important;
 }

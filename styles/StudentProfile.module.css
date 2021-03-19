@@ -24,9 +24,28 @@
   .buttonGrid2 {
     text-align: center;
 }
+
+
+.buttonGroup {
+  color: #105688 !important; 
   
-  .buttonGroup {
-    color: #105688 !important;
+} 
+  
+  .buttonGroup1 {
+    background-color: var(--color-primary) !important;
+    color: white !important;
+    width: 90px;
+    margin-right: 10px !important;
+    margin-top: 10px !important;
+
+  }
+
+  .buttonGroup2 {
+    background-color: var(--color-primary) !important;
+    color: white !important;
+    width: 160px;
+    margin-top: 10px !important;
+    
   }
   
   .info {

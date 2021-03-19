@@ -26,6 +26,11 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import CommentIcon from "@material-ui/icons/Comment";
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 
 
 const employeeProfile = (props) => {
@@ -72,6 +77,35 @@ const employeeProfile = (props) => {
 
     setChecked(newChecked);
   };
+
+  //state for handling submit button 
+  const [submitCheckOpen, setSubmitCheckOpen] = React.useState(false); 
+
+  //Opens the verification on saving student access
+  const openSubmitCheck = () => {
+    setSubmitCheckOpen(true);
+  }
+  //When save it closes both the alert and the list
+  const closeSubmitCheckSave = () => {
+    setSubmitCheckOpen(false);
+    setListOpen(false);
+  }
+  //On no save it closes just the alert
+  const closeSubmitCheckNoSave = () => {
+    setSubmitCheckOpen(false);
+  }
+ 
+  //State for handling when other info is being pressed 
+  const [otherInfoOpen, setOtherInfo] = React.useState(false); 
+  //Opens other info 
+  const openOtherInfo = () =>{
+    setOtherInfo(true);
+  }
+  //Close Other Info
+  const closeOtherInfo =() => {
+    setOtherInfo(false); 
+  }
+
 
    
    
@@ -139,6 +173,9 @@ const employeeProfile = (props) => {
             </List>
                 </DialogContent>
                 <DialogActions>
+                <Button className = {styles.buttonGroup} autoFocus onClick={openSubmitCheck} color="primary">
+                    Save changes
+                </Button>
                 </DialogActions>
         </Dialog>
     </div>
@@ -149,16 +186,22 @@ const employeeProfile = (props) => {
             <p className = {styles.label}>Email: </p> <p className = {styles.info}> {props.employee.email}</p>
             <Divider variant="middle" />
 
-            <p className = {styles.label}>Other Info:</p>
-            <OtherInfo info = {props.employee.otherInfo}/>
+           <p className = {styles.label}>Other Info:</p>
+           <div className={styles.bgOther}>
+            <Button variant="outlined" color="primary" onClick={openOtherInfo} className={styles.buttonGroup}>
+              Other Info
+            </Button>
+            </div>
+
+            {/*<OtherInfo info = {props.employee.otherInfo}/> */} 
 
 
             <div className ={styles.bg}>
             
-            <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
-                <Button className= {styles.buttonGroup}>Edit</Button>
-                <Button className= {styles.buttonGroup} onClick={handleClickOpen}>Archive</Button>
-            </ButtonGroup>
+            
+                <Button className= {styles.menuButtonGroup}>Edit</Button>
+                <Button className= {styles.menuButtonGroup} onClick={handleClickOpen}>Archive</Button>
+            
             </div>
 
         <Dialog
@@ -181,6 +224,47 @@ const employeeProfile = (props) => {
             <Link href="/studentSearch">
             Yes
             </Link>
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={submitCheckOpen}
+        onClose={closeSubmitCheckNoSave}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        >
+        <DialogTitle id="alert-dialog-title">{"Are you sure you want to make these changes?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This employee will now be able to access the records for all the checked students. 
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeSubmitCheckNoSave} color="primary" className={styles.buttonGroup}>
+            No
+          </Button>
+          <Button onClick={closeSubmitCheckSave} color="primary" autoFocus className={styles.buttonGroup}>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={otherInfoOpen}
+        onClose={closeOtherInfo}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        >
+        <DialogTitle id="alert-dialog-title">{"Other Info:"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {props.employee.otherInfo}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeOtherInfo} color="primary" autoFocus className={styles.buttonGroup}>
+            Close
           </Button>
         </DialogActions>
       </Dialog>
