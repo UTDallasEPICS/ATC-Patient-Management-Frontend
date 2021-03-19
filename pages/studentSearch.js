@@ -7,16 +7,19 @@ import Head from "next/head";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+
+// import theme from '../src/theme';
 
 import { green } from "@material-ui/core/colors";
 
-import {
-  fade,
-  ThemeProvider,
-  withStyles,
-  makeStyles,
-  createMuiTheme,
-} from "@material-ui/core/styles";
+// import {
+//   fade,
+//   ThemeProvider,
+//   withStyles,
+//   makeStyles,
+//   createMuiTheme,
+// } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   palette: {
@@ -55,7 +58,11 @@ export default function studentSearch({ students }) {
 
         <div style={{ textAlign: "center" }}>
           <Link href="/newStudent">
-            <Button className="primaryButton">Add New</Button>
+      
+              <Button className="primaryButton">
+                  Add New
+              </Button>
+       
           </Link>
         </div>
       </div>
