@@ -31,7 +31,7 @@ export default function studentSearch({ students }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container, "topSpacer"}>
       <Head>
         <title>Student Search</title>
         <link rel="icon" href="/atc-logo.png" />
