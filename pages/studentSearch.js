@@ -4,11 +4,28 @@ import StudentList from "../components/StudentList";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
-const buttonColor = "#0F5787";
+import { green } from '@material-ui/core/colors';
+
+import {
+  fade,
+  ThemeProvider,
+  withStyles,
+  makeStyles,
+  createMuiTheme,
+} from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+  },
+});
 
 export default function studentSearch({ students }) {
   const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <div className={styles.container}>
       <Head>
@@ -18,11 +35,23 @@ export default function studentSearch({ students }) {
 
       <Navbar pageTitle="Student Search"></Navbar>
 
+      <ThemeProvider theme={theme}>
+        <TextField
+          label="ThemeProvider"
+          id="mui-theme-provider-standard-input"
+        />
+        <TextField
+          label="ThemeProvider"
+          variant="outlined"
+          id="mui-theme-provider-outlined-input"
+        />
+      </ThemeProvider>
       <div className={styles.studentSearchPage}>
-        <input
+        <TextField
           className={styles.searchBox}
-          type="text"
-          placeholder="Search Student..."
+          id="outlined-basic"
+          label="Student Search"
+          variant="outlined"
           onChange={(e) => {
             setSearchTerm(e.target.value);
           }}
@@ -32,14 +61,11 @@ export default function studentSearch({ students }) {
           <StudentList students={students} searchTerm={searchTerm} />
         </div>
 
-        <Link href="/newStudent">
-          <button
-            className={styles.button}
-            style={{ backgroundColor: buttonColor }}
-          >
-            Add New
-          </button>
-        </Link>
+        <div style={{ textAlign: "center" }}>
+          <Link href="/newStudent">
+            <Button className="primaryButton">Add New</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
