@@ -1,9 +1,3 @@
-.container {
-  display: block; 
-  flex-direction: column;
-  overflow-y: hidden;
-}
-
 .studentSearchPage {
   display: flex;
   flex-direction: column;

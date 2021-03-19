@@ -32,7 +32,6 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    marginBottom: "100px",
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
@@ -65,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navbar = ({ pageTitle, window }) => {
+const Navbar = ({ pageTitle, window, children }) => {
   // const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -126,9 +125,9 @@ const Navbar = ({ pageTitle, window }) => {
           <Link href={item[1]} key={item[0]}>
             <ListItem button>
               <ListItemIcon>
-              {
+                {
                   {
-                    "Logout": <ExitToAppIcon />,
+                    Logout: <ExitToAppIcon />,
                   }[item[0]]
                 }
               </ListItemIcon>
@@ -193,43 +192,13 @@ const Navbar = ({ pageTitle, window }) => {
           </Drawer>
         </Hidden>
       </nav>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        {children}
+      </main>
     </div>
   );
 };
-
-// Hook
-function useWindowSize() {
-  // Initialize state with undefined width/height so server and client renders match
-  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  });
-
-  useEffect(() => {
-    // only execute all the code below in client side
-    if (typeof window !== "undefined") {
-      // Handler to call on window resize
-      function handleResize() {
-        // Set window width/height to state
-        setWindowSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        });
-      }
-
-      // Add event listener
-      window.addEventListener("resize", handleResize);
-
-      // Call handler right away so state gets updated with initial window size
-      handleResize();
-
-      // Remove event listener on cleanup
-      return () => window.removeEventListener("resize", handleResize);
-    }
-  }, []); // Empty array ensures that effect is only run on mount
-  return windowSize;
-}
 
 Navbar.propTypes = {
   pageTitle: PropTypes.string.isRequired,

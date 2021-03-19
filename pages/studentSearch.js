@@ -31,41 +31,37 @@ export default function studentSearch({ students }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Student Search</title>
         <link rel="icon" href="/atc-logo.png" />
       </Head>
 
-      <Navbar pageTitle="Student Search"></Navbar>
+      <Navbar pageTitle="Student Search">
+        <div className={styles.studentSearchPage}>
+          <FormControl>
+            <TextField
+              className={styles.searchBox}
+              id="outlined-basic"
+              label="Student Search"
+              variant="outlined"
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+              }}
+            />
+          </FormControl>
 
-      <div className={styles.studentSearchPage}>
-        <FormControl>
-          <TextField
-            className={styles.searchBox}
-            id="outlined-basic"
-            label="Student Search"
-            variant="outlined"
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-            }}
-          />
-        </FormControl>
+          <div>
+            <StudentList students={students} searchTerm={searchTerm} />
+          </div>
 
-        <div>
-          <StudentList students={students} searchTerm={searchTerm} />
+          <div style={{ textAlign: "center" }}>
+            <Link href="/newStudent">
+              <Button className="primaryButton">Add New</Button>
+            </Link>
+          </div>
         </div>
-
-        <div style={{ textAlign: "center" }}>
-          <Link href="/newStudent">
-      
-              <Button className="primaryButton">
-                  Add New
-              </Button>
-       
-          </Link>
-        </div>
-      </div>
+      </Navbar>
     </div>
   );
 }
