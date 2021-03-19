@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from "prop-types";
 import styles from "../styles/Navbar.module.css";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
@@ -5,127 +6,188 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { TransitionGroup } from "react-transition-group";
 
+import AppBar from "@material-ui/core/AppBar";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import MailIcon from "@material-ui/icons/Mail";
+import MenuIcon from "@material-ui/icons/Menu";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
-const Navbar = ({ pageTitle }) => {
-  const [collapsed, setCollapsed] = useState(true);
+const drawerWidth = 240;
 
-  const accordionClick = (e) => {
-    let button = e.target;
-    if (button instanceof HTMLLIElement) {
-      button = e.target.parentElement;
-    }
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+  drawer: {
+    [theme.breakpoints.up("sm")]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+  },
+  appBar: {
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+      paddingTop: 0,
+    },
+    paddingTop: "40px",
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+}));
 
-    if (button instanceof SVGSVGElement) {
-      button = e.target.parentElement.parentElement;
-    }
+const Navbar = ({ pageTitle, window }) => {
+  // const { window } = props;
+  const classes = useStyles();
+  const theme = useTheme();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    if (button instanceof SVGPathElement) {
-      button = e.target.parentElement.parentElement.parentElement;
-    }
-
-    console.log("e.target: " + e.target);
-
-    let content = button.nextElementSibling;
-
-    console.log("content: " + content);
-
-    // content.classList.toggle()
-    if (content.style.display === "block") {
-      setCollapsed(true);
-      content.style.display = "none";
-      //   content.classList.add(styles.hiddenContent);
-      //   content.classList.remove(styles.showingContent);
-    } else {
-      setCollapsed(false);
-      content.style.display = "block";
-      //   content.classList.remove(styles.hiddenContent);
-      //   content.classList.add(styles.showingContent);
-    }
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
-  const windowSize = useWindowSize();
+  const drawer = (
+    <div>
+      <div className={classes.toolbar} />
+      <Divider />
+      <List>
+        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {["All mail", "Trash", "Spam"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div className={styles.banner}>
-      <div className={styles.menuToggle}>
-        <input type="checkbox" />
-        <span></span>
-        <span></span>
-        <span></span>
-
-        <ul className={styles.menu} style={{height: windowSize.height}}>
-          <button
-            onClick={accordionClick}
-            type="button"
-            className={styles.collapsible}
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
           >
-            <li className={styles.link}>
-              Students{" "}
-              {collapsed ? (
-                <AiFillCaretDown className={styles.caret} />
-              ) : (
-                <AiFillCaretUp className={styles.caret} />
-              )}
-            </li>
-          </button>
-          <div className={styles.content}>
-            <ul className={styles.indentedMenu}>
-              <Link href="/studentSearch">
-                <li className={styles.link}>Search</li>
-              </Link>
-              <Link href="/newStudent">
-                <li className={styles.link}>Add new</li>
-              </Link>
-            </ul>
-          </div>
-
-          <Link href="/">
-            <li className={styles.link}>Schedule</li>
-          </Link>
-          <Link href="/">
-            <li className={styles.link}>Logout</li>
-          </Link>
-        </ul>
-      </div>
-
-      <h1 className={styles.pageTitle}>{pageTitle}</h1>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            {pageTitle}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <nav className={classes.drawer} aria-label="mailbox folders">
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden smUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === "rtl" ? "right" : "left"}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </nav>
     </div>
   );
 };
 
 // Hook
 function useWindowSize() {
-    // Initialize state with undefined width/height so server and client renders match
-    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-    const [windowSize, setWindowSize] = useState({
-      width: undefined,
-      height: undefined,
-    });
-  
-    useEffect(() => {
-      // only execute all the code below in client side
-      if (typeof window !== 'undefined') {
-        // Handler to call on window resize
-        function handleResize() {
-          // Set window width/height to state
-          setWindowSize({
-            width: window.innerWidth,
-            height: window.innerHeight,
-          });
-        }
-      
-        // Add event listener
-        window.addEventListener("resize", handleResize);
-       
-        // Call handler right away so state gets updated with initial window size
-        handleResize();
-      
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", handleResize);
+  // Initialize state with undefined width/height so server and client renders match
+  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    // only execute all the code below in client side
+    if (typeof window !== "undefined") {
+      // Handler to call on window resize
+      function handleResize() {
+        // Set window width/height to state
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
       }
-    }, []); // Empty array ensures that effect is only run on mount
-    return windowSize;
-  }
+
+      // Add event listener
+      window.addEventListener("resize", handleResize);
+
+      // Call handler right away so state gets updated with initial window size
+      handleResize();
+
+      // Remove event listener on cleanup
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []); // Empty array ensures that effect is only run on mount
+  return windowSize;
+}
 
 Navbar.propTypes = {
   pageTitle: PropTypes.string.isRequired,

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import StudentListItem from "../components/StudentListItem";
+import StudentListItem from "../components/studentListItem";
 import styles from "../styles/StudentSearch.module.css";
 
 const StudentList = ({ students, searchTerm }) => {
