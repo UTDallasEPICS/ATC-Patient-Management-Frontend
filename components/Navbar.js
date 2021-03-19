@@ -23,11 +23,16 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
+import SearchIcon from "@material-ui/icons/Search";
+import AddIcon from "@material-ui/icons/Add";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    marginBottom: "100px",
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
@@ -75,24 +80,61 @@ const Navbar = ({ pageTitle, window }) => {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+        {[
+          ["Student Search", "/studentSearch"],
+          ["New Student", "/newStudent"],
+        ].map((item, index) => (
+          <Link href={item[1]} key={item[0]}>
+            <ListItem button>
+              <ListItemIcon>
+                {
+                  {
+                    "Student Search": <SearchIcon />,
+                    "New Student": <AddIcon />,
+                  }[item[0]]
+                }
+              </ListItemIcon>
+              <ListItemText primary={item[0]} />
+            </ListItem>
+          </Link>
         ))}
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+        {[
+          ["Employee Search", "/"],
+          ["New Employee", "/"],
+        ].map((item, index) => (
+          <Link href={item[1]} key={item[0]}>
+            <ListItem button>
+              <ListItemIcon>
+                {
+                  {
+                    "Employee Search": <SearchIcon />,
+                    "New Employee": <AddIcon />,
+                  }[item[0]]
+                }
+              </ListItemIcon>
+              <ListItemText primary={item[0]} />
+            </ListItem>
+          </Link>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {[["Logout", "/"]].map((item, index) => (
+          <Link href={item[1]} key={item[0]}>
+            <ListItem button>
+              <ListItemIcon>
+              {
+                  {
+                    "Logout": <ExitToAppIcon />,
+                  }[item[0]]
+                }
+              </ListItemIcon>
+              <ListItemText primary={item[0]} />
+            </ListItem>
+          </Link>
         ))}
       </List>
     </div>
