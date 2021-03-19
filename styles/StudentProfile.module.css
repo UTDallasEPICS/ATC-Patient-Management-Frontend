@@ -36,7 +36,7 @@
     color: white !important;
     width: 90px;
     margin-right: 10px !important;
-    margin-top: 10px !important;
+    margin-top: 5px !important;
 
   }
 
@@ -44,7 +44,7 @@
     background-color: var(--color-primary) !important;
     color: white !important;
     width: 160px;
-    margin-top: 10px !important;
+    margin-top: 5px !important;
     
   }
   
@@ -59,6 +59,11 @@
     text-align: center; 
   }
 
+  .bgOther {
+    text-decoration-color: #105688 impo !important; 
+    text-align: center; 
+    /*margin-bottom: 10px !important;*/
+  }
 
   .picture {
     position: relative;
