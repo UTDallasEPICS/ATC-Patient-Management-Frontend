@@ -6,8 +6,9 @@ import Navbar from "../components/Navbar";
 import Head from "next/head";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
 
-import { green } from '@material-ui/core/colors';
+import { green } from "@material-ui/core/colors";
 
 import {
   fade,
@@ -35,27 +36,18 @@ export default function studentSearch({ students }) {
 
       <Navbar pageTitle="Student Search"></Navbar>
 
-      <ThemeProvider theme={theme}>
-        <TextField
-          label="ThemeProvider"
-          id="mui-theme-provider-standard-input"
-        />
-        <TextField
-          label="ThemeProvider"
-          variant="outlined"
-          id="mui-theme-provider-outlined-input"
-        />
-      </ThemeProvider>
       <div className={styles.studentSearchPage}>
-        <TextField
-          className={styles.searchBox}
-          id="outlined-basic"
-          label="Student Search"
-          variant="outlined"
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-          }}
-        />
+        <FormControl>
+          <TextField
+            className={styles.searchBox}
+            id="outlined-basic"
+            label="Student Search"
+            variant="outlined"
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+          />
+        </FormControl>
 
         <div>
           <StudentList students={students} searchTerm={searchTerm} />
