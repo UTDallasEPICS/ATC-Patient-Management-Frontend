@@ -24,12 +24,39 @@
   .buttonGrid2 {
     text-align: center;
 }
+
+
+.buttonGroup {
+  color: #105688 !important; 
   
+} 
+  
+  .buttonGroup1 {
+    background-color: var(--color-primary) !important;
+    color: white !important;
+    width: 90px;
+    margin-right: 10px !important;
+    margin-top: 10px !important;
+
+  }
+
+  .buttonGroup2 {
+    background-color: var(--color-primary) !important;
+    color: white !important;
+    width: 160px;
+    margin-top: 10px !important;
+    
+  }
   
   .info {
       text-align: center;
       font-family: Arial, Helvetica, sans-serif;
       font-weight: 500;
+  }
+
+  .bg {
+    text-decoration-color: #105688 impo !important; 
+    text-align: center; 
   }
 
 

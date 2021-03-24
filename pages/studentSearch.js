@@ -4,43 +4,64 @@ import StudentList from "../components/StudentList";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-const buttonColor = "#0F5787";
+// import theme from '../src/theme';
+
+import { green } from "@material-ui/core/colors";
+
+// import {
+//   fade,
+//   ThemeProvider,
+//   withStyles,
+//   makeStyles,
+//   createMuiTheme,
+// } from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+  },
+});
 
 export default function studentSearch({ students }) {
   const [searchTerm, setSearchTerm] = useState("");
+
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Student Search</title>
         <link rel="icon" href="/atc-logo.png" />
       </Head>
 
-      <Navbar pageTitle="Student Search"></Navbar>
+      <Navbar pageTitle="Student Search">
+        <div className={styles.studentSearchPage}>
+          <FormControl>
+            <TextField
+              className={styles.searchBox}
+              id="outlined-basic"
+              label="Student Search"
+              variant="outlined"
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+              }}
+            />
+          </FormControl>
 
-      <div className={styles.studentSearchPage}>
-        <input
-          className={styles.searchBox}
-          type="text"
-          placeholder="Search Student..."
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-          }}
-        />
+          <div>
+            <StudentList students={students} searchTerm={searchTerm} />
+          </div>
 
-        <div>
-          <StudentList students={students} searchTerm={searchTerm} />
+          <div style={{ textAlign: "center" }}>
+            <Link href="/newStudent">
+              <Button className="primaryButton">Add New</Button>
+            </Link>
+          </div>
         </div>
-
-        <Link href="/newStudent">
-          <button
-            className={styles.button}
-            style={{ backgroundColor: buttonColor }}
-          >
-            Add New
-          </button>
-        </Link>
-      </div>
+      </Navbar>
     </div>
   );
 }

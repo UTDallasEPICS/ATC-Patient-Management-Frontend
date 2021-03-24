@@ -7,7 +7,7 @@ import Head from "next/head";
 
 const buttonColor = "#0F5787";
 
-export default function employeeSearch({ employee }) {
+export default function EmployeeSearch({ Employee }) {
   const [searchTerm, setSearchTerm] = useState("");
   return (
     <div className={styles.container}>
@@ -18,18 +18,18 @@ export default function employeeSearch({ employee }) {
 
       <Navbar pageTitle="Employee Search"></Navbar>
 
-      <div className={styles.employeeSearchPage}>
+      <div className={styles.EmployeeSearchPage}>
         <input
           className={styles.searchBox}
           type="text"
-          placeholder="Search Student..."
+          placeholder="Search Employee..."
           onChange={(e) => {
             setSearchTerm(e.target.value);
           }}
         />
 
         <div>
-          <EmployeeList employee={employee} searchTerm={searchTerm} />
+          <EmployeeList Employees={Employees} searchTerm={searchTerm} />
         </div>
 
         <Link href="/newEmployee">
@@ -48,9 +48,9 @@ export default function employeeSearch({ employee }) {
 export const getServerSideProps = async () => {
   // const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=6`)
   // // const res = await fetch(`https://randomuser.me/api/`)
-  // const students = await res.json()
+  // const Employees = await res.json()
 
-  const employee = [
+  const Employees = [
     {
       id: 1,
       firstName: "Billy",
@@ -101,7 +101,7 @@ export const getServerSideProps = async () => {
     },
   ];
 
-  employee.sort(function (a, b) {
+  Employees.sort(function (a, b) {
     const aName = a.firstName + a.lastName;
     const bName = b.firstName + b.lastName;
     if (aName < bName) {
@@ -115,8 +115,7 @@ export const getServerSideProps = async () => {
 
   return {
     props: {
-      employee,
+      Employees,
     },
   };
 };
-

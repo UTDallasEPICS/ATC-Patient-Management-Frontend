@@ -1,8 +1,17 @@
 .oi {
-    margin-bottom: -10px;
+    /*margin-bottom: -10px;*/
     border-style: solid;
     border-color: gray;
     border-width: .75px;
-    padding-bottom: 10px;
-    overflow: scroll;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    
+    overflow-y: scroll;
 }
+/*.container {
+    overflow-y: scroll;
+} */
