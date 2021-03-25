@@ -1,6 +1,6 @@
 import styles from "../styles/StudentSearch.module.css";
 import Link from "next/link";
-import StudentList from "../components/StudentList";
+import SearchList from "../components/SearchList";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
@@ -38,7 +38,7 @@ export default function studentSearch({ students }) {
       </Head>
 
       <Navbar pageTitle="Student Search">
-        <div className={styles.studentSearchPage}>
+        <div className={styles.searchPage}>
           <FormControl>
             <TextField
               className={styles.searchBox}
@@ -52,7 +52,7 @@ export default function studentSearch({ students }) {
           </FormControl>
 
           <div>
-            <StudentList students={students} searchTerm={searchTerm} />
+            <SearchList students={students} searchTerm={searchTerm} />
           </div>
 
           <div style={{ textAlign: "center" }}>

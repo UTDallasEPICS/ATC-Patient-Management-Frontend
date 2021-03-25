@@ -1,47 +1,51 @@
-import styles from "../styles/EmployeeSearch.module.css";
+import styles from "../styles/StudentSearch.module.css";
 import Link from "next/link";
-import EmployeeList from "../components/EmployeeList";
+import SearchList from "../components/SearchList";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const buttonColor = "#0F5787";
 
-export default function EmployeeSearch({ Employee }) {
+export default function EmployeeSearch({ employees }) {
   const [searchTerm, setSearchTerm] = useState("");
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Employee Search</title>
-        <link rel="icon" href="/atc-logo.png" />
-      </Head>
+    <div>
+    <Head>
+      <title>Employee Search</title>
+      <link rel="icon" href="/atc-logo.png" />
+    </Head>
 
-      <Navbar pageTitle="Employee Search"></Navbar>
-
-      <div className={styles.EmployeeSearchPage}>
-        <input
-          className={styles.searchBox}
-          type="text"
-          placeholder="Search Employee..."
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-          }}
-        />
+    <Navbar pageTitle="Employee Search">
+      <div className={styles.searchPage}>
+        <FormControl>
+          <TextField
+            className={styles.searchBox}
+            id="outlined-basic"
+            label="Employee Search"
+            variant="outlined"
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+          />
+        </FormControl>
 
         <div>
-          <EmployeeList Employees={Employees} searchTerm={searchTerm} />
+          <SearchList students={employees} searchTerm={searchTerm} />
         </div>
 
-        <Link href="/newEmployee">
-          <button
-            className={styles.button}
-            style={{ backgroundColor: buttonColor }}
-          >
-            Add New
-          </button>
-        </Link>
+        <div style={{ textAlign: "center" }}>
+          <Link href="/newStudent">
+            <Button className="primaryButton">Add New</Button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </Navbar>
+  </div>
   );
 }
 
@@ -50,7 +54,7 @@ export const getServerSideProps = async () => {
   // // const res = await fetch(`https://randomuser.me/api/`)
   // const Employees = await res.json()
 
-  const Employees = [
+  const employees = [
     {
       id: 1,
       firstName: "Billy",
@@ -101,7 +105,7 @@ export const getServerSideProps = async () => {
     },
   ];
 
-  Employees.sort(function (a, b) {
+  employees.sort(function (a, b) {
     const aName = a.firstName + a.lastName;
     const bName = b.firstName + b.lastName;
     if (aName < bName) {
@@ -115,7 +119,7 @@ export const getServerSideProps = async () => {
 
   return {
     props: {
-      Employees,
+      employees,
     },
   };
 };
