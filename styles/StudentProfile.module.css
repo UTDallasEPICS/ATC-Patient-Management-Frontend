@@ -24,7 +24,29 @@
   .buttonGrid2 {
     text-align: center;
 }
+
+
+.buttonGroup {
+  color: #105688 !important; 
   
+} 
+  
+  .buttonGroup1 {
+    background-color: var(--color-primary) !important;
+    color: white !important;
+    width: 90px;
+    margin-right: 10px !important;
+    margin-top: 5px !important;
+
+  }
+
+  .buttonGroup2 {
+    background-color: var(--color-primary) !important;
+    color: white !important;
+    width: 160px;
+    margin-top: 5px !important;
+    
+  }
   
   .info {
       text-align: center;
@@ -32,6 +54,16 @@
       font-weight: 500;
   }
 
+  .bg {
+    text-decoration-color: #105688 impo !important; 
+    text-align: center; 
+  }
+
+  .bgOther {
+    text-decoration-color: #105688 impo !important; 
+    text-align: center; 
+    /*margin-bottom: 10px !important;*/
+  }
 
   .picture {
     position: relative;

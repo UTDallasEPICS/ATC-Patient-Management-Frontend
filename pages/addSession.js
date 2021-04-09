@@ -15,19 +15,20 @@ const addSession = ({ program }) => {
         <link rel="icon" href="/atc-logo.png" />
       </Head>
 
-      <Navbar pageTitle="Add Session" />
-      <Container className={styles.container}>
-        <Behaviors behaviors={behaviors} />
+      <Navbar pageTitle="Add Session">
+        <Container className={styles.container}>
+          <Behaviors behaviors={behaviors} />
 
-        <Button
-          variant="contained"
-          color="inherit"
-          className="primaryButton"
-          style={{ width: "20vh", margin: "auto", marginBottom:"80px" }}
-        >
-          Submit Session
-        </Button>
-      </Container>
+          <Button
+            variant="contained"
+            color="inherit"
+            className="primaryButton"
+            style={{ width: "20vh", margin: "auto", marginBottom: "80px" }}
+          >
+            Submit Session
+          </Button>
+        </Container>
+      </Navbar>
     </div>
   );
 };

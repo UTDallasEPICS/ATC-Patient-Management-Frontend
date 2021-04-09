@@ -36,65 +36,69 @@ export default function newStudent() {
         <link rel="icon" href="/atc-logo.png" />
       </Head>
 
-      <Navbar pageTitle="New Student" />
-      <div>
-        <form className={styles.inputs} onSubmit={handleSubmit(onSubmit)}>
-          <div className={styles.parent}>
-            <Avatar diameter="175px" img={imgPreview} />
+      <Navbar pageTitle="New Student">
+        <div>
+          <form className={styles.inputs} onSubmit={handleSubmit(onSubmit)}>
+            <div className={styles.parent}>
+              <Avatar diameter="175px" img={imgPreview} />
 
-            <div className={styles.child}>
-              <label htmlFor="image_upload" className={styles.imageInputLabel}>
-                <strong>Upload Picture (Optional)</strong>
-              </label>
-              <input
-                id="image_upload"
-                name="image_upload"
-                ref={register}
-                type="file"
-                accept="image/*"
-                className={styles.imageInput}
-                onChange={updateImageDisplay}
-              />
+              <div className={styles.child}>
+                <label
+                  htmlFor="image_upload"
+                  className={styles.imageInputLabel}
+                >
+                  <strong>Upload Picture (Optional)</strong>
+                </label>
+                <input
+                  id="image_upload"
+                  name="image_upload"
+                  ref={register}
+                  type="file"
+                  accept="image/*"
+                  className={styles.imageInput}
+                  onChange={updateImageDisplay}
+                />
+              </div>
             </div>
-          </div>
 
-          <input
-            className={styles.searchBox}
-            type="text"
-            placeholder="First Name..."
-            onChange={(e) => {
-              setFirstName(e.target.value);
-            }}
-          />
+            <input
+              className={styles.searchBox}
+              type="text"
+              placeholder="First Name..."
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
+            />
 
-          <input
-            className={styles.searchBox}
-            type="text"
-            placeholder="Last Name..."
-            onChange={(e) => {
-              setLastName(e.target.value);
-            }}
-          />
-          <input
-            className={styles.searchBox}
-            type="number"
-            placeholder="Age..."
-            onChange={(e) => {
-              setAge(e.target.value);
-            }}
-          />
-          <textarea
-            className={styles.textArea}
-            id="textArea"
-            type="text"
-            placeholder="Other Info..."
-            onChange={(e) => {
-              setOtherInfo(e.target.value);
-            }}
-          />
-          <button className={styles.button}>Done</button>
-        </form>
-      </div>
+            <input
+              className={styles.searchBox}
+              type="text"
+              placeholder="Last Name..."
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
+            />
+            <input
+              className={styles.searchBox}
+              type="number"
+              placeholder="Age..."
+              onChange={(e) => {
+                setAge(e.target.value);
+              }}
+            />
+            <textarea
+              className={styles.textArea}
+              id="textArea"
+              type="text"
+              placeholder="Other Info..."
+              onChange={(e) => {
+                setOtherInfo(e.target.value);
+              }}
+            />
+            <button className={styles.button}>Done</button>
+          </form>
+        </div>
+      </Navbar>
     </div>
   );
 }
