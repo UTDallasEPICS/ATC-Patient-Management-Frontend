@@ -9,3 +9,17 @@
     right:  30px;
     
 }
+
+.chip{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.domainPaper{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 25px;
+}

@@ -15,6 +15,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from "@material-ui/core/Typography";
 import GenInfo from "../components/GenInfo";
+import DomainInput from "../components/DomainInput"
 
 
 
@@ -53,7 +54,7 @@ const editProgram = () => {
         case 0:
           return <GenInfo/>;
         case 1:
-          return 'Domain...';
+          return <DomainInput/>;
         case 2:
           return 'MC...';
         default:
