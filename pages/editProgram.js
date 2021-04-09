@@ -14,6 +14,7 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from "@material-ui/core/Typography";
+import GenInfo from "../components/GenInfo";
 
 
 
@@ -50,7 +51,7 @@ const editProgram = () => {
     function getStepContent(stepIndex) {
       switch (stepIndex) {
         case 0:
-          return 'Gen Info...';
+          return <GenInfo/>;
         case 1:
           return 'Domain...';
         case 2:
