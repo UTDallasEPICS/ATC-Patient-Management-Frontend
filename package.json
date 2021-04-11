@@ -15,6 +15,7 @@
     "react-dom": "17.0.1",
     "react-hook-form": "^6.15.1",
     "react-icons": "^4.2.0",
-    "react-transition-group": "^4.4.1"
+    "react-transition-group": "^4.4.1",
+    "recharts": "^2.0.9"
   }
 }
