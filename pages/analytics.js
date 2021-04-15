@@ -1,11 +1,20 @@
-
 import Navbar from "../components/Navbar";
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StackedBarGraph from "../components/Graphs/StackedBarGraph";
 import styles from "../styles/Analytics.module.css";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const analytics = () => {
+  const [domains, setDomains] = useState([]);
+
+  useEffect(() => {
+    console.log("Use Effect called");
+    setDomains( ["Domain 1", "Domain 2", "Domain 3"] );
+  }, []);
+
   const data = [
     {
       name: "Page A",
@@ -58,6 +67,17 @@ const analytics = () => {
     setPage(newValue);
   };
 
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = (e) => {
+    console.log(e.target.id);
+    setAnchorEl(null);
+  };
+
   return (
     <div>
       <Head>
@@ -65,8 +85,34 @@ const analytics = () => {
         <link rel="icon" href="/atc-logo.png" />
       </Head>
 
-      <Navbar pageTitle="Analytics" analytics onChangeAnalyticsPage={handlePageChange} analyticsPageValue={page}>
+      <Navbar
+        pageTitle="Analytics"
+        analytics
+        onChangeAnalyticsPage={handlePageChange}
+        analyticsPageValue={page}
+      >
         <div style={{ textAlign: "center" }}>
+          <div>
+            <Button
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              Open Menu
+            </Button>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              {domains.map((domain) => (
+                <MenuItem onClick={handleClose} id={domain}>{domain}</MenuItem>
+              ))}
+            </Menu>
+          </div>
+
           <div className={styles.graph}>
             <StackedBarGraph data={data} />
           </div>
