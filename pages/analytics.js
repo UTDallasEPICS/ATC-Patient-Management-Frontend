@@ -7,13 +7,28 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
+
 const analytics = () => {
   const [domains, setDomains] = useState([]);
+  const [selectedDomain, setSelectedDomain] = useState(null);
 
   useEffect(() => {
     console.log("Use Effect called");
-    setDomains( ["Domain 1", "Domain 2", "Domain 3"] );
+    fetchData();
   }, []);
+
+  const fetchData = async () => {
+    setDomains([..."Domain 1", "Domain 2", "Domain 3"]);
+  };
 
   const data = [
     {
@@ -91,14 +106,14 @@ const analytics = () => {
         onChangeAnalyticsPage={handlePageChange}
         analyticsPageValue={page}
       >
-        <div style={{ textAlign: "center" }}>
-          <div>
+        <div>
+          <div style={{ position: "fixed" }}>
             <Button
               aria-controls="simple-menu"
               aria-haspopup="true"
               onClick={handleClick}
             >
-              Open Menu
+              Select Domain
             </Button>
             <Menu
               id="simple-menu"
@@ -108,14 +123,14 @@ const analytics = () => {
               onClose={handleClose}
             >
               {domains.map((domain) => (
-                <MenuItem onClick={handleClose} id={domain}>{domain}</MenuItem>
+                <MenuItem id={domain} onClick={handleClose} id={domain}>
+                  {domain}
+                </MenuItem>
               ))}
             </Menu>
           </div>
 
-          <div className={styles.graph}>
             <StackedBarGraph data={data} />
-          </div>
         </div>
       </Navbar>
     </div>

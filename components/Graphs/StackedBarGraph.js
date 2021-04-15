@@ -1,18 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-    BarChart,
-    Bar,
-    Cell,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-    ResponsiveContainer,
-  } from "recharts";
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
-const StackedBarGraph = ( {data} ) => {
+import { useEffect } from "react";
+
+const StackedBarGraph = ({ data }) => {
+  useEffect(() => {
+    console.log("Use Effect on bar graph");
+  }, [data]);
+
   return (
     <div>
       <BarChart
@@ -39,7 +45,7 @@ const StackedBarGraph = ( {data} ) => {
 };
 
 StackedBarGraph.propTypes = {
-    data: PropTypes.array.isRequired,
-  };
+  data: PropTypes.array.isRequired,
+};
 
 export default StackedBarGraph;
