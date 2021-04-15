@@ -1,17 +1,9 @@
-import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
 
 import Navbar from "../components/Navbar";
-import Head from "next/head"
+import Head from "next/head";
+import { useState } from "react";
+import StackedBarGraph from "../components/Graphs/StackedBarGraph";
+import styles from "../styles/Analytics.module.css";
 
 const analytics = () => {
   const data = [
@@ -59,32 +51,26 @@ const analytics = () => {
     },
   ];
 
+  const [page, setPage] = useState(0);
+
+  const handlePageChange = (event, newValue) => {
+    console.log(newValue);
+    setPage(newValue);
+  };
+
   return (
     <div>
       <Head>
         <title>Analytics</title>
         <link rel="icon" href="/atc-logo.png" />
       </Head>
-      <Navbar pageTitle="Analytics">
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="pv" stackId="a" fill="#8884d8" />
-          <Bar dataKey="uv" stackId="a" fill="#82ca9d" />
-        </BarChart>
+
+      <Navbar pageTitle="Analytics" analytics onChangeAnalyticsPage={handlePageChange} analyticsPageValue={page}>
+        <div style={{ textAlign: "center" }}>
+          <div className={styles.graph}>
+            <StackedBarGraph data={data} />
+          </div>
+        </div>
       </Navbar>
     </div>
   );
