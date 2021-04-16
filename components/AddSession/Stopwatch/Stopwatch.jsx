@@ -33,22 +33,20 @@ const Stopwatch = () => {
   };
 
   return (
-    <div>
-      <Card className={styles.durationInputBox}>
-        {timerOn === false && timerTime === 0 && (
-          <Button onClick={start}>START</Button>
-        )}
-        {timerOn === true && <Button onClick={stop}>STOP</Button>}
-        {timerOn === false && timerTime > 0 && (
-          <Button onClick={start}>RESUME</Button>
-        )}
-        <Button onClick={reset}>RESET</Button>
+    <Card className={styles.durationInputBox}>
+      {timerOn === false && timerTime === 0 && (
+        <Button onClick={start}>START</Button>
+      )}
+      {timerOn === true && <Button onClick={stop}>STOP</Button>}
+      {timerOn === false && timerTime > 0 && (
+        <Button onClick={start}>RESUME</Button>
+      )}
+      <Button onClick={reset}>RESET</Button>
 
-        <div className={styles.stopwatchDisplay}>
-          {hours}:{minutes}:{seconds}:{centiseconds}
-        </div>
-      </Card>
-    </div>
+      <div className={styles.stopwatchDisplay}>
+        {hours}:{minutes}:{seconds}:{centiseconds}
+      </div>
+    </Card>
   );
 };
 

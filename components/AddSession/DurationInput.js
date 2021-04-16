@@ -6,20 +6,21 @@ import { useState, useEffect } from "react";
 
 const DurationInput = () => {
   const [times, setTimes] = useState([]);
-  let i = 0;
+  const [nextID, setNextID] = useState(0);
 
   const addStopwatch = () => {
     console.log("add stopwatch");
-    
-    // setTimes((times) => {
-    //     times = [...times, 0]
-    // });
+    setTimes([...times, nextID]);
+    setNextID((prevID) => prevID + 1);
   };
+
+  const stopwatches = times.map((id) => <Stopwatch id={id} key={id} />);
 
   return (
     <div>
-      <Stopwatch i={i}/>
+      {stopwatches}
       <div style={{ display: "table", margin: "auto", marginTop: "20px" }}>
+        
         <Fab
           onClick={addStopwatch}
           className={styles.addStopwatchButton}
