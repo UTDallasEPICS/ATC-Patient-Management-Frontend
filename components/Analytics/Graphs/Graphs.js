@@ -39,32 +39,73 @@ const Graphs = () => {
         data: [
           {
             name: "5/7/2021",
-            F: 5,
+            Occurrences: 5,
           },
           {
             name: "5/8/2021",
-            F: 7,
+            Occurrences: 7,
           },
           {
             name: "5/9/2021",
-            F: 10,
+            Occurrences: 10,
           },
           {
             name: "5/10/2021",
-            F: 9,
-     
+            Occurrences: 9,
           },
           {
             name: "5/11/2021",
-            F: 8,
+            Occurrences: 8,
           },
           {
             name: "5/12/2021",
-            F: 4,
+            Occurrences: 4,
           },
           {
             name: "5/14/2021",
-            F: 0,
+            Occurrences: 0,
+          },
+        ],
+      },
+      {
+        type: "duration",
+        title: "Duration Demo",
+        data: [
+          {
+            name: "5/7/2021",
+            Seconds: 30,
+          },
+          {
+            name: "5/8/2021",
+            Seconds: 47,
+          },
+          {
+            name: "5/9/2021",
+            Seconds: 50,
+          },
+          {
+            name: "5/10/2021",
+            Seconds: 42,
+          },
+          {
+            name: "5/11/2021",
+            Seconds: 36,
+          },
+          {
+            name: "5/12/2021",
+            Seconds: 25,
+          },
+          {
+            name: "5/14/2021",
+            Seconds: 15,
+          },
+          {
+            name: "5/15/2021",
+            Seconds: 7,
+          },
+          {
+            name: "5/16/2021",
+            Seconds: 0,
           },
         ],
       },
@@ -97,11 +138,6 @@ const Graphs = () => {
       {
         type: "probe",
         title: "Probe Demo",
-      },
-
-      {
-        type: "duration",
-        title: "Duration Demo",
       },
     ]);
   };
@@ -149,15 +185,15 @@ const Graphs = () => {
 
       {data.map((graph) => {
         switch (graph.type) {
-          case "frequency":
-            return <SimpleLineChart data={graph.data} title={graph.title} />;
           case "trials":
             return <StackedBarGraph data={graph.data} title={graph.title} />;
           case "probe":
             return <h1>Probe Graph</h1>;
 
           case "duration":
-            return <h1>Duration Graph</h1>;
+            return <SimpleLineChart data={graph.data} dataKey="Seconds" title={graph.title} />;
+          case "frequency":
+            return <SimpleLineChart data={graph.data} dataKey="Occurrences" title={graph.title} />;
         }
         // console.log(graph.title);
         // return <StackedBarGraph data={graph.data} title={graph.title} />;

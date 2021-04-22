@@ -17,7 +17,7 @@ import {PRIMARY_COLOR} from "../../../styles/constants"
 
 // import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const SimpleLineChart = ({ data, title }) => {
+const SimpleLineChart = ({ data, title, dataKey }) => {
 
   return (
     <div style={{ marginBottom: "50px", marginTop: "20px", height: "400px" }}>
@@ -40,7 +40,7 @@ const SimpleLineChart = ({ data, title }) => {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Line type="monotone" dataKey="F" stroke={PRIMARY_COLOR} activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey={dataKey} stroke={PRIMARY_COLOR} activeDot={{ r: 8 }} />
         </LineChart>
       </ResponsiveContainer>
   </div>
@@ -49,6 +49,8 @@ const SimpleLineChart = ({ data, title }) => {
 
 SimpleLineChart.propTypes = {
   data: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+  dataKey: PropTypes.string.isRequired
 };
 
 export default SimpleLineChart;
