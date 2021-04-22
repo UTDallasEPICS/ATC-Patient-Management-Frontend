@@ -12,7 +12,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import Typography from "@material-ui/core/Typography"
+import Typography from "@material-ui/core/Typography";
 import { useEffect } from "react";
 
 const StackedBarGraph = ({ data, title }) => {
@@ -21,7 +21,7 @@ const StackedBarGraph = ({ data, title }) => {
   // }, [data]);
 
   return (
-    <div style={{marginBottom:"4vw", marginTop:"20px"}}>
+    <div style={{ marginBottom: "4vw", marginTop: "20px" }}>
       <Typography variant="h4" component="h2">
         {title}
       </Typography>
@@ -42,8 +42,8 @@ const StackedBarGraph = ({ data, title }) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="pv" stackId="a" fill="#8884d8" />
-          <Bar dataKey="uv" stackId="a" fill="#82ca9d" />
+          <Bar dataKey="success" stackId="a" fill="#82ca9d" />
+          <Bar dataKey="failure" stackId="a" fill="#ff6666" />
         </BarChart>
       </ResponsiveContainer>
     </div>
