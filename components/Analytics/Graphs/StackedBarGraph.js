@@ -13,7 +13,6 @@ import {
 } from "recharts";
 
 import Typography from "@material-ui/core/Typography";
-import { useEffect } from "react";
 
 const StackedBarGraph = ({ data, title }) => {
   // useEffect(() => {

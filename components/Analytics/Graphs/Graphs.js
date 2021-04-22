@@ -3,6 +3,19 @@ import { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import SimpleLineChart from "./SimpleLineChart";
+
+import React, { PureComponent } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const Graphs = () => {
   const [domains, setDomains] = useState([]);
@@ -20,6 +33,41 @@ const Graphs = () => {
   const fetchData = () => {
     console.log("Fetch data called");
     setData([
+      {
+        type: "frequency",
+        title: "Frequency Demo",
+        data: [
+          {
+            name: "5/7/2021",
+            F: 5,
+          },
+          {
+            name: "5/8/2021",
+            F: 7,
+          },
+          {
+            name: "5/9/2021",
+            F: 10,
+          },
+          {
+            name: "5/10/2021",
+            F: 9,
+     
+          },
+          {
+            name: "5/11/2021",
+            F: 8,
+          },
+          {
+            name: "5/12/2021",
+            F: 4,
+          },
+          {
+            name: "5/14/2021",
+            F: 0,
+          },
+        ],
+      },
       {
         type: "trials",
         title: "Trial Demo",
@@ -48,15 +96,12 @@ const Graphs = () => {
       },
       {
         type: "probe",
-        title: "Probe Demo"
+        title: "Probe Demo",
       },
-      {
-        type: "frequency",
-        title: "Frequency Demo"
-      },
+
       {
         type: "duration",
-        title: "Duration Demo"
+        title: "Duration Demo",
       },
     ]);
   };
@@ -104,14 +149,15 @@ const Graphs = () => {
 
       {data.map((graph) => {
         switch (graph.type) {
+          case "frequency":
+            return <SimpleLineChart data={graph.data} title={graph.title} />;
           case "trials":
             return <StackedBarGraph data={graph.data} title={graph.title} />;
-          case "probe": 
-            return <h1>Probe Graph</h1>
-          case "frequency":
-            return <h1>Frequency Graph</h1>
+          case "probe":
+            return <h1>Probe Graph</h1>;
+
           case "duration":
-            return <h1>Duration Graph</h1>
+            return <h1>Duration Graph</h1>;
         }
         // console.log(graph.title);
         // return <StackedBarGraph data={graph.data} title={graph.title} />;
