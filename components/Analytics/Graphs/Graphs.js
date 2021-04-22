@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import SimpleLineChart from "./SimpleLineChart";
+import ProbeGraph from "./ProbeGraph";
 
 import React, { PureComponent } from "react";
 import {
@@ -138,6 +139,20 @@ const Graphs = () => {
       {
         type: "probe",
         title: "Probe Demo",
+        data: [
+          {
+            name: "5/14/2021",
+            value: false,
+          },
+          {
+            name: "5/15/2021",
+            value: true,
+          },
+          {
+            name: "5/16/2021",
+            value: false,
+          },
+        ],
       },
     ]);
   };
@@ -188,12 +203,24 @@ const Graphs = () => {
           case "trials":
             return <StackedBarGraph data={graph.data} title={graph.title} />;
           case "probe":
-            return <h1>Probe Graph</h1>;
+            return <ProbeGraph data={graph.data} title={graph.title}/>;
 
           case "duration":
-            return <SimpleLineChart data={graph.data} dataKey="Seconds" title={graph.title} />;
+            return (
+              <SimpleLineChart
+                data={graph.data}
+                dataKey="Seconds"
+                title={graph.title}
+              />
+            );
           case "frequency":
-            return <SimpleLineChart data={graph.data} dataKey="Occurrences" title={graph.title} />;
+            return (
+              <SimpleLineChart
+                data={graph.data}
+                dataKey="Occurrences"
+                title={graph.title}
+              />
+            );
         }
         // console.log(graph.title);
         // return <StackedBarGraph data={graph.data} title={graph.title} />;
