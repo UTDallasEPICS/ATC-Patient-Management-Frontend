@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import { useState } from "react";
-import styles from "../styles/NewStudent.module.css";
+import styles from "../styles/NewEntity.module.css";
 import Avatar from "../components/Avatar";
 import { useForm } from "react-hook-form";
 import Head from "next/head";

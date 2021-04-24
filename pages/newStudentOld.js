@@ -1,14 +1,15 @@
 import Navbar from "../components/Navbar";
 import { useState } from "react";
-import styles from "../styles/NewStudent.module.css";
+import styles from "../styles/NewEntity.module.css";
 import Avatar from "../components/Avatar";
 import { useForm } from "react-hook-form";
 import Head from "next/head";
+import TextField from "@material-ui/core/TextField";
 
 export default function newStudent() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState();
+  const [birthDate, setBirthDate] = useState("");
   const [otherInfo, setOtherInfo] = useState("");
   const [imgPreview, setImagePreview] = useState("/default-avatar.jpg");
 
@@ -78,13 +79,16 @@ export default function newStudent() {
                 setLastName(e.target.value);
               }}
             />
-            <input
-              className={styles.searchBox}
-              type="number"
-              placeholder="Age..."
-              onChange={(e) => {
-                setAge(e.target.value);
+            <TextField
+              id="date"
+              label="Birthday"
+              type="date"
+              defaultValue="2017-05-24"
+              InputLabelProps={{
+                shrink: true,
               }}
+              className={styles.searchBox}
+              onChange={(e) => setBirthDate(e.target.value)}
             />
             <textarea
               className={styles.textArea}
