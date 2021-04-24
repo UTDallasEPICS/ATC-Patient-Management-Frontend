@@ -1,0 +1,25 @@
+.appBar {
+    top: auto !important;
+    bottom: 0;
+    
+}
+.addButton {
+    position: absolute;
+    bottom: 30px  !important;
+    right:  30px;
+    
+}
+
+.chip{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.domainPaper{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 25px;
+}

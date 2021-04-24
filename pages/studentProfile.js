@@ -51,6 +51,16 @@ const studentProfile = ({ student }) => {
           <h1 className={styles.info}>
             {student.firstName} {student.lastName}
           </h1>
+          <div className={styles.bgOther}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={styles.buttonGroup}
+          >
+            New Session
+          </Button>
+          </div>
+          <br/>
           <Divider variant="middle" />
           <p className={styles.label}>Date of Birth:</p>{" "}
           <p className={styles.info}> {student.dob}</p>
@@ -73,7 +83,7 @@ const studentProfile = ({ student }) => {
           <div className={styles.bg}>
             <br />
             <Button className={styles.buttonGroup1}>Edit</Button>
-            <Button className={styles.buttonGroup2}>New Session</Button>
+            <Button className={styles.buttonGroup2}>Edit Program</Button>
             <br />
 
             <Button className={styles.buttonGroup1} onClick={handleClickOpen}>

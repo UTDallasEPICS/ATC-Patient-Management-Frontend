@@ -102,6 +102,23 @@ const employeeProfile = (props) => {
     setOtherInfo(false);
   };
 
+  //State for handling when the x button is pressed on list 
+  const [xValidation, setXValidation] = React.useState(false); 
+  //Opens x validation
+  const openXValidation = () => {
+    setXValidation(true);
+  }
+  //Closes x validation
+  const closeXValidation = () => {
+    setXValidation(false);
+  }
+  //close x validation when user says yes
+  //Closes x validation
+  const closeXValidationYes = () => {
+    setXValidation(false);
+    setListOpen(false);
+  }
+
   return (
     <div>
       <Head>
@@ -134,7 +151,7 @@ const employeeProfile = (props) => {
               Student List
               <IconButton
                 aria-label="close"
-                onClick={closeList}
+                onClick={openXValidation}
                 className={styles.closeButton}
               >
                 <CloseIcon />
@@ -305,6 +322,37 @@ const employeeProfile = (props) => {
               className={styles.buttonGroup}
             >
               Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={xValidation}
+          onClose={closeXValidation}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Are you sure you want to exit list?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Without clicking save changes, no changes will be saved. 
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={closeXValidation}
+              color="primary"
+              autoFocus
+              className={styles.buttonGroup}
+            >
+              No
+            </Button>
+            <Button
+              onClick={closeXValidationYes}
+              color="primary"
+              autoFocus
+              className={styles.buttonGroup}
+            >
+              Yes
             </Button>
           </DialogActions>
         </Dialog>

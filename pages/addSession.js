@@ -42,6 +42,13 @@ export const getServerSideProps = async ({ query }) => {
     lastName: "Doe",
     behaviors: [
       {
+        title: "Episodes of Challenging Behavior",
+        description:
+          "May include, crying, yelling, screaming, whining, and dropping to the ground",
+        type: "duration",
+        trialsPerEntry: 1,
+      },
+      {
         title: "Following Steps",
         description:
           " Will follow 20 1-step instructions, each for 3 trials a session across three consecutive sessions.",

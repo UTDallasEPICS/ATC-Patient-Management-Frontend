@@ -1,0 +1,12 @@
+.testFields {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.container {
+    text-align:center;
+}
+
+.hide {
+    text-align: center !important;
+}
