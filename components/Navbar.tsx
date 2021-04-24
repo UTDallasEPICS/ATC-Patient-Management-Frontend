@@ -64,8 +64,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navbar = ({ pageTitle, window, children }) => {
-  // const { window } = props;
+const Navbar = (props: { pageTitle, window?, children }) => {
+  const { pageTitle,window, children } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);

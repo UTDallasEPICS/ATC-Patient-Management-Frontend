@@ -1,7 +1,22 @@
 
-.searchBox {
-  background-color: green;
+.inputField {
+ margin-bottom: 20px !important;
 }
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 80%;
+  margin: 20px auto 20px auto;
+}
+
+@media screen and (min-width: 768px) {
+  .inputs {
+    padding-left: 20vw;
+    padding-right: 20vw;
+  }
+} 
 
 .parent {
   position: relative;
@@ -47,3 +62,4 @@
 .imageInputLabel:hover {
   filter: drop-shadow(-3px 11px 44px rgba(0, 0, 0, 1));
 }
+

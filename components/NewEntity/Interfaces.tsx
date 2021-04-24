@@ -7,4 +7,5 @@ export enum InputType {
     value: string,
     attributeName: string,
     type: InputType,
+    name?: string,
   }

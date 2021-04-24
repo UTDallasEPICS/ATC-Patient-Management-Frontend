@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Head from "next/head";
 import TextField from "@material-ui/core/TextField";
 import { StringInput, InputType } from "./Interfaces";
+import Button from "@material-ui/core/Button"
 // import DateInput from "./DateInput"
 // import TextInput from "./TextInput"
 
@@ -18,14 +19,13 @@ export const NewEntity = (props: { textFields: StringInput[] }) => {
     setTextInputs(props.textFields);
   }, []);
 
-  // console.log(props.textFields[0].value);
-  // console.log(textInputs[0].value);
 
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = () => {
+    console.log("Submit called")
     //here is where the POST request will happen
+    //use the current state to fill the call body
   };
 
   const updateImageDisplay = (e) => {
@@ -39,23 +39,33 @@ export const NewEntity = (props: { textFields: StringInput[] }) => {
   };
 
   const getComponent = (input: StringInput) => {
-    console.log(input);
-    console.log("Input: " + input);
     switch (input.type) {
       case InputType.TEXT:
-        return <h1 key={input.attributeName}>Text</h1>;
+        return (
+          <TextField
+            key={input.attributeName}
+            id="outlined-basic"
+            label={input.value}
+            variant="outlined"
+            className={styles.inputField}
+            onChange={(e) => {
+              updateInput(input.attributeName, e.target.value);
+            }}
+          />
+        );
+
       case InputType.DATE:
         return (
           <TextField
             id={input.attributeName}
-            label={input.attributeName}
+            label={input.name || input.attributeName}
             key={input.attributeName}
             type="date"
             defaultValue={input.value}
             InputLabelProps={{
               shrink: true,
             }}
-            className={styles.searchBox}
+            className={styles.inputField}
             // onChange={(e) => setBirthDate(e.target.value)}
             onChange={(e) => updateInput(input.attributeName, e.target.value)}
           />
@@ -76,13 +86,36 @@ export const NewEntity = (props: { textFields: StringInput[] }) => {
   };
 
   return (
-    <div>
-      {textInputs.map((input: StringInput) => {
-        console.log("Input before call: " + input);
-        console.log(input);
-        return getComponent(input);
-      })}
-    </div>
+    <form className={styles.inputs} onSubmit={handleSubmit(onSubmit)}>
+      <div className={styles.parent}>
+              <Avatar diameter="175px" img={imgPreview} />
+
+              <div className={styles.child}>
+                <label
+                  htmlFor="image_upload"
+                  className={styles.imageInputLabel}
+                >
+                  <strong>Upload Picture (Optional)</strong>
+                </label>
+                <input
+                  id="image_upload"
+                  name="image_upload"
+                  ref={register}
+                  type="file"
+                  accept="image/*"
+                  className={styles.imageInput}
+                  onChange={updateImageDisplay}
+                />
+              </div>
+            </div>
+
+      <div className={styles.parent}>
+        {textInputs.map((input: StringInput) => {
+          return getComponent(input);
+        })}
+      </div>
+      <Button variant="contained" color="primary" type="submit">Submit</Button>
+    </form>
   );
 };
 
