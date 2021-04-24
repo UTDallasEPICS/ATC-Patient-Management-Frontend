@@ -3,6 +3,12 @@
  margin-bottom: 20px !important;
 }
 
+.textInputs {
+  display: flex !important;
+  flex-direction: column !important;
+  text-align: center !important;
+}
+
 .inputs {
   display: flex;
   flex-direction: column;

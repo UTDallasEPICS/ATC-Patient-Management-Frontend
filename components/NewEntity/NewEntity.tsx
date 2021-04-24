@@ -109,7 +109,7 @@ export const NewEntity = (props: { textFields: StringInput[] }) => {
               </div>
             </div>
 
-      <div className={styles.parent}>
+      <div className={styles.textInputs}>
         {textInputs.map((input: StringInput) => {
           return getComponent(input);
         })}
