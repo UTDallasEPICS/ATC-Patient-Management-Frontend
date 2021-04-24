@@ -3,8 +3,8 @@ export enum InputType {
     TEXT
   }
   
-  export interface TextInput {
-    displayValue: string,
+  export interface StringInput {
+    value: string,
     attributeName: string,
     type: InputType,
   }

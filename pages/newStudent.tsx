@@ -1,26 +1,26 @@
 import  NewEntity  from "../components/NewEntity/NewEntity";
-import {TextInput, InputType} from "../components/NewEntity/Interfaces"
+import {StringInput, InputType} from "../components/NewEntity/Interfaces"
 
 const newStudent = () => {
-  const firstNameInput: TextInput = {
-    displayValue: "First Name...",
+  const firstNameInput: StringInput = {
+    value: "First Name...",
     attributeName: "first_name",
     type: InputType.TEXT
   };
 
-  const lastNameInput: TextInput = {
-    displayValue: "Last Name...",
+  const lastNameInput: StringInput = {
+    value: "Last Name...",
     attributeName: "last_name",
     type: InputType.TEXT
   };
 
-  const birthDateInput: TextInput = {
-    displayValue: "Last Name...",
-    attributeName: "last_name",
+  const birthDateInput: StringInput = {
+    value: "2017-05-24",
+    attributeName: "birth_date",
     type: InputType.DATE
   };
 
-  const textInputs: TextInput[] = [firstNameInput, lastNameInput, birthDateInput]
+  const textInputs: StringInput[] = [firstNameInput, lastNameInput, birthDateInput]
 
   return (
     <div>

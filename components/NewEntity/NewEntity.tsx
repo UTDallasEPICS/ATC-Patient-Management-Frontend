@@ -3,9 +3,11 @@ import Avatar from "../Avatar";
 import { useForm } from "react-hook-form";
 import Head from "next/head";
 import TextField from "@material-ui/core/TextField";
-import { TextInput, InputType } from "./Interfaces";
+import { StringInput, InputType } from "./Interfaces";
+// import DateInput from "./DateInput"
+// import TextInput from "./TextInput"
 
-export const NewEntity = (props: { textFields: TextInput[] }) => {
+export const NewEntity = (props: { textFields: StringInput[] }) => {
   const styles = require("../../styles/NewEntity.module.css");
 
   const [imgPreview, setImagePreview] = useState("/default-avatar.jpg");
@@ -16,8 +18,8 @@ export const NewEntity = (props: { textFields: TextInput[] }) => {
     setTextInputs(props.textFields);
   }, []);
 
-  // console.log(props.textFields[0].displayValue);
-  // console.log(textInputs[0].displayValue);
+  // console.log(props.textFields[0].value);
+  // console.log(textInputs[0].value);
 
   const { register, handleSubmit } = useForm();
 
@@ -36,21 +38,49 @@ export const NewEntity = (props: { textFields: TextInput[] }) => {
     }
   };
 
-  const getComponent = (input: TextInput) => {
-    switch(input.type){
+  const getComponent = (input: StringInput) => {
+    console.log(input);
+    console.log("Input: " + input);
+    switch (input.type) {
       case InputType.TEXT:
-        return <h1>Text</h1>
-      case InputType.DATE: 
-        return <h1>Date</h1>
+        return <h1 key={input.attributeName}>Text</h1>;
+      case InputType.DATE:
+        return (
+          <TextField
+            id={input.attributeName}
+            label={input.attributeName}
+            key={input.attributeName}
+            type="date"
+            defaultValue={input.value}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            className={styles.searchBox}
+            // onChange={(e) => setBirthDate(e.target.value)}
+            onChange={(e) => updateInput(input.attributeName, e.target.value)}
+          />
+        );
     }
-  }
+  };
+
+  const updateInput = (attributeName: string, newValue: string) => {
+    setTextInputs((oldInputs) =>
+      oldInputs.map((oldInput) => {
+        if (oldInput.attributeName === attributeName) {
+          oldInput.value = newValue;
+        }
+
+        return oldInput;
+      })
+    );
+  };
 
   return (
     <div>
-      {textInputs.map((input) => {
-        return (
-          getComponent(input)
-        );
+      {textInputs.map((input: StringInput) => {
+        console.log("Input before call: " + input);
+        console.log(input);
+        return getComponent(input);
       })}
     </div>
   );
