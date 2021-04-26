@@ -4,8 +4,8 @@ export enum InputType {
   }
   
   export interface StringInput {
-    value: string,
     attributeName: string,
     type: InputType,
     name?: string,
+    defaultValue?: string,
   }

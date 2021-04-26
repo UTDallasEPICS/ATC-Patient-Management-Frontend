@@ -5,19 +5,18 @@ import Head from "next/head";
 
 const newStudent = () => {
   const firstNameInput: StringInput = {
-    value: "First Name...",
     attributeName: "first_name",
+    name: "First Name",
     type: InputType.TEXT,
   };
 
   const lastNameInput: StringInput = {
-    value: "Last Name...",
     attributeName: "last_name",
+    name: "Last Name",
     type: InputType.TEXT,
   };
 
   const birthDateInput: StringInput = {
-    value: "2017-05-24",
     attributeName: "birth_date",
     type: InputType.DATE,
     name: "Birth Date",

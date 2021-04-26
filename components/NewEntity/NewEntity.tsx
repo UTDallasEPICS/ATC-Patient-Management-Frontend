@@ -45,7 +45,7 @@ export const NewEntity = (props: { textFields: StringInput[] }) => {
           <TextField
             key={input.attributeName}
             id="outlined-basic"
-            label={input.value}
+            label={input.name || input.attributeName}
             variant="outlined"
             className={styles.inputField}
             onChange={(e) => {
@@ -61,7 +61,7 @@ export const NewEntity = (props: { textFields: StringInput[] }) => {
             label={input.name || input.attributeName}
             key={input.attributeName}
             type="date"
-            defaultValue={input.value}
+      
             InputLabelProps={{
               shrink: true,
             }}
