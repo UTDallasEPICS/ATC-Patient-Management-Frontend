@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import Avatar from "../Avatar";
 import { useForm } from "react-hook-form";
-import Head from "next/head";
 import TextField from "@material-ui/core/TextField";
-import { StringInput, InputType } from "./Interfaces";
+import { Input, InputType } from "./Interfaces";
 import Button from "@material-ui/core/Button"
 // import DateInput from "./DateInput"
 // import TextInput from "./TextInput"
 
-export const NewEntity = (props: { textFields: StringInput[] }) => {
+export const NewEntity = (props: { textFields: Input[] }) => {
   const styles = require("../../styles/NewEntity.module.css");
 
   const [imgPreview, setImagePreview] = useState("/default-avatar.jpg");
@@ -38,7 +37,7 @@ export const NewEntity = (props: { textFields: StringInput[] }) => {
     }
   };
 
-  const getComponent = (input: StringInput) => {
+  const getComponent = (input: Input) => {
     switch (input.type) {
       case InputType.TEXT:
         return (
@@ -110,7 +109,7 @@ export const NewEntity = (props: { textFields: StringInput[] }) => {
             </div>
 
       <div className={styles.textInputs}>
-        {textInputs.map((input: StringInput) => {
+        {textInputs.map((input: Input) => {
           return getComponent(input);
         })}
       </div>
