@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import { Input, InputType } from "./Interfaces";
 import Button from "@material-ui/core/Button"
+import { TextRotationAngleupTwoTone } from "@material-ui/icons";
 // import DateInput from "./DateInput"
 // import TextInput from "./TextInput"
 
-export const NewEntity = (props: { textFields: Input[] }) => {
+export const NewEntity = (props: { textFields: Input[], apiURL: String }) => {
   const styles = require("../../styles/NewEntity.module.css");
 
   const [imgPreview, setImagePreview] = useState("/default-avatar.jpg");
@@ -22,7 +23,8 @@ export const NewEntity = (props: { textFields: Input[] }) => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = () => {
-    console.log("Submit called")
+    console.log("Submit called, apiURL: " + props.apiURL);
+    console.log(textInputs.map((textInput) => {return textInput.name + ": " + textInput.value}));
     //here is where the POST request will happen
     //use the current state to fill the call body
   };

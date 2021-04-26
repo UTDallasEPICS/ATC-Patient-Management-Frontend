@@ -37,7 +37,7 @@ const newEmployee = () => {
 
       <Navbar pageTitle="New Employee">
         <div>
-          <NewEntity textFields={textInputs} />
+          <NewEntity textFields={textInputs} apiURL="TODO/newEmployee" />
         </div>
       </Navbar>
     </div>

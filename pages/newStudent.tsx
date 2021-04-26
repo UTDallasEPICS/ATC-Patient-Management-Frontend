@@ -37,7 +37,7 @@ const newStudent = () => {
 
       <Navbar pageTitle="New Student">
         <div>
-          <NewEntity textFields={textInputs} />
+          <NewEntity textFields={textInputs} apiURL="TODO/newStudent"/>
         </div>
       </Navbar>
     </div>
