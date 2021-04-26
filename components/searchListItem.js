@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Avatar from "./Avatar";
-import styles from "../styles/StudentSearch.module.css";
+import styles from "../styles/SearchList.module.css";
 import Link from "next/link";
 import ListItem from "@material-ui/core/ListItem";
 

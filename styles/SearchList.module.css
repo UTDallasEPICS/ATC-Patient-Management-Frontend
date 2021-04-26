@@ -1,3 +1,7 @@
+.buttonWrapper {
+  text-align: center;
+  margin-top: 20px;
+}
 .searchPage {
   display: flex;
   flex-direction: column;
