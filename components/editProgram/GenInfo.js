@@ -5,7 +5,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import styles from "../styles/GenInfo.module.css";
+import styles from "../../styles/GenInfo.module.css";
 import { Container } from '@material-ui/core';
 
 
@@ -29,7 +29,12 @@ const GenInfo = () => {
         <div className = {styles.container}>
         <div className={styles.testFields}>
          <TextField id="standard-basic" label="Name" /> <br/>
-         <TextField id="standard-basic" label="Description" /> <br/>
+         <TextField
+          id="standard-textarea"
+          label="Description"
+          placeholder=""
+          multiline
+        />
          </div>
             <FormControl >
         <Select
@@ -40,9 +45,10 @@ const GenInfo = () => {
           <MenuItem value="" disabled>
             Type
           </MenuItem>
-          <MenuItem value={1} onClick={show}>Probe </MenuItem>
-          <MenuItem value={2} onClick={doNotShow}>Frequency</MenuItem>
-          <MenuItem value={3} onClick={doNotShow}>Duration</MenuItem>
+          <MenuItem value={1} onClick={doNotShow}>Probe </MenuItem>
+          <MenuItem value={2} onClick={show}>Trial </MenuItem>
+          <MenuItem value={3} onClick={doNotShow}>Frequency</MenuItem>
+          <MenuItem value={4} onClick={doNotShow}>Duration</MenuItem>
         </Select>
         <FormHelperText>Select Behavior Type</FormHelperText>
       </FormControl>

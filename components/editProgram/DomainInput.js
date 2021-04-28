@@ -1,6 +1,6 @@
 import React from "react";
 import Chip from "@material-ui/core/Chip";
-import styles from "../styles/EditProgram.module.css";
+import styles from "../../styles/EditProgram.module.css";
 import Paper from "@material-ui/core/Paper";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from '@material-ui/core/Fab';
@@ -28,6 +28,7 @@ const DomainInput = () => {
         let icon;
 
         return (
+          <div className= {styles.chipGrid}>
           <li key={data.key}>
             <Chip
               icon={icon}
@@ -36,7 +37,9 @@ const DomainInput = () => {
               className={styles.chip}
             />
           </li>
+          </div>
         );
+        
       })}
 
       {/* <li >
@@ -45,7 +48,7 @@ const DomainInput = () => {
           className="addDomainButton"
         />
       </li> */}
-
+      <br/>
       <Fab color="primary" size="small" aria-label="add" style={{marginLeft:"25px", marginTop:"10px"}}>
         <AddIcon />
       </Fab>

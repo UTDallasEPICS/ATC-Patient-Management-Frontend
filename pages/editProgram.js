@@ -14,8 +14,11 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from "@material-ui/core/Typography";
-import GenInfo from "../components/GenInfo";
-import DomainInput from "../components/DomainInput"
+import GenInfo from "../components/editProgram/GenInfo";
+import DomainInput from "../components/editProgram/DomainInput"
+import Master from "../components/editProgram/Mastery"
+import Behavior from "../components/editProgram/Behavior"
+
 
 
 
@@ -24,6 +27,37 @@ const editProgram = () => {
     const [open, setOpen] = React.useState(false);
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
+ 
+
+
+    const[behavior, setBehavior]= React.useState([ 
+        {
+          id: 0,
+          name: "Touch Knees", 
+          description: "Test if client is able to touch knees", 
+          type: "Trial", 
+          domain: ["Behaviors for Increase"], 
+          masteryCriteria: "5 consecutive days passed.",
+        },
+        {
+          id: 1,
+          name: "Eye Contact", 
+          description: "Make eye contact when name is called first with a visual cue, then without a visual cue", 
+          type: "probe", 
+          domain: ["Listener Reponding", "Visual Cues"], 
+          masteryCriteria: "2 consecutive days passed.",
+        },
+        {
+          id: 2,
+          name: "Responding to Name", 
+          description: "Reacts when name is called", 
+          type: "probe", 
+          domain: ["Listener Reponding"], 
+          masteryCriteria: "10 Sessions Passed",
+        },
+      ])
+    
+    
 
     const handleClickOpen = () => {
       setOpen(true);
@@ -56,7 +90,7 @@ const editProgram = () => {
         case 1:
           return <DomainInput/>;
         case 2:
-          return 'MC...';
+          return <Master/>;
         default:
           return 'Unknown stepIndex';
       }
@@ -69,8 +103,10 @@ const editProgram = () => {
         </Head>
             <Navbar pageTitle="Edit Program">
             
-          <h1>Hello World</h1>
+          <Behavior list={behavior}/>
             
+   
+      
 
             
           <div className={styles.addButton} >

@@ -13,6 +13,11 @@
 .chip{
     margin-left: 5px;
     margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.chipGrid {
+    text-align: center;
 }
 
 .domainPaper{
