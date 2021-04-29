@@ -1,4 +1,4 @@
-import styles from "../styles/StudentSearch.module.css";
+import styles from "../styles/SearchList.module.css";
 import Link from "next/link";
 import SearchList from "../components/SearchList";
 import { useState } from "react";
@@ -55,7 +55,7 @@ export default function studentSearch({ students }) {
             <SearchList students={students} searchTerm={searchTerm} />
           </div>
 
-          <div style={{ textAlign: "center" }}>
+          <div className={styles.buttonWrapper}>
             <Link href="/newStudent">
               <Button className="primaryButton">Add New</Button>
             </Link>

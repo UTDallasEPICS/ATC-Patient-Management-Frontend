@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import StudentListItem from "./studentListItem";
-import styles from "../styles/StudentSearch.module.css";
+import StudentListItem from "./searchListItem";
+import styles from "../styles/SearchList.module.css";
 
 const StudentList = ({ students, searchTerm }) => {
   return (

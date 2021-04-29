@@ -1,11 +1,13 @@
 export enum InputType {
     DATE,
-    TEXT
+    TEXT,
+    MUTILINE_TEXT,
   }
   
-  export interface StringInput {
-    value: string,
+  export interface Input {
     attributeName: string,
     type: InputType,
     name?: string,
+    defaultValue?: string,
+    required?: boolean,
   }

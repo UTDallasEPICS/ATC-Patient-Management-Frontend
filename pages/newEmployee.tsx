@@ -1,32 +1,41 @@
 import NewEntity from "../components/NewEntity/NewEntity";
-import { StringInput, InputType } from "../components/NewEntity/Interfaces";
+import { Input, InputType } from "../components/NewEntity/Interfaces";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
 
 const newEmployee = () => {
-  const firstNameInput: StringInput = {
-    value: "First Name...",
+  const firstNameInput: Input = {
     attributeName: "first_name",
+    name: "First Name",
     type: InputType.TEXT,
+    required: true,
   };
 
-  const lastNameInput: StringInput = {
-    value: "Last Name...",
+  const lastNameInput: Input = {
     attributeName: "last_name",
+    name: "Last Name",
     type: InputType.TEXT,
+    required: true,
   };
 
-  const birthDateInput: StringInput = {
-    value: "2017-05-24",
+  const birthDateInput: Input = {
     attributeName: "birth_date",
     type: InputType.DATE,
     name: "Birth Date",
+    required: true,
   };
 
-  const textInputs: StringInput[] = [
+  const otherInfoInput: Input = {
+    attributeName: "other_info",
+    type: InputType.MUTILINE_TEXT,
+    name: "Other info",
+  };
+
+  const textInputs: Input[] = [
     firstNameInput,
     lastNameInput,
     birthDateInput,
+    otherInfoInput,
   ];
 
   return (
@@ -38,7 +47,7 @@ const newEmployee = () => {
 
       <Navbar pageTitle="New Employee">
         <div>
-          <NewEntity textFields={textInputs} />
+          <NewEntity textFields={textInputs} apiURL="TODO/newEmployee" />
         </div>
       </Navbar>
     </div>
