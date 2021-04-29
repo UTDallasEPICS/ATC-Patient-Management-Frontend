@@ -12,9 +12,11 @@
     "@material-ui/icons": "^4.11.2",
     "next": "10.0.5",
     "react": "17.0.1",
+    "react-calendar-heatmap": "^1.8.1",
     "react-dom": "17.0.1",
     "react-hook-form": "^6.15.1",
     "react-icons": "^4.2.0",
+    "react-tooltip": "^4.2.18",
     "react-transition-group": "^4.4.1",
     "recharts": "^2.0.9"
   },

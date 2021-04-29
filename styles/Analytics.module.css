@@ -1,0 +1,16 @@
+
+
+  .probeFailure {
+    fill: #ff6666 !important;
+  }
+
+  .probeSuccess {
+    fill: #82ca9d;
+  }
+
+  .probeEmpty {
+      fill: #eeeeee;
+  }
+
+
+  
