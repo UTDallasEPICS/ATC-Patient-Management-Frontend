@@ -8,24 +8,34 @@ const newEmployee = () => {
     attributeName: "first_name",
     name: "First Name",
     type: InputType.TEXT,
+    required: true,
   };
 
   const lastNameInput: Input = {
     attributeName: "last_name",
     name: "Last Name",
     type: InputType.TEXT,
+    required: true,
   };
 
   const birthDateInput: Input = {
     attributeName: "birth_date",
     type: InputType.DATE,
     name: "Birth Date",
+    required: true,
+  };
+
+  const otherInfoInput: Input = {
+    attributeName: "other_info",
+    type: InputType.MUTILINE_TEXT,
+    name: "Other info",
   };
 
   const textInputs: Input[] = [
     firstNameInput,
     lastNameInput,
     birthDateInput,
+    otherInfoInput,
   ];
 
   return (
