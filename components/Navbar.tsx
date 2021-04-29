@@ -22,10 +22,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-<<<<<<< HEAD:components/Navbar.tsx
-=======
-
->>>>>>> a8cd532 (updated graphs page, fixed legend bug, implemented analytics pseudo-page-switch):components/Navbar.js
 
 import SearchIcon from "@material-ui/icons/Search";
 import AddIcon from "@material-ui/icons/Add";
@@ -68,15 +64,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-<<<<<<< HEAD:components/Navbar.tsx
 const Navbar = (props: { pageTitle, window?, children }) => {
   const { pageTitle,window, children } = props;
-=======
-const Navbar = ({ pageTitle, window, children, analytics }) => {
-  const [value, setValue] = useState(0);
-
-  // const { window } = props;
->>>>>>> a8cd532 (updated graphs page, fixed legend bug, implemented analytics pseudo-page-switch):components/Navbar.js
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -204,16 +193,7 @@ const Navbar = ({ pageTitle, window, children, analytics }) => {
         </Hidden>
       </nav>
       <main className={classes.content}>
-<<<<<<< HEAD:components/Navbar.tsx
         <div className={classes.toolbar} style={{paddingBottom: "70px"}} />
-=======
-        {analytics ? (
-          <div className={classes.toolbar} style={{ paddingBottom: "70px" }} />
-        ) : (
-          <div className={classes.toolbar} style={{ paddingBottom: "70px" }} />
-        )}
-
->>>>>>> a8cd532 (updated graphs page, fixed legend bug, implemented analytics pseudo-page-switch):components/Navbar.js
         {children}
       </main>
     </div>
