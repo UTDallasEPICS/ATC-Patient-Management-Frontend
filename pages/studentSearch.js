@@ -92,7 +92,7 @@ export const getServerSideProps = async () => {
       id: 3,
       firstName: "Johnny",
       lastName: "Lennon",
-      img: "https://picsum.photos/200",
+      img: "https://picsum.photos/300/300",
     },
     {
       id: 4,
