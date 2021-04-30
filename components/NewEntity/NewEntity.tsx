@@ -8,7 +8,10 @@ import { TextRotationAngleupTwoTone } from "@material-ui/icons";
 // import DateInput from "./DateInput"
 // import TextInput from "./TextInput"
 
-export const NewEntity = (props: { textFields: Input[]; apiURL: String }) => {
+export const NewEntity = (props: {
+  textFields: Input[];
+  submitFunction: Function;
+}) => {
   const styles = require("../../styles/NewEntity.module.css");
 
   const [imgPreview, setImagePreview] = useState("/default-avatar.jpg");
@@ -22,14 +25,7 @@ export const NewEntity = (props: { textFields: Input[]; apiURL: String }) => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = () => {
-    console.log("Submit called, apiURL: " + props.apiURL);
-    console.log(
-      textInputs.map((textInput) => {
-        return textInput.name + ": " + textInput.value;
-      })
-    );
-    //here is where the POST request will happen
-    //use the current state to fill the call body
+    props.submitFunction(textInputs);
   };
 
   const updateImageDisplay = (e) => {
@@ -56,6 +52,7 @@ export const NewEntity = (props: { textFields: Input[]; apiURL: String }) => {
               updateInput(input.attributeName, e.target.value);
             }}
             required={input.required}
+            defaultValue={input.value || ""}
           />
         );
 
@@ -72,6 +69,7 @@ export const NewEntity = (props: { textFields: Input[]; apiURL: String }) => {
             className={styles.inputField}
             onChange={(e) => updateInput(input.attributeName, e.target.value)}
             required={input.required}
+            defaultValue={input.value || ""}
           />
         );
 
@@ -87,6 +85,7 @@ export const NewEntity = (props: { textFields: Input[]; apiURL: String }) => {
             variant="outlined"
             onChange={(e) => updateInput(input.attributeName, e.target.value)}
             required={input.required}
+            defaultValue={input.value || ""}
           />
         );
     }

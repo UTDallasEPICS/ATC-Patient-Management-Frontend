@@ -38,6 +38,14 @@ const newEmployee = () => {
     otherInfoInput,
   ];
 
+  const handleSubmit = (fields: Input[]) => {
+    console.log( "handleSubmit: " +
+      fields.map((field) => {
+        return field.name + ": " + field.value;
+      })
+    );
+  };
+
   return (
     <div>
       <Head>
@@ -47,7 +55,7 @@ const newEmployee = () => {
 
       <Navbar pageTitle="New Employee">
         <div>
-          <NewEntity textFields={textInputs} apiURL="TODO/newEmployee" />
+          <NewEntity textFields={textInputs} submitFunction={handleSubmit} />
         </div>
       </Navbar>
     </div>

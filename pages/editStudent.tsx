@@ -2,13 +2,18 @@ import NewEntity from "../components/NewEntity/NewEntity";
 import { Input, InputType } from "../components/NewEntity/Interfaces";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
+import { Student } from "../components/Interfaces/Entities";
+import newStudent from "./newStudent";
 
-const newStudent = () => {
+const editStudent = (props: { student: Student }) => {
+  const { student } = props;
+
   const firstNameInput: Input = {
     attributeName: "first_name",
     name: "First Name",
     type: InputType.TEXT,
     required: true,
+    value: student.firstName,
   };
 
   const lastNameInput: Input = {
@@ -16,6 +21,7 @@ const newStudent = () => {
     name: "Last Name",
     type: InputType.TEXT,
     required: true,
+    value: student.lastName,
   };
 
   const birthDateInput: Input = {
@@ -23,12 +29,14 @@ const newStudent = () => {
     type: InputType.DATE,
     name: "Birth Date",
     required: true,
+    value: student.dob,
   };
 
   const otherInfoInput: Input = {
     attributeName: "other_info",
     type: InputType.MUTILINE_TEXT,
     name: "Other info",
+    value: student.otherInfo,
   };
 
   const textInputs: Input[] = [
@@ -37,7 +45,7 @@ const newStudent = () => {
     birthDateInput,
     otherInfoInput,
   ];
-  
+
   const handleSubmit = (fields: Input[]) => {
     console.log( "handleSubmit: " +
       fields.map((field) => {
@@ -49,17 +57,38 @@ const newStudent = () => {
   return (
     <div>
       <Head>
-        <title>New Student</title>
+        <title>Edit Student</title>
         <link rel="icon" href="/atc-logo.png" />
       </Head>
 
-      <Navbar pageTitle="New Student">
+      <Navbar pageTitle="Edit Student">
         <div>
-          <NewEntity textFields={textInputs} submitFunction={handleSubmit}/>
+          <NewEntity
+            textFields={textInputs}
+            submitFunction={handleSubmit}
+          />
         </div>
       </Navbar>
     </div>
   );
 };
 
-export default newStudent;
+export const getServerSideProps = async ({ query }) => {
+  const student: Student = {
+    id: query.studentID,
+    firstName: "Billy",
+    lastName: "Doe",
+    dob: "2021-12-08",
+    phone: "999-999-9999",
+    email: "epics@atc.com",
+    otherInfo: "Parent Phone: 828-902-2828",
+  };
+
+  return {
+    props: {
+      student: student,
+    },
+  };
+};
+
+export default editStudent;

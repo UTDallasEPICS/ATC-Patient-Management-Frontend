@@ -3,11 +3,12 @@ export enum InputType {
     TEXT,
     MUTILINE_TEXT,
   }
+
   
   export interface Input {
     attributeName: string,
     type: InputType,
     name?: string,
-    defaultValue?: string,
+    value?: string,
     required?: boolean,
   }
