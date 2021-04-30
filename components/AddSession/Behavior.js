@@ -47,8 +47,8 @@ export default function Behavior({ data }) {
       </Accordion>
 
       <Grid container justify="center" spacing={2}>
-        {entries.map((entry, i) => (
-          <Grid item key={i}>
+        {entries.map((entry) => (
+          <Grid item key={entry}>
             {generateInput(entry)}
           </Grid>
         ))}

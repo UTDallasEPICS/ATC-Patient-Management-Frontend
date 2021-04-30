@@ -19,38 +19,42 @@ import DomainInput from "../components/editProgram/DomainInput";
 import Master from "../components/editProgram/Mastery";
 import Behavior from "../components/editProgram/Behavior";
 
-const editProgram = ({studentID}) => {
+const editProgram = ({ studentID }) => {
   const [open, setOpen] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
-  const [behavior, setBehavior] = React.useState([
-    {
-      id: 0,
-      name: "Touch Knees",
-      description: "Test if client is able to touch knees",
-      type: "Trial",
-      domain: ["Behaviors for Increase"],
-      masteryCriteria: "5 consecutive days passed.",
-    },
-    {
-      id: 1,
-      name: "Eye Contact",
-      description:
-        "Make eye contact when name is called first with a visual cue, then without a visual cue",
-      type: "probe",
-      domain: ["Listener Reponding", "Visual Cues"],
-      masteryCriteria: "2 consecutive days passed.",
-    },
-    {
-      id: 2,
-      name: "Responding to Name",
-      description: "Reacts when name is called",
-      type: "probe",
-      domain: ["Listener Reponding"],
-      masteryCriteria: "10 Sessions Passed",
-    },
-  ]);
+  const [behavior, setBehavior] = React.useState([]);
+
+  React.useEffect(() => {
+    setBehavior([
+      {
+        id: 0,
+        name: "Touch Knees",
+        description: "Test if client is able to touch knees",
+        type: "Trial",
+        domain: ["Behaviors for Increase"],
+        masteryCriteria: "5 consecutive days passed.",
+      },
+      {
+        id: 1,
+        name: "Eye Contact",
+        description:
+          "Make eye contact when name is called first with a visual cue, then without a visual cue",
+        type: "probe",
+        domain: ["Listener Reponding", "Visual Cues"],
+        masteryCriteria: "2 consecutive days passed.",
+      },
+      {
+        id: 2,
+        name: "Responding to Name",
+        description: "Reacts when name is called",
+        type: "probe",
+        domain: ["Listener Reponding"],
+        masteryCriteria: "10 Sessions Passed",
+      },
+    ]);
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);

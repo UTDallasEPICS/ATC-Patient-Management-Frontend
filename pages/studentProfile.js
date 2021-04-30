@@ -89,7 +89,14 @@ const studentProfile = ({ student }) => {
           </div>
           <div className={styles.bg}>
             <br />
-            <Button className={styles.buttonGroup1}>Edit</Button>
+            <Link
+              href={{
+                pathname: "/editStudent",
+                query: { studentID: student.id },
+              }}
+            >
+              <Button className={styles.buttonGroup1}>Edit</Button>
+            </Link>
             <Link
               href={{
                 pathname: "/editProgram",

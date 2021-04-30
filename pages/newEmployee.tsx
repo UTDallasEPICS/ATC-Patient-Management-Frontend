@@ -31,18 +31,33 @@ const newEmployee = () => {
     name: "Other info",
   };
 
+  const phoneNumberInput: Input = {
+    attributeName: "phone_number",
+    type: InputType.TEXT,
+    name: "Phone number",
+  };
+
+  const emailInput: Input = {
+    attributeName: "email",
+    type: InputType.TEXT,
+    name: "Email address",
+  };
+
   const textInputs: Input[] = [
     firstNameInput,
     lastNameInput,
     birthDateInput,
+    phoneNumberInput,
+    emailInput,
     otherInfoInput,
   ];
 
   const handleSubmit = (fields: Input[]) => {
-    console.log( "handleSubmit: " +
-      fields.map((field) => {
-        return field.name + ": " + field.value;
-      })
+    console.log(
+      "handleSubmit: " +
+        fields.map((field) => {
+          return field.name + ": " + field.value;
+        })
     );
   };
 

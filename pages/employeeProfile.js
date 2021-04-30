@@ -102,22 +102,22 @@ const employeeProfile = (props) => {
     setOtherInfo(false);
   };
 
-  //State for handling when the x button is pressed on list 
-  const [xValidation, setXValidation] = React.useState(false); 
+  //State for handling when the x button is pressed on list
+  const [xValidation, setXValidation] = React.useState(false);
   //Opens x validation
   const openXValidation = () => {
     setXValidation(true);
-  }
+  };
   //Closes x validation
   const closeXValidation = () => {
     setXValidation(false);
-  }
+  };
   //close x validation when user says yes
   //Closes x validation
   const closeXValidationYes = () => {
     setXValidation(false);
     setListOpen(false);
-  }
+  };
 
   return (
     <div>
@@ -230,7 +230,9 @@ const employeeProfile = (props) => {
         </div>
         {/*<OtherInfo info = {props.employee.otherInfo}/> */}
         <div className={styles.bg}>
-          <Button className={styles.menuButtonGroup}>Edit</Button>
+          <Link href={{pathname:"/editEmployee", query: {employeeID: props.employee.id}}}>
+            <Button className={styles.menuButtonGroup}>Edit</Button>
+          </Link>
           <Button className={styles.menuButtonGroup} onClick={handleClickOpen}>
             Archive
           </Button>
@@ -331,10 +333,12 @@ const employeeProfile = (props) => {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{"Are you sure you want to exit list?"}</DialogTitle>
+          <DialogTitle id="alert-dialog-title">
+            {"Are you sure you want to exit list?"}
+          </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Without clicking save changes, no changes will be saved. 
+              Without clicking save changes, no changes will be saved.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -363,7 +367,7 @@ const employeeProfile = (props) => {
 
 export default employeeProfile;
 
-export const getServerSideProps = async ({query}) => {
+export const getServerSideProps = async ({ query }) => {
   const employee = {
     id: query.id,
     firstName: "Billy",

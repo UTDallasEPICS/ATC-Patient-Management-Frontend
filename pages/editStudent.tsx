@@ -39,18 +39,35 @@ const editStudent = (props: { student: Student }) => {
     value: student.otherInfo,
   };
 
+  const phoneNumberInput: Input = {
+    attributeName: "phone_number",
+    type: InputType.TEXT,
+    name: "Phone number",
+    value: student.phone,
+  };
+
+  const emailInput: Input = {
+    attributeName: "email",
+    type: InputType.TEXT,
+    name: "Email address",
+    value: student.email,
+  };
+
   const textInputs: Input[] = [
     firstNameInput,
     lastNameInput,
     birthDateInput,
+    phoneNumberInput,
+    emailInput,
     otherInfoInput,
   ];
 
   const handleSubmit = (fields: Input[]) => {
-    console.log( "handleSubmit: " +
-      fields.map((field) => {
-        return field.name + ": " + field.value;
-      })
+    console.log(
+      "handleSubmit: " +
+        fields.map((field) => {
+          return field.name + ": " + field.value;
+        })
     );
   };
 
@@ -63,10 +80,7 @@ const editStudent = (props: { student: Student }) => {
 
       <Navbar pageTitle="Edit Student">
         <div>
-          <NewEntity
-            textFields={textInputs}
-            submitFunction={handleSubmit}
-          />
+          <NewEntity textFields={textInputs} submitFunction={handleSubmit} />
         </div>
       </Navbar>
     </div>
