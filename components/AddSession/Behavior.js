@@ -24,6 +24,8 @@ export default function Behavior({ data }) {
         return <ProbeInput title={entry} trialsPerEntry={trialsPerEntry} />;
       case "duration":
         return <DurationInput title={entry} trialsPerEntry={trialsPerEntry} />;
+      case "frequency":
+        return <FrenquencyInput title={entry} />;
     }
   };
 

@@ -78,6 +78,12 @@ export const getServerSideProps = async ({ query }) => {
         type: "probe",
         trialsPerEntry: 1,
       },
+      {
+        title: "Episodes of challenging behavior",
+        description:
+          "May include, crying, yelling, screaming, whining, and dropping to the ground",
+        type: "frequency",
+      },
     ],
   };
 
