@@ -101,8 +101,8 @@ const Navbar = (props: { pageTitle, window?, children }) => {
       <Divider />
       <List>
         {[
-          ["Employee Search", "/"],
-          ["New Employee", "/"],
+          ["Employee Search", "/employeeSearch"],
+          ["New Employee", "/newEmployee"],
         ].map((item, index) => (
           <Link href={item[1]} key={item[0]}>
             <ListItem button>

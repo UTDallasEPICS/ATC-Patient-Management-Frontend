@@ -52,7 +52,11 @@ export default function studentSearch({ students }) {
           </FormControl>
 
           <div>
-            <SearchList students={students} searchTerm={searchTerm} />
+            <SearchList
+              students={students}
+              searchTerm={searchTerm}
+              destinationPath="/studentProfile"
+            />
           </div>
 
           <div className={styles.buttonWrapper}>

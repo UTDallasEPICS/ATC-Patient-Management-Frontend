@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Reports = () => {
+const Reports = ({studentID}) => {
     return (
         <div>
-            <h1>Hello World</h1>
+            <h1>Hello World {studentID}</h1>
         </div>
     )
 }

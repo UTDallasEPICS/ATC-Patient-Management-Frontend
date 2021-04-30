@@ -363,9 +363,9 @@ const employeeProfile = (props) => {
 
 export default employeeProfile;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async ({query}) => {
   const employee = {
-    id: 1,
+    id: query.id,
     firstName: "Billy",
     lastName: "Doe",
     img: "",

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import StudentListItem from "./searchListItem";
 import styles from "../styles/SearchList.module.css";
 
-const StudentList = ({ students, searchTerm }) => {
+const SearchList = ({ students, searchTerm, destinationPath }) => {
   return (
     <div
       className={styles.studentList}
@@ -30,15 +30,16 @@ const StudentList = ({ students, searchTerm }) => {
             lastName={student.lastName}
             id={student.id}
             img={student.img}
+            destinationPath={destinationPath}
           />
         ))}
     </div>
   );
 };
 
-StudentList.propTypes = {
+SearchList.propTypes = {
   students: PropTypes.array.isRequired,
   searchTerm: PropTypes.string.isRequired,
 };
 
-export default StudentList;
+export default SearchList;

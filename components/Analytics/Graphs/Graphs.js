@@ -18,7 +18,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const Graphs = () => {
+const Graphs = ( {studentID} ) => {
   const [domains, setDomains] = useState([]);
   const [selectedDomain, setSelectedDomain] = useState(null);
   const [data, setData] = useState([]);
@@ -33,6 +33,7 @@ const Graphs = () => {
 
   const fetchData = () => {
     console.log("Fetch data called");
+    console.log("studentID = " + studentID);
     setData([
       {
         type: "frequency",

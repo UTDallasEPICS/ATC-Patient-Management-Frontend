@@ -52,15 +52,22 @@ const studentProfile = ({ student }) => {
             {student.firstName} {student.lastName}
           </h1>
           <div className={styles.bgOther}>
-          <Button
-            variant="outlined"
-            color="primary"
-            className={styles.buttonGroup}
-          >
-            New Session
-          </Button>
+            <Link
+              href={{
+                pathname: "/addSession",
+                query: { studentID: student.id },
+              }}
+            >
+              <Button
+                variant="outlined"
+                color="primary"
+                className={styles.buttonGroup}
+              >
+                New Session
+              </Button>
+            </Link>
           </div>
-          <br/>
+          <br />
           <Divider variant="middle" />
           <p className={styles.label}>Date of Birth:</p>{" "}
           <p className={styles.info}> {student.dob}</p>
@@ -89,7 +96,9 @@ const studentProfile = ({ student }) => {
             <Button className={styles.buttonGroup1} onClick={handleClickOpen}>
               Archive
             </Button>
-            <Button className={styles.buttonGroup2}>View Reports</Button>
+            <Link  href={{ pathname: "/analytics", query: { studentID: student.id } }}>
+              <Button className={styles.buttonGroup2}>View Reports</Button>
+            </Link>
           </div>
           <Dialog
             open={open}
@@ -157,9 +166,9 @@ const studentProfile = ({ student }) => {
 
 export default studentProfile;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async ({ query }) => {
   const student = {
-    id: 1,
+    id: query.id,
     firstName: "Billy",
     lastName: "Doe",
     img: "",

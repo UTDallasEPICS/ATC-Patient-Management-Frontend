@@ -5,21 +5,16 @@ import styles from "../styles/Analytics.module.css";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Graphs from "../components/Analytics/Graphs/Graphs"
-import Reports from "../components/Analytics/Reports/Reports"
+import Graphs from "../components/Analytics/Graphs/Graphs";
+import Reports from "../components/Analytics/Reports/Reports";
 
-
-const analytics = () => {
-  
-
+const analytics = ({ studentID }) => {
   const [page, setPage] = useState(0);
 
   const handlePageChange = (event, newValue) => {
     console.log(newValue);
     setPage(newValue);
   };
-
- 
 
   return (
     <div>
@@ -28,10 +23,7 @@ const analytics = () => {
         <link rel="icon" href="/atc-logo.png" />
       </Head>
 
-      <Navbar
-        pageTitle="Analytics"
-        analytics
-      >
+      <Navbar pageTitle="Analytics" analytics>
         <div>
           <Paper square>
             <Tabs
@@ -46,14 +38,24 @@ const analytics = () => {
             </Tabs>
           </Paper>
         </div>
-        
 
-        
-        {page===0? <Graphs /> : <Reports/>}
-
+        {page === 0 ? (
+          <Graphs studentID={studentID} />
+        ) : (
+          <Reports studentID={studentID} />
+        )}
       </Navbar>
     </div>
   );
+};
+
+export const getServerSideProps = async ({ query }) => {
+  const studentID = query.studentID;
+  return {
+    props: {
+      studentID,
+    },
+  };
 };
 
 export default analytics;

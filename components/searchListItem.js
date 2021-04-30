@@ -4,9 +4,9 @@ import styles from "../styles/SearchList.module.css";
 import Link from "next/link";
 import ListItem from "@material-ui/core/ListItem";
 
-const StudentListItem = ({ firstName, lastName, id, img }) => {
+const StudentListItem = ({ firstName, lastName, id, img, destinationPath }) => {
   return (
-    <Link href="/">
+    <Link href={{ pathname: destinationPath, query: { id: id } }}>
       <ListItem button key={id}>
         <div className={styles.level}>
           <div className={styles.levelItem}>

@@ -15,37 +15,41 @@ export default function EmployeeSearch({ employees }) {
   const [searchTerm, setSearchTerm] = useState("");
   return (
     <div>
-    <Head>
-      <title>Employee Search</title>
-      <link rel="icon" href="/atc-logo.png" />
-    </Head>
+      <Head>
+        <title>Employee Search</title>
+        <link rel="icon" href="/atc-logo.png" />
+      </Head>
 
-    <Navbar pageTitle="Employee Search">
-      <div className={styles.searchPage}>
-        <FormControl>
-          <TextField
-            className={styles.searchBox}
-            id="outlined-basic"
-            label="Employee Search"
-            variant="outlined"
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-            }}
-          />
-        </FormControl>
+      <Navbar pageTitle="Employee Search">
+        <div className={styles.searchPage}>
+          <FormControl>
+            <TextField
+              className={styles.searchBox}
+              id="outlined-basic"
+              label="Employee Search"
+              variant="outlined"
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+              }}
+            />
+          </FormControl>
 
-        <div>
-          <SearchList students={employees} searchTerm={searchTerm} />
+          <div>
+            <SearchList
+              students={employees}
+              searchTerm={searchTerm}
+              destinationPath="/employeeProfile"
+            />
+          </div>
+
+          <div className={styles.buttonWrapper}>
+            <Link href="/newStudent">
+              <Button className="primaryButton">Add New</Button>
+            </Link>
+          </div>
         </div>
-
-        <div className={styles.buttonWrapper}>
-          <Link href="/newStudent">
-            <Button className="primaryButton">Add New</Button>
-          </Link>
-        </div>
-      </div>
-    </Navbar>
-  </div>
+      </Navbar>
+    </div>
   );
 }
 
