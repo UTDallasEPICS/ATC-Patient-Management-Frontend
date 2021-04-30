@@ -90,13 +90,25 @@ const studentProfile = ({ student }) => {
           <div className={styles.bg}>
             <br />
             <Button className={styles.buttonGroup1}>Edit</Button>
-            <Button className={styles.buttonGroup2}>Edit Program</Button>
+            <Link
+              href={{
+                pathname: "/editProgram",
+                query: { studentID: student.id },
+              }}
+            >
+              <Button className={styles.buttonGroup2}>Edit Program</Button>
+            </Link>
             <br />
 
             <Button className={styles.buttonGroup1} onClick={handleClickOpen}>
               Archive
             </Button>
-            <Link  href={{ pathname: "/analytics", query: { studentID: student.id } }}>
+            <Link
+              href={{
+                pathname: "/analytics",
+                query: { studentID: student.id },
+              }}
+            >
               <Button className={styles.buttonGroup2}>View Reports</Button>
             </Link>
           </div>
