@@ -202,9 +202,9 @@ const Graphs = ( {studentID} ) => {
       {data.map((graph) => {
         switch (graph.type) {
           case "trials":
-            return <StackedBarGraph data={graph.data} title={graph.title} />;
+            return <StackedBarGraph key={graph.title} data={graph.data} title={graph.title} />;
           case "probe":
-            return <ProbeGraph data={graph.data} title={graph.title}/>;
+            return <ProbeGraph  key={graph.title} data={graph.data} title={graph.title}/>;
 
           case "duration":
             return (
@@ -212,6 +212,7 @@ const Graphs = ( {studentID} ) => {
                 data={graph.data}
                 dataKey="Seconds"
                 title={graph.title}
+                key={graph.title}
               />
             );
           case "frequency":
@@ -220,6 +221,7 @@ const Graphs = ( {studentID} ) => {
                 data={graph.data}
                 dataKey="Occurrences"
                 title={graph.title}
+                key={graph.title}
               />
             );
         }
