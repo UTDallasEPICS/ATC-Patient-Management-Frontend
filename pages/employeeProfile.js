@@ -58,14 +58,12 @@ const employeeProfile = (props) => {
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value.id - 1);
     const newChecked = [...checked];
-    //console.log("hello");
-    //console.log(value)
-    //console.log(checked.indexOf(value.id-1));
+    
 
     if (currentIndex === -1) {
-      //console.log("hello from inside if");
+      
       newChecked.push(value.id - 1);
-      //console.log(checked);
+      
     } else {
       console.log("hello from inside else");
       newChecked.splice(currentIndex, 1);
@@ -142,6 +140,7 @@ const employeeProfile = (props) => {
           >
             Update Student Access
           </Button>
+          { /*This Dialog box is the check list of students */}
           <Dialog
             onClose={closeList}
             aria-labelledby="customized-dialog-title"
