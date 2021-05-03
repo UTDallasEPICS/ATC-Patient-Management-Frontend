@@ -18,79 +18,22 @@ import GenInfo from "../components/editProgram/GenInfo";
 import DomainInput from "../components/editProgram/DomainInput";
 import Master from "../components/editProgram/Mastery";
 import Behavior from "../components/editProgram/Behavior";
+import Paper from "@material-ui/core/Paper";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Current from "../components/editProgram/Current";
+import Mastered from "../components/editProgram/Mastered";
 
 const editProgram = ({ studentID }) => {
-  const [open, setOpen] = React.useState(false);
-  const [activeStep, setActiveStep] = React.useState(0);
-  const steps = getSteps();
 
-  const [behavior, setBehavior] = React.useState([]);
-
-  React.useEffect(() => {
-    setBehavior([
-      {
-        id: 0,
-        name: "Touch Knees",
-        description: "Test if client is able to touch knees",
-        type: "Trial",
-        domain: ["Behaviors for Increase"],
-        masteryCriteria: "5 consecutive days passed.",
-      },
-      {
-        id: 1,
-        name: "Eye Contact",
-        description:
-          "Make eye contact when name is called first with a visual cue, then without a visual cue",
-        type: "probe",
-        domain: ["Listener Reponding", "Visual Cues"],
-        masteryCriteria: "2 consecutive days passed.",
-      },
-      {
-        id: 2,
-        name: "Responding to Name",
-        description: "Reacts when name is called",
-        type: "probe",
-        domain: ["Listener Reponding"],
-        masteryCriteria: "10 Sessions Passed",
-      },
-    ]);
-  }, []);
-
-  const handleClickOpen = () => {
-    setOpen(true);
+  
+  //Allows for the user to switch from mastered to unmastered criteria.
+  const [page, setPage] = React.useState(0);
+  //Changes pages
+  const handlePageChange = (event, newValue) => {
+    console.log(newValue);
+    setPage(newValue);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    if (activeStep + 1 === steps.length) {
-      setActiveStep(0);
-      handleClose();
-    }
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-  //Gets the steps for the stepper
-  function getSteps() {
-    return ["General Info", "Domain", "Mastery Criteria"];
-  }
-
-  //Returns the components corresponding to the step the user is on.
-  function getStepContent(stepIndex) {
-    switch (stepIndex) {
-      case 0:
-        return <GenInfo />;
-      case 1:
-        return <DomainInput />;
-      case 2:
-        return <Master />;
-      default:
-        return "Unknown stepIndex";
-    }
-  }
   return (
     <div>
       <Head>
@@ -98,59 +41,26 @@ const editProgram = ({ studentID }) => {
         <link rel="icon" href="/atc-logo.png" />
       </Head>
       <Navbar pageTitle="Edit Program">
-        <Behavior list={behavior} />
-
-        <div className={styles.addButton}>
-          <Fab
-            aria-label="add"
-            onClick={handleClickOpen}
-            className="primaryButton"
-          >
-            <AddIcon />
-          </Fab>
+      <div className= {styles.topMenu}>
+          <Paper square>
+            <Tabs
+              value={page}
+              onChange={handlePageChange}
+              indicatorColor="primary"
+              textColor="primary"
+              centered
+            >
+              <Tab label="Current" />
+              <Tab label="Mastered" />
+            </Tabs>
+          </Paper>
         </div>
-
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">{"Create Behavior"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              <Stepper activeStep={activeStep} alternativeLabel>
-                {steps.map((label) => (
-                  <Step key={label}>
-                    <StepLabel>{label}</StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
-              <div>
-                {activeStep === steps.length ? (
-                  {}
-                ) : (
-                  <div>
-                    <Typography>{getStepContent(activeStep)}</Typography>
-                    <div>
-                      <Button
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        className=""
-                      >
-                        Back
-                      </Button>
-                      <Button className="primaryColor" onClick={handleNext}>
-                        {activeStep === steps.length - 1 ? "Save" : "Next"}
-                      </Button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions></DialogActions>
-        </Dialog>
+        
+        {page === 0 ? (
+          <Current studentID={studentID} />
+        ) : (
+          <Mastered studentID={studentID} />
+        )}
       </Navbar>
     </div>
   );

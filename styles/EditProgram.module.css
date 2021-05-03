@@ -28,3 +28,13 @@
     margin: 0;
     padding: 25px;
 }
+
+.topMenu {
+    margin-bottom: 10px;
+}
+
+.threeDotMenu {
+    position: absolute;
+    left: 85%;
+    top: 15%
+}

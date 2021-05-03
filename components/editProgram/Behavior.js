@@ -6,9 +6,32 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Chip from "@material-ui/core/Chip";
 import styles from "../../styles/EditProgram.module.css";
-import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-const Behavior = ({ list }) => {
+const Behavior = ({ list, mastered }) => {
+
+  const options = ["Delete", "Move to Mastered"];
+
+  
+  
+
+const ITEM_HEIGHT = 48;
+
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  
   return (
     <div>
       {list.map((item) => (
@@ -19,12 +42,47 @@ const Behavior = ({ list }) => {
             id="panel1a-header"
           >
             <Typography>{item.name} </Typography>
+       
           </AccordionSummary>
           <AccordionDetails>
             <div>
               <Typography color="textSecondary" variant="body2">
                 Type: <br />
                 {item.type}
+                <div className={styles.threeDotMenu}>
+                <IconButton
+                    aria-label="more"
+                    aria-controls="long-menu"
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                >
+                  <MoreVertIcon />
+              </IconButton>
+              </div>
+
+              <Menu
+                id="long-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            maxHeight: ITEM_HEIGHT * 4.5,
+            width: "20ch"
+          }
+        }}
+      >
+        {options.map((option) => (
+          <MenuItem
+            key={option}
+            selected={option === "Pyxis"}
+            onClick={handleClose}
+          >
+            {option}
+          </MenuItem>
+        ))}
+      </Menu>
                 <br />
                 <br />
               </Typography>
