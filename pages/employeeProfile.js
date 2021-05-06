@@ -243,7 +243,7 @@ const employeeProfile = (props) => {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            {"Are you sure you want to archive this student?"}
+            {"Are you sure you want to archive this employee?"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
