@@ -2,79 +2,109 @@ import NewEntity from "../components/NewEntity/NewEntity";
 import { Input, InputType } from "../components/NewEntity/Interfaces";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
+import { Patient } from "../interfaces/Patient";
+import { useRouter } from "next/router";
 
 const newStudent = () => {
-  const firstNameInput: Input = {
-    attributeName: "first_name",
-    name: "First Name",
-    type: InputType.TEXT,
-    required: true,
-  };
+    const router = useRouter();
+    const firstNameInput: Input = {
+        attributeName: "first_name",
+        name: "First Name",
+        type: InputType.TEXT,
+        required: true,
+    };
 
-  const lastNameInput: Input = {
-    attributeName: "last_name",
-    name: "Last Name",
-    type: InputType.TEXT,
-    required: true,
-  };
+    const lastNameInput: Input = {
+        attributeName: "last_name",
+        name: "Last Name",
+        type: InputType.TEXT,
+        required: true,
+    };
 
-  const birthDateInput: Input = {
-    attributeName: "birth_date",
-    type: InputType.DATE,
-    name: "Birth Date",
-    required: true,
-  };
+    const birthDateInput: Input = {
+        attributeName: "birth_date",
+        type: InputType.DATE,
+        name: "Birth Date",
+        required: true,
+    };
 
-  const otherInfoInput: Input = {
-    attributeName: "other_info",
-    type: InputType.MUTILINE_TEXT,
-    name: "Other info",
-  };
+    const parentPhoneInput: Input = {
+        attributeName: "parent_phone",
+        type: InputType.TEXT,
+        name: "Parent Phone Number",
+    };
 
-  const phoneNumberInput: Input = {
-    attributeName: "phone_number",
-    type: InputType.TEXT,
-    name: "Phone number",
-  };
+    const emailInput: Input = {
+        attributeName: "email",
+        type: InputType.TEXT,
+        name: "Email address",
+    };
 
-  const emailInput: Input = {
-    attributeName: "email",
-    type: InputType.TEXT,
-    name: "Email address",
-  };
+    const parentEmailInput: Input = {
+        attributeName: "parent_email",
+        type: InputType.TEXT,
+        name: "Parent email address",
+    };
 
-  const textInputs: Input[] = [
-    firstNameInput,
-    lastNameInput,
-    birthDateInput,
-    phoneNumberInput,
-    emailInput,
-    otherInfoInput,
-  ];
+    const textInputs: Input[] = [
+        firstNameInput,
+        lastNameInput,
+        birthDateInput,
+        emailInput,
+        parentPhoneInput,
+        parentEmailInput,
+    ];
 
-  const handleSubmit = (fields: Input[]) => {
-    console.log(
-      "handleSubmit: " +
-        fields.map((field) => {
-          return field.name + ": " + field.value;
-        })
-    );
-  };
+    const convertStringToDate = (date: string) => {
+        const data = date.split("-");
+        return new Date(
+            parseInt(data[0]),
+            parseInt(data[1]) - 1,
+            parseInt(data[2])
+        );
+    };
 
-  return (
-    <div>
-      <Head>
-        <title>New Student</title>
-        <link rel="icon" href="/atc-logo.png" />
-      </Head>
+    const handleSubmit = async (fields: Input[]) => {
+        const [firstName, lastName, birthday, email, parentPhone, parentEmail] =
+            fields.map((field) => field.value || "");
 
-      <Navbar pageTitle="New Student">
+        const newUser: Patient = {
+            firstName,
+            lastName,
+            birthday: convertStringToDate(birthday),
+            email,
+            parentPhone,
+            parentEmail,
+        };
+
+        await fetch("http://localhost:8080/patient/", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newUser),
+        });
+
+        router.push("/studentSearch");
+    };
+
+    return (
         <div>
-          <NewEntity textFields={textInputs} submitFunction={handleSubmit} />
+            <Head>
+                <title>New Student</title>
+                <link rel="icon" href="/atc-logo.png" />
+            </Head>
+
+            <Navbar pageTitle="New Student">
+                <div>
+                    <NewEntity
+                        textFields={[...textInputs]}
+                        submitFunction={handleSubmit}
+                    />
+                </div>
+            </Navbar>
         </div>
-      </Navbar>
-    </div>
-  );
+    );
 };
 
 export default newStudent;
