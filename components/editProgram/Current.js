@@ -17,143 +17,175 @@ import GenInfo from "./GenInfo";
 import DomainInput from "./DomainInput";
 import Master from "./Mastery";
 import Behavior from "./Behavior";
+import BehaviorDialogForm from "./BehaviorDialogForm";
 
+const Current = ({ studentID, addedBehavior }) => {
+  const [loading, setLoading] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+  const [activeStep, setActiveStep] = React.useState(0);
+  const steps = getSteps();
 
-const Current = ( { studentID }) => {
-    const [open, setOpen] = React.useState(false);
-    const [activeStep, setActiveStep] = React.useState(0);
-    const steps = getSteps();
-  
-    const [behavior, setBehavior] = React.useState([]);
-  
-    React.useEffect(() => {
-      setBehavior([
-        {
-          id: 0,
-          name: "Touch Knees",
-          description: "Test if client is able to touch knees",
-          type: "Trial",
-          domain: ["Behaviors for Increase"],
-          masteryCriteria: "5 consecutive days passed.",
-          mastered: false,
+  const [globalBehavior, setGlobalBehavior] = React.useState([]);
+  const [behavior, setBehavior] = React.useState([]);
+  const [behaviorId, setBehaviorId] = React.useState("");
+  const [currentBehavior, setCurrentBehavior] = React.useState(null);
+
+  React.useEffect(() => {
+    async function getBehaviors() {
+      const temp = await fetch("http://localhost:8080/behaviour", {
+        method: "get",
+      });
+      const { data } = await temp.json();
+      setGlobalBehavior(data);
+      setBehavior(addedBehavior);
+      setLoading(false);
+    }
+    getBehaviors();
+  }, []);
+
+  //Handling if we need set trials
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  //Handling when we do not need to set trial amount
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const saveProgram = async () => {
+    const payload = {
+      ...currentBehavior,
+      studentId: studentID,
+    };
+
+    try {
+      const temp = await fetch("http://localhost:8080/program", {
+        method: "post",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          id: 1,
-          name: "Eye Contact",
-          description:
-            "Make eye contact when name is called first with a visual cue, then without a visual cue",
-          type: "probe",
-          domain: ["Listener Reponding", "Visual Cues"],
-          masteryCriteria: "2 consecutive days passed.",
-          mastered: false,
-        },
-        {
-          id: 2,
-          name: "Responding to Name",
-          description: "Reacts when name is called",
-          type: "probe",
-          domain: ["Listener Reponding"],
-          masteryCriteria: "10 Sessions Passed",
-          mastered: false,
-        },
-      ]);
-    }, []);
-  
-    //Handling if we need set trials
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-    //Handling when we do not need to set trial amount
-    const handleClose = () => {
-      setOpen(false);
-    };
-    //Function for  the stepper 
-    const handleNext = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      if (activeStep + 1 === steps.length) {
-        setActiveStep(0);
-        handleClose();
-      }
-    };
-    //Allows the stepper to go back 
-    const handleBack = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-      //Gets the steps for the stepper
-      function getSteps() {
-        return ["General Info", "Domain", "Mastery Criteria"];
-      }
-    
-      //Returns the components corresponding to the step the user is on.
-      function getStepContent(stepIndex) {
-        switch (stepIndex) {
-          case 0:
-            return <GenInfo />;
-          case 1:
-            return <DomainInput />;
-          case 2:
-            return <Master />;
-          default:
-            return "Unknown stepIndex";
-        }
-      }
-    return (
-        <div>
-            <Behavior list={behavior} />
+      });
+      const { data } = await temp.json();
+      setBehavior(data.behaviours);
+    } catch (error) {
+      console.error(
+        "Failed to add behavior to program! Please try again later"
+      );
+    }
+  };
 
-<div className={styles.addButton}>
-  <Fab
-    aria-label="add"
-    onClick={handleClickOpen}
-    className="primaryButton"
-  >
-    <AddIcon />
-  </Fab>
-</div>
+  //Function for  the stepper
+  const handleNext = async () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep + 1 === steps.length) {
+      setActiveStep(0);
+      await saveProgram();
+      handleClose();
+    }
+  };
+  //Allows the stepper to go back
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+  //Gets the steps for the stepper
+  function getSteps() {
+    return ["General Info", "Domain"];
+  }
 
-<Dialog
-  open={open}
-  onClose={handleClose}
-  aria-labelledby="alert-dialog-title"
-  aria-describedby="alert-dialog-description"
->
-  <DialogTitle id="alert-dialog-title">{"Create Behavior"}</DialogTitle>
-  <DialogContent>
-    <DialogContentText id="alert-dialog-description">
-      <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      <div>
-        {activeStep === steps.length ? (
-          {}
-        ) : (
-          <div>
-            <Typography>{getStepContent(activeStep)}</Typography>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className=""
-              >
-                Back
-              </Button>
-              <Button className="primaryColor" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? "Save" : "Next"}
-              </Button>
-            </div>
-          </div>
-        )}
+  //Returns the components corresponding to the step the user is on.
+  function getStepContent(stepIndex) {
+    switch (stepIndex) {
+      case 0:
+        return (
+          <GenInfo
+            globalBehavior={globalBehavior}
+            behaviorId={behaviorId}
+            setBehaviorId={setBehaviorId}
+            updateBehavior={(idx) => {
+              setCurrentBehavior(
+                globalBehavior.find((behavior) => behavior._id === idx)
+              );
+            }}
+          />
+        );
+      case 1:
+        return (
+          <BehaviorDialogForm
+            behavior={currentBehavior}
+            setBehavior={setCurrentBehavior}
+          />
+        );
+      default:
+        return "Unknown stepIndex";
+    }
+  }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <Behavior
+        list={behavior}
+        studentId={studentID}
+        updateBehaviorList={setBehavior}
+      />
+
+      <div className={styles.addButton}>
+        <Fab
+          aria-label="add"
+          onClick={handleClickOpen}
+          className="primaryButton"
+        >
+          <AddIcon />
+        </Fab>
       </div>
-    </DialogContentText>
-  </DialogContent>
-  <DialogActions></DialogActions>
-</Dialog>
-        </div>
-    )
-}
 
-export default Current
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Create Behavior"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <Stepper activeStep={activeStep} alternativeLabel>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+            <div>
+              {activeStep === steps.length ? (
+                {}
+              ) : (
+                <div>
+                  <Typography>{getStepContent(activeStep)}</Typography>
+                  <div>
+                    <Button
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                      className=""
+                    >
+                      Back
+                    </Button>
+                    <Button className="primaryColor" onClick={handleNext}>
+                      {activeStep === steps.length - 1 ? "Save" : "Next"}
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions></DialogActions>
+      </Dialog>
+    </div>
+  );
+};
+
+export default Current;
