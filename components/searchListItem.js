@@ -30,7 +30,7 @@ StudentListItem.defaultProps = {
 StudentListItem.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default StudentListItem;
