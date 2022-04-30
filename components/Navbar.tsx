@@ -68,10 +68,13 @@ const Navbar = (props: { pageTitle; window?; children }) => {
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-
+    
     const drawer = (
         <div>
             <div className={classes.toolbar} />
+                <div style={{marginLeft:"15px"}}>
+                    <img src="/logo.jpeg" alt="logo" />
+            </div>
             <Divider />
             <List>
                 {[
