@@ -2,6 +2,8 @@ import NewEntity from "../components/NewEntity/NewEntity";
 import { Input, InputType } from "../components/NewEntity/Interfaces";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
+import { Employee } from "../interfaces/Employee";
+import { useRouter } from "next/router";
 
 const newEmployee = () => {
   const firstNameInput: Input = {
@@ -69,10 +71,13 @@ const newEmployee = () => {
       </Head>
 
       <Navbar pageTitle="New Employee">
-        <div>
-          <NewEntity textFields={textInputs} submitFunction={handleSubmit} />
-        </div>
-      </Navbar>
+                <div>
+                    <NewEntity
+                        textFields={[...textInputs]}
+                        submitFunction={handleSubmit}
+                    />
+                </div>
+            </Navbar>
     </div>
   );
 };

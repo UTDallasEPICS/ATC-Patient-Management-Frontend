@@ -11,6 +11,8 @@ export default function Home() {
   const [user, setUser] = useState({ username: "" });
   const [error, setError] = useState("");
 
+  fetch(sampUser)
+
   //Function for login
   const LoginFunct = (details) => {
     console.log(details);
