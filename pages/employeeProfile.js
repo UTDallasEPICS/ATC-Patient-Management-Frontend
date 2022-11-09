@@ -31,7 +31,8 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-const employeeProfile = (props) => {
+
+const employeeProfile = ({ employee, students }) => {
   //State handles the notifications for when the archive is clicked
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -117,19 +118,28 @@ const employeeProfile = (props) => {
     setListOpen(false);
   };
 
+  const formatDate = (d) => {
+    return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  };
+
+
   return (
     <div>
       <Head>
         <title>Employee Profile</title>
         <link rel="icon" href="/atc-logo.png" />
       </Head>
+      
 
       <Navbar pageTitle="Employee Profile">
+        <Link href="/employeeSearch">
+          <Button>Go Back</Button>
+        </Link>
         <div className={styles.picture}>
-          <Avatar diameter="175px" img={props.employee.img} />
+          <Avatar diameter="175px" img={employee.img} />
         </div>
         <h1 className={styles.info}>
-          {props.employee.firstName} {props.employee.lastName}
+          {employee.firstName} {employee.lastName}
         </h1>
         <div className={styles.bg}>
           <Button
@@ -159,7 +169,7 @@ const employeeProfile = (props) => {
 
             <DialogContent dividers>
               <List>
-                {props.students.map((index) => {
+                {students.map((index) => {
                   const labelId = `checkbox-list-label-${index.id - 1}`;
 
                   return (
@@ -210,11 +220,14 @@ const employeeProfile = (props) => {
         <br />
         <Divider variant="middle" />
         <p className={styles.label}>Date of Birth:</p>{" "}
-        <p className={styles.info}> {props.employee.dob}</p>
+        <p className={styles.info}>
+                        {" "}
+                        {formatDate(new Date(employee.dob))}
+                    </p>
         <p className={styles.label}>Phone Number:</p>{" "}
-        <p className={styles.info}> {props.employee.phone}</p>
+        <p className={styles.info}> {employee.phone}</p>
         <p className={styles.label}>Email: </p>{" "}
-        <p className={styles.info}> {props.employee.email}</p>
+        <p className={styles.info}> {employee.email}</p>
         <Divider variant="middle" />
         <p className={styles.label}>Other Info:</p>
         <div className={styles.bgOther}>
@@ -229,7 +242,7 @@ const employeeProfile = (props) => {
         </div>
         {/*<OtherInfo info = {props.employee.otherInfo}/> */}
         <div className={styles.bg}>
-          <Link href={{pathname:"/editEmployee", query: {employeeID: props.employee.id}}}>
+          <Link href={{pathname:"/editEmployee", query: {employeeID: employee.id}}}>
             <Button className={styles.menuButtonGroup}>Edit</Button>
           </Link>
           <Button className={styles.menuButtonGroup} onClick={handleClickOpen}>
@@ -312,7 +325,7 @@ const employeeProfile = (props) => {
           <DialogTitle id="alert-dialog-title">{"Other Info:"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              {props.employee.otherInfo}
+              {employee.otherInfo}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -367,17 +380,35 @@ const employeeProfile = (props) => {
 export default employeeProfile;
 
 export const getServerSideProps = async ({ query }) => {
+  const temp = await fetch(`http://localhost:8080/therapist/${query.id}`, {
+        method: "get",
+    });
+    console.log( temp );
+  const { data } = await temp.json();
+  const temp2 = await fetch(`http://localhost:8080/patient/${query.id2}`, {
+        method: "get",
+    });
+    console.log( temp2 );
+  const { data2 } = await temp2.json();
+  
   const employee = {
     id: query.id,
-    firstName: "Billy",
-    lastName: "Doe",
+    firstName: data.firstName,
+    lastName: data.lastName,
     img: "",
-    dob: "December 15, 1422",
-    phone: "999-999-9999",
-    email: "epics@atc.com",
-    otherInfo: "Unable to work on Fridays",
+    dob: data.birthday,
+    phone: data.phoneNumber,
+    email: data.email,
+    otherInfo: data.otherInfo,
   };
-
+  
+  const students1 = {
+    id: query.id,
+    firstName: data.firstName,
+    lastName: data.lastName,
+    img: "",
+  };
+  
   const students = [
     {
       id: 1,

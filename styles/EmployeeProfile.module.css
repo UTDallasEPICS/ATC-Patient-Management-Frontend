@@ -47,3 +47,9 @@
     /*top: 10px !important; */
     color: grey !important;
 }
+
+.gb {
+  width: 300;
+  height: 100;
+  align-items: right;
+}

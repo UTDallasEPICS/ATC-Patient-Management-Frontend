@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar";
 import Head from "next/head";
 import { Patient } from "../interfaces/Patient";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import Button from "@material-ui/core/Button";
 
 const newStudent = () => {
     const router = useRouter();
@@ -96,6 +98,9 @@ const newStudent = () => {
             </Head>
 
             <Navbar pageTitle="New Student">
+                <Link href="/studentSearch">
+                    <Button className="primaryButton">Go Back</Button>
+                </Link> 
                 <div>
                     <NewEntity
                         textFields={[...textInputs]}

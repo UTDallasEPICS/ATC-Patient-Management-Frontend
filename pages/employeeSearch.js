@@ -43,7 +43,7 @@ export default function EmployeeSearch({ employees }) {
           </div>
 
           <div className={styles.buttonWrapper}>
-            <Link href="/newStudent">
+            <Link href="/newEmployee">
               <Button className="primaryButton">Add New</Button>
             </Link>
           </div>
@@ -58,7 +58,23 @@ export const getServerSideProps = async () => {
   // // const res = await fetch(`https://randomuser.me/api/`)
   // const Employees = await res.json()
 
-  const employees = [
+  let temp = await fetch("http://localhost:8080/therapist", {
+    method: "get",
+  });
+
+  const { data } = await temp.json();
+
+  let employees = data.map((employee) => {
+     employee.id = employee._id;
+      delete employee._id;
+      return {
+          ...employee,
+          img: "",
+      };
+  });
+
+
+  const employees1 = [
     {
       id: 1,
       firstName: "Billy",
