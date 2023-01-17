@@ -2,9 +2,20 @@ import NewEntity from "../components/NewEntity/NewEntity";
 import { Input, InputType } from "../components/NewEntity/Interfaces";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
+import { GetServerSideProps } from "next";
 import { Employee } from "../components/Interfaces/Entities";
+import { useRouter } from "next/router";
 
-const editEmployee = ({ employee }) => {
+type EmployeeWithIdAndImg = Employee & { id: string; img: string };
+
+const editEmployee = (props: { employee: EmployeeWithIdAndImg }) => {
+  const { employee } = props;
+  const router = useRouter();
+
+  const formatDate = (d) => {
+      d = new Date(d);
+      return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  };
   const firstNameInput: Input = {
     attributeName: "first_name",
     name: "First Name",
@@ -26,7 +37,7 @@ const editEmployee = ({ employee }) => {
     type: InputType.DATE,
     name: "Birth Date",
     required: true,
-    value: employee.dob,
+    value: formatDate(employee.dob),
   };
 
   const otherInfoInput: Input = {
@@ -40,7 +51,7 @@ const editEmployee = ({ employee }) => {
     attributeName: "phone_number",
     type: InputType.TEXT,
     name: "Phone number",
-    value: employee.phone,
+    value: employee.phoneNumber,
   };
 
   const emailInput: Input = {
@@ -58,40 +69,82 @@ const editEmployee = ({ employee }) => {
     otherInfoInput,
   ];
 
-  const handleSubmit = (fields: Input[]) => {
-    console.log(
-      "handleSubmit: " +
-        fields.map((field) => {
-          return field.name + ": " + field.value;
-        })
+  const convertStringToDate = (date: string) => {
+    const data = date.split("-");
+    return new Date(
+        parseInt(data[0]),
+        parseInt(data[1]) - 1,
+        parseInt(data[2])
     );
   };
 
-  return (
-    <div>
-      <Head>
-        <title>Edit Employee</title>
-        <link rel="icon" href="/atc-logo.png" />
-      </Head>
+  const handleSubmit = async (fields: Input[]) => {
+    const [firstName, lastName, dob, phoneNumber, email, otherInfo] =
+        fields.map((field) => field.value || "");
 
-      <Navbar pageTitle="Edit Employee">
-        <div>
-          <NewEntity textFields={textInputs} submitFunction={handleSubmit} />
-        </div>
-      </Navbar>
-    </div>
-  );
+    try {
+        await fetch(`http://localhost:8080/therapist/${employee.id}`, {
+            method: "patch",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                firstName,
+                lastName,
+                dob: convertStringToDate(dob),
+                email,
+                phoneNumber,
+                otherInfo,
+            }),
+        });
+        router.push("/employeeSearch");
+    } catch (error) {
+        console.log("Failed to update profile! Please try again later");
+        console.error(error);
+    }
 };
 
-export const getServerSideProps = async ({ query }) => {
+return (
+    <div>
+        <Head>
+            <title>Edit Employee</title>
+            <link rel="icon" href="/atc-logo.png" />
+        </Head>
+
+        <Navbar pageTitle="Edit Employee">
+            <div>
+                <NewEntity
+                    textFields={textInputs}
+                    submitFunction={handleSubmit}
+                />
+            </div>
+        </Navbar>
+    </div>
+);
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { query } = context;
+    if (!query.employeeID) {
+        return {
+            notFound: true,
+        };
+    }
+    const temp = await fetch(
+        `http://localhost:8080/therapist/${query.employeeID}`,
+        {
+            method: "get",
+        }
+    );
+  const { data } = await temp.json();
   const employee: Employee = {
-    id: query.employeeID,
-    firstName: "Billy",
-    lastName: "Doe",
-    dob: "2021-12-08",
-    phone: "999-999-9999",
-    email: "epics@atc.com",
-    otherInfo: "Unable to work on Fridays",
+    id: query.employeeID as string,
+    firstName: data.firstName,
+    lastName: data.lastName,
+    dob: data.birthday,
+    phone: data.phoneNumber,
+    email: data.email,
+    otherInfo: data.otherInfo,
   };
 
   return {
