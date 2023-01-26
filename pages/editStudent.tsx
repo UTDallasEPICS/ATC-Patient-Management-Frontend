@@ -86,7 +86,7 @@ const editStudent = (props: { student: PatientWithIdAndImg }) => {
 
         try {
             await fetch(`http://localhost:8080/patient/${student.id}`, {
-                method: "patch",
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -135,7 +135,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const temp = await fetch(
         `http://localhost:8080/patient/${query.studentID}`,
         {
-            method: "get",
+            method: "GET",
         }
     );
     const { data } = await temp.json();
