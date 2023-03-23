@@ -11,22 +11,22 @@ export default function Home() {
   const [user, setUser] = useState({ username: "" });
   const [error, setError] = useState("");
 
-  fetch(sampUser)
+  //fetch(sampUser)
 
   //Function for login
-  const LoginFunct = (details) => {
-    console.log(details);
+  // const LoginFunct = (details) => {
+  //   console.log(details);
 
-    if (
-      details.name == sampUser.username &&
-      details.password == sampUser.password
-    ) {
-      console.log("Logged In");
-      setUser({
-        username: details.name,
-      });
-    }
-  };
+  //   if (
+  //     details.name == sampUser.username &&
+  //     details.password == sampUser.password
+  //   ) {
+  //     console.log("Logged In");
+  //     setUser({
+  //       username: details.name,
+  //     });
+  //   }
+  // };
 
   return (
     <div className={styles.container}>
@@ -38,7 +38,8 @@ export default function Home() {
       <div style={{marginBottom:"50px"}}>
         <img src="/logo.jpeg" alt="logo" />
       </div>
-      <Login loginf={LoginFunct} error={error} />
+        {/* <Login loginf={LoginFunct} error={error} /> */}
+        <Login />
     </div>
   );
 }

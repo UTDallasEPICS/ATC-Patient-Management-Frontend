@@ -1,8 +1,8 @@
-import styles from "../styles/SearchList.module.css";
+import styles from "../../styles/SearchList.module.css";
 import Link from "next/link";
-import SearchList from "../components/SearchList";
+import SearchList from "../../components/SearchList";
 import { useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar";
 import Head from "next/head";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";

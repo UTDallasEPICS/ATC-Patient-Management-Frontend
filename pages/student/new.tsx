@@ -1,8 +1,8 @@
-import NewEntity from "../components/NewEntity/NewEntity";
-import { Input, InputType } from "../components/NewEntity/Interfaces";
-import Navbar from "../components/Navbar";
+import NewEntity from "../../components/NewEntity/NewEntity";
+import { Input, InputType } from "../../components/NewEntity/Interfaces";
+import Navbar from "../../components/Navbar";
 import Head from "next/head";
-import { Patient } from "../interfaces/Patient";
+import { Patient } from "../../interfaces/Patient";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Button from "@material-ui/core/Button";

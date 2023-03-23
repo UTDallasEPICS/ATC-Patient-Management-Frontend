@@ -78,8 +78,8 @@ const Navbar = (props: { pageTitle; window?; children }) => {
             <Divider />
             <List>
                 {[
-                    ["Student Search", "/studentSearch"],
-                    ["New Student", "/newStudent"],
+                    ["Student Search", "/student/search"],
+                    ["New Student", "/student/new"],
                 ].map((item, index) => (
                     <Link href={item[1]} key={item[0]}>
                         <ListItem button>
@@ -99,8 +99,8 @@ const Navbar = (props: { pageTitle; window?; children }) => {
             <Divider />
             <List>
                 {[
-                    ["Employee Search", "/employeeSearch"],
-                    ["New Employee", "/newEmployee"],
+                    ["Employee Search", "/employee/search"],
+                    ["New Employee", "/employee/new"],
                 ].map((item, index) => (
                     <Link href={item[1]} key={item[0]}>
                         <ListItem button>
@@ -119,7 +119,7 @@ const Navbar = (props: { pageTitle; window?; children }) => {
             </List>
             <Divider />
             <List>
-                <Link href="/manageBehaviors">
+                <Link href="/behaviors/manage">
                     <ListItem button>
                         <ListItemIcon>
                             <MenuIcon />

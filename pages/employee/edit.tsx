@@ -1,9 +1,9 @@
-import NewEntity from "../components/NewEntity/NewEntity";
-import { Input, InputType } from "../components/NewEntity/Interfaces";
-import Navbar from "../components/Navbar";
+import NewEntity from "../../components/NewEntity/NewEntity";
+import { Input, InputType } from "../../components/NewEntity/Interfaces";
+import Navbar from "../../components/Navbar";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
-import { Employee } from "../components/Interfaces/Entities";
+import { Employee } from "../../components/Interfaces/Entities";
 import { useRouter } from "next/router";
 
 type EmployeeWithIdAndImg = Employee & { id: string; img: string };

@@ -1,8 +1,8 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import styles from "../styles/AddSession.module.css";
-import Behaviors from "../components/AddSession/Behaviors";
+import Behaviors from "../../components/AddSession/Behaviors";
 import Head from "next/head";
 
 const addSession = ({ program }) => {
