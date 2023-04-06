@@ -2,23 +2,15 @@ import Head from "next/head";
 import Navbar from "../../components/Navbar";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
-import {
-    Button,
-    makeStyles,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
+import { Button, makeStyles, Paper,
+        Table, TableBody, TableCell,
+        TableContainer, TableHead,
+        TableRow, Dialog, DialogActions,
+        DialogContent, DialogContentText,
+        DialogTitle,
 } from "@material-ui/core";
 import { useState } from "react";
+import CheckUser from "../../auth0CheckUser";
 
 const useStyles = makeStyles({
     table: {
@@ -42,6 +34,9 @@ interface BehaviorAsProps {
 }
 
 export default function manageBehaviorsPage({ behaviors }) {
+    // Verifies if user has the correct permissions
+    if(!CheckUser()) return(<div>Redirecting...</div>);
+
     const [behaviorList, setBehaviorList] = useState<BehaviorAsProps[]>(
         behaviors.map((behavior: Behavior, idx: number) => ({
             behaviorName: behavior.name,

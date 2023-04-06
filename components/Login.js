@@ -76,9 +76,9 @@ const Login = ({ loginf, error }) => {
           </FormControl>
         </div>
 
-        <Link href="/studentSearch">
+        <Link href="//api/auth/login?returnTo=/home">
           <Button type="submit" variant="contained" className="primaryButton" style={{width:"100%"}}>
-            Sign In
+            Sign in
           </Button>
         </Link>
 

@@ -1,11 +1,15 @@
 import Navbar from "../../components/Navbar";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-import styles from "../styles/AddSession.module.css";
+import styles from "../../styles/AddSession.module.css";
 import Behaviors from "../../components/AddSession/Behaviors";
 import Head from "next/head";
+import CheckUser  from '../../auth0CheckUser';
 
 const addSession = ({ program }) => {
+  // Verifies if user has the correct permissions
+  if(!CheckUser()) return(<div>Redirecting...</div>);
+
   const { studentID, firstName, lastName, behaviors } = program;
 
   return (

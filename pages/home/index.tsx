@@ -1,16 +1,12 @@
-import { useUser } from '@auth0/nextjs-auth0/client';
+import CheckUser  from '../../auth0CheckUser';
 
 export default function Home()
 {
-    const { user, error, isLoading } = useUser();
+    if(!CheckUser()) return(<div>Redirecting...</div>);
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>{error.message}</div>;
-
-    if (user) {
-        return(
-            <body>
-               It's where you want to be :)
-            </body>);
-    }
+    return(
+        <body>
+           It's where you want to be :)
+        </body>
+    );
 };

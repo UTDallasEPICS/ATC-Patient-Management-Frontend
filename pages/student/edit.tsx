@@ -4,11 +4,15 @@ import Navbar from "../../components/Navbar";
 import Head from "next/head";
 import { Patient } from "../../interfaces/Patient";
 import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
+import CheckUser  from '../../auth0CheckUser';
+import { useRouter } from 'next/router';
 
 type PatientWithIdAndImg = Patient & { id: string; img: string };
 
 const editStudent = (props: { student: PatientWithIdAndImg }) => {
+    // Verifies if user has the correct permissions
+    if(!CheckUser()) return(<div>Redirecting...</div>);
+    
     const { student } = props;
     const router = useRouter();
 
@@ -99,7 +103,7 @@ const editStudent = (props: { student: PatientWithIdAndImg }) => {
                     parentEmail,
                 }),
             });
-            router.push("/studentSearch");
+            router.push("/student/search");
         } catch (error) {
             console.log("Failed to update profile! Please try again later");
             console.error(error);

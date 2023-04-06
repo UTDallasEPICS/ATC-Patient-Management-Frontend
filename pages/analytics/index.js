@@ -1,14 +1,18 @@
 import Navbar from "../../components/Navbar";
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import styles from "../styles/Analytics.module.css";
+import styles from "../../styles/Analytics.module.css";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Graphs from "../../components/Analytics/Graphs/Graphs";
 import Reports from "../../components/Analytics/Reports/Reports";
+import CheckUser from "../../auth0CheckUser";
 
 const analytics = ({ studentID }) => {
+  // Verifies if user has the correct permissions
+  if(!CheckUser()) return(<div>Redirecting...</div>);
+
   const [page, setPage] = useState(0);
 
   const handlePageChange = (event, newValue) => {

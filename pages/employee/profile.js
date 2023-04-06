@@ -30,9 +30,13 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import CheckUser  from '../../auth0CheckUser';
 
 
 const employeeProfile = ({ employee, students }) => {
+  // Verifies if user has the correct permissions
+  if(!CheckUser()) return(<div>Redirecting...</div>);
+
   //State handles the notifications for when the archive is clicked
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {

@@ -8,10 +8,14 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import CheckUser  from '../../auth0CheckUser';
 
 const buttonColor = "#0F5787";
 
 export default function EmployeeSearch({ employees }) {
+  // Verifies if user has the correct permissions
+  if(!CheckUser()) return(<div>Redirecting...</div>);
+
   const [searchTerm, setSearchTerm] = useState("");
   return (
     <div>

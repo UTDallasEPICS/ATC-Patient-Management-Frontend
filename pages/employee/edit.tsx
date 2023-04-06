@@ -5,10 +5,14 @@ import Head from "next/head";
 import { GetServerSideProps } from "next";
 import { Employee } from "../../components/Interfaces/Entities";
 import { useRouter } from "next/router";
+import CheckUser  from '../../auth0CheckUser';
 
 type EmployeeWithIdAndImg = Employee & { id: string; img: string };
 
 const editEmployee = (props: { employee: EmployeeWithIdAndImg }) => {
+  // Verifies if user has the correct permissions
+  if(!CheckUser()) return(<div>Redirecting...</div>);
+
   const { employee } = props;
   const router = useRouter();
 

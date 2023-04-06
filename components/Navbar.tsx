@@ -130,7 +130,7 @@ const Navbar = (props: { pageTitle; window?; children }) => {
             </List>
             <Divider />
             <List>
-                {[["Logout", "/"]].map((item, index) => (
+                {[["Logout", "/api/auth/logout"]].map((item, index) => (
                     <Link href={item[1]} key={item[0]}>
                         <ListItem button>
                             <ListItemIcon>

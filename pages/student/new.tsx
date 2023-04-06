@@ -3,11 +3,15 @@ import { Input, InputType } from "../../components/NewEntity/Interfaces";
 import Navbar from "../../components/Navbar";
 import Head from "next/head";
 import { Patient } from "../../interfaces/Patient";
-import { useRouter } from "next/router";
+import CheckUser  from '../../auth0CheckUser';
+import { useRouter } from 'next/router';
 import Link from "next/link";
 import Button from "@material-ui/core/Button";
 
 const newStudent = () => {
+    // Verifies if user has the correct permissions
+    if(!CheckUser()) return(<div>Redirecting...</div>);
+
     const router = useRouter();
     const firstNameInput: Input = {
         attributeName: "first_name",
@@ -87,7 +91,7 @@ const newStudent = () => {
             body: JSON.stringify(newUser),
         });
 
-        router.push("/studentSearch");
+        router.push("/student/search");
     };
 
     return (
@@ -98,7 +102,7 @@ const newStudent = () => {
             </Head>
 
             <Navbar pageTitle="New Student">
-                <Link href="/studentSearch">
+                <Link href="/student/search">
                     <Button className="primaryButton">Go Back</Button>
                 </Link> 
                 <div>

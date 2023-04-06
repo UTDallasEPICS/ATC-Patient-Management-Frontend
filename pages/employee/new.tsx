@@ -6,8 +6,12 @@ import Link from "next/link";
 import Button from "@material-ui/core/Button";
 import { Employee } from "../../interfaces/Employee";
 import { useRouter } from "next/router";
+import CheckUser  from '../../auth0CheckUser';
 
 const newEmployee = () => {
+  // Verifies if user has the correct permissions
+  if(!CheckUser()) return(<div>Redirecting...</div>);
+
   const router = useRouter();
   const firstNameInput: Input = {
     attributeName: "first_name",

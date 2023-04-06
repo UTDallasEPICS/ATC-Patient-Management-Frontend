@@ -5,7 +5,9 @@ specifiers:
   '@material-ui/core': ^4.12.3
   '@material-ui/data-grid': ^4.0.0-alpha.37
   '@material-ui/icons': ^4.11.2
-  '@types/node': ^14.14.41
+  '@next/env': ^13.2.4
+  '@types/node': ^14.18.42
+  client: link:@auth0/nextjs-auth0/client
   mongoose: ^6.2.9
   next: ^12.1.0
   react: 17.0.1
@@ -23,6 +25,8 @@ dependencies:
   '@material-ui/core': 4.12.4_w7o5yyljkiidx2s2nzb26ottzu
   '@material-ui/data-grid': 4.0.0-alpha.37_ewwh7ubkov4icczt53gvwy6j64
   '@material-ui/icons': 4.11.3_2f7oew7lhxe2ikh4opgpy5iotq
+  '@next/env': 13.2.4
+  client: link:@auth0/nextjs-auth0/client
   mongoose: 6.10.4
   next: 12.3.4_w7o5yyljkiidx2s2nzb26ottzu
   react: 17.0.1
@@ -1042,6 +1046,10 @@ packages:
 
   /@next/env/12.3.4:
     resolution: {integrity: sha512-H/69Lc5Q02dq3o+dxxy5O/oNxFsZpdL6WREtOOtOM1B/weonIwDXkekr1KV5DPVPr12IHFPrMrcJQ6bgPMfn7A==}
+    dev: false
+
+  /@next/env/13.2.4:
+    resolution: {integrity: sha512-+Mq3TtpkeeKFZanPturjcXt+KHfKYnLlX6jMLyCrmpq6OOs4i1GqBOAauSkii9QeKCMTYzGppar21JU57b/GEA==}
     dev: false
 
   /@next/swc-android-arm-eabi/12.3.4:

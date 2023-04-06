@@ -13,8 +13,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Link from "next/link";
+import CheckUser  from '../../auth0CheckUser';
 
 const studentProfile = ({ student }) => {
+    // Verifies if user has the correct permissions
+    if(!CheckUser()) return(<div>Redirecting...</div>);
+
     //State handles the notifications for when the archive is clicked
     const [open, setOpen] = React.useState(false);
 
@@ -58,7 +62,7 @@ const studentProfile = ({ student }) => {
                     <div className={styles.bgOther}>
                         <Link
                             href={{
-                                pathname: "/addSession",
+                                pathname: "/session/add",
                                 query: { studentID: student.id },
                             }}
                         >
@@ -100,7 +104,7 @@ const studentProfile = ({ student }) => {
                         <br />
                         <Link
                             href={{
-                                pathname: "/editStudent",
+                                pathname: "/student/edit",
                                 query: { studentID: student.id },
                             }}
                         >
@@ -168,7 +172,7 @@ const studentProfile = ({ student }) => {
                                 autoFocus
                                 className={styles.buttonGroup}
                             >
-                                <Link href="/studentSearch">Yes</Link>
+                                <Link href="/student/search">Yes</Link>
                             </Button>
                         </DialogActions>
                     </Dialog>
