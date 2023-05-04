@@ -42,12 +42,12 @@ export default function EmployeeSearch({ employees }) {
             <SearchList
               students={employees}
               searchTerm={searchTerm}
-              destinationPath="/employeeProfile"
+              destinationPath="/employee/profile"
             />
           </div>
 
           <div className={styles.buttonWrapper}>
-            <Link href="/newEmployee">
+            <Link href="/employee/new">
               <Button className="primaryButton">Add New</Button>
             </Link>
           </div>

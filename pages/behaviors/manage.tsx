@@ -183,7 +183,7 @@ export default function manageBehaviorsPage({ behaviors }) {
                     </DialogActions>
                 </Dialog>
 
-                <Link href="/addBehavior">
+                <Link href="/behaviors/add">
                     <Button variant="contained" color="primary">
                         Add Behavior
                     </Button>

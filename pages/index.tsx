@@ -1,4 +1,4 @@
-import CheckUser  from '../../auth0CheckUser';
+import CheckUser  from '../auth0CheckUser';
 
 export default function Home()
 {

@@ -48,7 +48,7 @@ export default function addBehavior() {
             description: "",
             datatype: "",
         });
-        router.push("/manageBehaviors");
+        router.push("/behaviors/manage");
     };
 
     return (

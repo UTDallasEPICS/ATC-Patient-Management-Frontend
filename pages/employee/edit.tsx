@@ -101,7 +101,7 @@ const editEmployee = (props: { employee: EmployeeWithIdAndImg }) => {
                 otherInfo,
             }),
         });
-        router.push("/employeeSearch");
+        router.push("/employee/search");
     } catch (error) {
         console.log("Failed to update profile! Please try again later");
         console.error(error);

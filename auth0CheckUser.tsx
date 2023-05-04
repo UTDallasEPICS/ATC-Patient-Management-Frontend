@@ -25,7 +25,7 @@ export default function CheckUser(usersAllowed?: String[]) {
 
     if (!user) {
         // router.prefetch('/'); Might not need
-        router.push('/');
+        router.push('/api/auth/login?returnTo=/');
         return(false);
     }
 
@@ -38,7 +38,7 @@ export default function CheckUser(usersAllowed?: String[]) {
         ------------------------------------------------------------------------------
     */
 
-    alert(user.nickname)
+    //alert(user.nickname)
 
     return(true);
 }

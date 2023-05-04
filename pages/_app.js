@@ -9,8 +9,7 @@ import '../styles/globals.css'
 
 // serves as the entry point for the pages, ONLY here so we can use material-ui
 export default function MyApp({ Component, pageProps }) {
-  //const { Component, pageProps } = props;
-
+  // part of the installation for global-wide material ui format
   React.useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -18,6 +17,8 @@ export default function MyApp({ Component, pageProps }) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
+
+  console.log(<Component />)
 
   return (
     <React.Fragment>
@@ -27,9 +28,9 @@ export default function MyApp({ Component, pageProps }) {
       </Head>
       <UserProvider>
         <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Component {...pageProps} />
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Component {...pageProps} />
         </ThemeProvider>
       </UserProvider>
     </React.Fragment>

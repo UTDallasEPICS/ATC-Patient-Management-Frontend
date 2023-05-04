@@ -99,7 +99,7 @@ const newEmployee = () => {
             body: JSON.stringify(newUser),
         });
 
-        router.push("/employeeSearch");
+        router.push("/employee/search");
   };
   
 
