@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "../../components/Navbar";
 import Head from "next/head";
 import Avatar from "../../components/Avatar";
@@ -17,17 +17,32 @@ import CheckUser  from '../../auth0CheckUser';
 
 const studentProfile = ({ student }) => {
     // Verifies if user has the correct permissions
-    if(!CheckUser()) return(<div>Redirecting...</div>);
+    const {allowed, role} = CheckUser(["Admin", "BCBA", "Technician", "Guardian"])
+    if(!allowed) return(<div>Redirecting...</div>);
+
+    var editStudent = false;
+    if (role == "Admin") editStudent = true;
+    var studentAnalytics = false;
+    if (role == "Admin" || role == "BCBA" || role == "Technician") studentAnalytics = true;
 
     //State handles the notifications for when the archive is clicked
-    const [open, setOpen] = React.useState(false);
-
+    const [open, setOpen] = useState(false);
+    console.log(role)
     const handleClickOpen = () => {
         setOpen(true);
     };
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleArchive = async () => {
+        const temp = await fetch(`http://localhost:8080/patient/${student.id}`, {
+            method: "DELETE",
+        });
+        const { data } = await temp.json();
+        console.log(data)
+        handleClose()
+    }
 
     //State for handling when other info is being pressed
     const [otherInfoOpen, setOtherInfo] = React.useState(false);
@@ -41,7 +56,8 @@ const studentProfile = ({ student }) => {
     };
 
     const formatDate = (d) => {
-        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+        return d.toLocaleDateString('en-us', { year:"numeric", month:"short", day: 'numeric'})
+        //return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
     };
 
     return (
@@ -51,7 +67,7 @@ const studentProfile = ({ student }) => {
                 <link rel="icon" href="/atc-logo.png" />
             </Head>
 
-            <Navbar pageTitle="Student Profile">
+            <Navbar pageTitle="Student Profile" role={role} >
                 <div className={styles.profilePage}>
                     <span className={styles.picture}>
                         <Avatar diameter="175px" img={student.img} />
@@ -59,22 +75,27 @@ const studentProfile = ({ student }) => {
                     <h1 className={styles.info}>
                         {student.firstName} {student.lastName}
                     </h1>
-                    <div className={styles.bgOther}>
-                        <Link
-                            href={{
-                                pathname: "/session/add",
-                                query: { studentID: student.id },
-                            }}
-                        >
-                            <Button
-                                variant="outlined"
-                                color="primary"
-                                className={styles.buttonGroup}
+                        { studentAnalytics ? 
+                        <div className={styles.bgOther}>
+                            <Link
+                                href={{
+                                    pathname: "/session/add",
+                                    query: { 
+                                        studentID: student.id, 
+                                        firstName: student.firstName,
+                                        lastName: student.lastName,
+                                    },
+                                }}
                             >
-                                New Session
-                            </Button>
-                        </Link>
-                    </div>
+                                <Button
+                                    variant="outlined"
+                                    color="primary"
+                                    className={styles.buttonGroup}
+                                >
+                                    New Session
+                                </Button>
+                            </Link>
+                        </div> : null}
                     <br />
                     <Divider variant="middle" />
                     <p className={styles.label}>Date of Birth:</p>{" "}
@@ -83,7 +104,7 @@ const studentProfile = ({ student }) => {
                         {formatDate(new Date(student.dob))}
                     </p>
                     <p className={styles.label}>Parent's Phone Number:</p>{" "}
-                    <p className={styles.info}> {student.parentPhone}</p>
+                    <p className={styles.info}> {`(${student.parentPhone.slice(0,3)}) ${student.parentPhone.slice(3,6)}-${student.parentPhone.slice(6,10)}`}</p>
                     <p className={styles.label}>Email: </p>{" "}
                     <p className={styles.info}> {student.email}</p>
                     <p className={styles.label}>Parent's email: </p>{" "}
@@ -102,44 +123,55 @@ const studentProfile = ({ student }) => {
                     </div>
                     <div className={styles.bg}>
                         <br />
-                        <Link
-                            href={{
-                                pathname: "/student/edit",
-                                query: { studentID: student.id },
-                            }}
-                        >
-                            <Button className={styles.buttonGroup1}>
-                                Edit
+                    {
+                        editStudent ? (
+                        <span>
+                            <Link
+                                href={{
+                                    pathname: "/student/edit",
+                                    query: { studentID: student.id },
+                                }}
+                            >
+                                <Button className={styles.buttonGroup1}>
+                                    Edit
+                                </Button>
+                            </Link>
+                            <Link
+                                href={{
+                                    pathname: "/editProgram",
+                                    query: { studentID: student.id },
+                                }}
+                            >
+                                <Button className={styles.buttonGroup2}>
+                                    Edit Program
+                                </Button>
+                            </Link>
+                            <br />
+                            <Button
+                                className={styles.buttonGroup1}
+                                onClick={handleClickOpen}
+                            >
+                                Archive
                             </Button>
-                        </Link>
-                        <Link
-                            href={{
-                                pathname: "/editProgram",
-                                query: { studentID: student.id },
-                            }}
-                        >
-                            <Button className={styles.buttonGroup2}>
-                                Edit Program
-                            </Button>
-                        </Link>
-                        <br />
-
-                        <Button
-                            className={styles.buttonGroup1}
-                            onClick={handleClickOpen}
-                        >
-                            Archive
-                        </Button>
-                        <Link
-                            href={{
-                                pathname: "/analytics",
-                                query: { studentID: student.id },
-                            }}
-                        >
-                            <Button className={styles.buttonGroup2}>
-                                View Reports
-                            </Button>
-                        </Link>
+                        </span>
+                        ) : null
+                    }
+                    {
+                        studentAnalytics ? (
+                        <span>
+                            <Link
+                                href={{
+                                    pathname: "/analytics",
+                                    query: { studentID: student.id },
+                                }}
+                            >
+                                <Button className={styles.buttonGroup2}>
+                                    View Reports
+                                </Button>
+                            </Link>
+                        </span>
+                        ) : null
+                    }
                     </div>
                     <Dialog
                         open={open}
@@ -167,7 +199,7 @@ const studentProfile = ({ student }) => {
                                 No
                             </Button>
                             <Button
-                                onClick={handleClose}
+                                onClick={handleArchive}
                                 color="primary"
                                 autoFocus
                                 className={styles.buttonGroup}

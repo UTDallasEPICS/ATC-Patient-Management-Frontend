@@ -1,6 +1,11 @@
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useRouter } from 'next/router';
 
+type roleAndAllowed = {
+    allowed: boolean,
+    role?: string,
+}
+
 /*
     Explaination:
         This function SHOULD be implemented within every route except the initial '/' route.
@@ -15,7 +20,7 @@ import { useRouter } from 'next/router';
     Implementation:
         if(!CheckUser(["Admin"])) return(<div>Redirecting...</div>);
 */
-export default function CheckUser(usersAllowed?: String[]) {
+export default function CheckUser(rolesAllowed?: String[]) : roleAndAllowed {
     const { user, error, isLoading } = useUser();
     const router = useRouter();
 
@@ -24,13 +29,12 @@ export default function CheckUser(usersAllowed?: String[]) {
     if (error) return(<div>{error.message}</div>);
 
     if (!user) {
-        // router.prefetch('/'); Might not need
         router.push('/api/auth/login?returnTo=/');
-        return(false);
+        return{
+            'allowed': false,
+            'role': null,
+        };
     }
-
-    if(typeof usersAllowed == "object")
-        console.log(usersAllowed.join(" "))
 
     /*
         ------------------------------------------------------------------------------
@@ -38,7 +42,26 @@ export default function CheckUser(usersAllowed?: String[]) {
         ------------------------------------------------------------------------------
     */
 
-    //alert(user.nickname)
+    var role
+    // ideally this would fetch role from prsima database
+    if(user.email == 'guerbray@gmail.com')
+        role = 'Admin'
+    else
+        role = "Technician"
 
-    return(true);
+    // if any of the users are allowed, return true and send the role
+    for(const roleAllowed of rolesAllowed) {
+        if (roleAllowed == role)
+            return{
+                'allowed': true, 
+                'role': role,
+            };
+    }
+
+    // else, send to the login screen
+    router.push('/api/auth/logout');
+    return{
+        'allowed': false,
+        'role': null,
+    };
 }

@@ -24,7 +24,7 @@
     "**/*.ts",
     "**/*.tsx",
     "pages/test/index.tsx"
-, "auth0CheckUser.tsx", "pages/add-user-test.js"  ],
+, "auth0CheckUser.tsx", "pages/add-user-test.js", "pages/employee/test.jsx"  ],
   "exclude": [
     "node_modules"
   ]

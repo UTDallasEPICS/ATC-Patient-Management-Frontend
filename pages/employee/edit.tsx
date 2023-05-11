@@ -11,7 +11,8 @@ type EmployeeWithIdAndImg = Employee & { id: string; img: string };
 
 const editEmployee = (props: { employee: EmployeeWithIdAndImg }) => {
   // Verifies if user has the correct permissions
-  if(!CheckUser()) return(<div>Redirecting...</div>);
+  const {allowed, role} = CheckUser(["Admin"])
+  if(!allowed) return(<div>Redirecting...</div>);
 
   const { employee } = props;
   const router = useRouter();
@@ -41,7 +42,7 @@ const editEmployee = (props: { employee: EmployeeWithIdAndImg }) => {
     type: InputType.DATE,
     name: "Birth Date",
     required: true,
-    value: formatDate(employee.dob),
+    value: formatDate(employee.birthday),
   };
 
   const otherInfoInput: Input = {
@@ -87,7 +88,7 @@ const editEmployee = (props: { employee: EmployeeWithIdAndImg }) => {
         fields.map((field) => field.value || "");
 
     try {
-        await fetch(`http://localhost:8080/therapist/${employee.id}`, {
+        await fetch(`http://localhost:8080/employee/${employee.id}`, {
             method: "patch",
             headers: {
                 "Content-Type": "application/json",
@@ -115,7 +116,7 @@ return (
             <link rel="icon" href="/atc-logo.png" />
         </Head>
 
-        <Navbar pageTitle="Edit Employee">
+        <Navbar pageTitle="Edit Employee" role={role}>
             <div>
                 <NewEntity
                     textFields={textInputs}
@@ -135,7 +136,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         };
     }
     const temp = await fetch(
-        `http://localhost:8080/therapist/${query.employeeID}`,
+        `http://localhost:8080/employee/${query.employeeID}`,
         {
             method: "get",
         }

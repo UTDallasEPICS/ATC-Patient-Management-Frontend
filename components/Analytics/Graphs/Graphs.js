@@ -34,6 +34,12 @@ const Graphs = ( {studentID} ) => {
   const fetchData = () => {
     console.log("Fetch data called");
     console.log("studentID = " + studentID);
+
+    // the data below controls how the graph looks, please play with it to get a better understanding
+    // basically, the reports data we have been collecting can be accesed by doing patients.reports (not sure if thats accurate)
+    // you could either do that or fetch the reports separately
+
+    // title would be the name of the behavoir, since we have all the reports you would need to iterate through 
     setData([
       {
         type: "frequency",
@@ -158,46 +164,9 @@ const Graphs = ( {studentID} ) => {
     ]);
   };
 
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (e) => {
-    console.log(e.target.id);
-    setAnchorEl(null);
-  };
 
   return (
     <div style={{ textAlign: "center", marginTop: "10px" }}>
-      <div>
-        <Button
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
-          Select Domain
-        </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          {domains.map((domain) => (
-            <MenuItem
-              id={domain}
-              key={domain}
-              onClick={handleClose}
-              id={domain}
-            >
-              {domain}
-            </MenuItem>
-          ))}
-        </Menu>
-      </div>
 
       {data.map((graph) => {
         switch (graph.type) {
@@ -225,12 +194,7 @@ const Graphs = ( {studentID} ) => {
               />
             );
         }
-        // console.log(graph.title);
-        // return <StackedBarGraph data={graph.data} title={graph.title} />;
       })}
-
-      {/* <StackedBarGraph data={trialData} title="Made Eye Contact" />
-      <StackedBarGraph data={trialData} title="Graph 2" /> */}
     </div>
   );
 };

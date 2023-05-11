@@ -10,7 +10,8 @@ import Button from "@material-ui/core/Button";
 
 const newStudent = () => {
     // Verifies if user has the correct permissions
-    if(!CheckUser()) return(<div>Redirecting...</div>);
+    const {allowed, role} = CheckUser(["Admin"])
+    if(!allowed) return(<div>Redirecting...</div>);
 
     const router = useRouter();
     const firstNameInput: Input = {
@@ -101,7 +102,7 @@ const newStudent = () => {
                 <link rel="icon" href="/atc-logo.png" />
             </Head>
 
-            <Navbar pageTitle="New Student">
+            <Navbar pageTitle="New Student" role={role}>
                 <Link href="/student/search">
                     <Button className="primaryButton">Go Back</Button>
                 </Link> 

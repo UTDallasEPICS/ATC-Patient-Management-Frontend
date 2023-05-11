@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, {useState, useEffect} from "react";
+import PropTypes, { string } from "prop-types";
 import Link from "next/link";
 
 import AppBar from "@material-ui/core/AppBar";
@@ -21,9 +21,11 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import AddIcon from "@material-ui/icons/Add";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { ExitToApp } from "@material-ui/icons";
 
 const drawerWidth = 240;
 
+//styles for navbar (call function to get styles)
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
@@ -59,8 +61,131 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Navbar = (props: { pageTitle; window?; children }) => {
-    const { pageTitle, window, children } = props;
+/*
+
+    ----------------------------------------------------------
+    INSERT CODE that fetches user role from auth0CheckUser.tsx
+    ----------------------------------------------------------
+
+*/
+
+// const role = "BCBA" //for testing navbar
+
+//functions defining js components for each "button"
+function Logo() {
+    const classes = useStyles();
+    return (
+        <div>
+            <div className={classes.toolbar} />
+            <div style={{marginLeft:"15px"}}>
+            <img src="/logo.jpeg" alt="logo" />
+        </div></div>);
+}
+
+function ManageBehaviors() {
+    return (
+    <div>
+        <List>
+            <Link href="/behaviors/manage">
+                <ListItem button>
+                    <ListItemIcon>
+                        <MenuIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Manage Behaviors"></ListItemText>
+                </ListItem>
+            </Link>
+        </List>
+    </div>
+    );
+}
+
+function StudentSearch() {
+    return (
+    <div>
+        <List>
+            <Link href="/student/search">
+                <ListItem button>
+                    <ListItemIcon>
+                        <SearchIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Student Search"></ListItemText>
+                </ListItem>
+            </Link>
+        </List>
+    </div>
+    );
+}
+
+function EmployeeSearch() {
+    return (
+    <div>
+        <List>
+            <Link href="/employee/search">
+                <ListItem button>
+                    <ListItemIcon>
+                        <SearchIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Employee Search"></ListItemText>
+                </ListItem>
+            </Link>
+        </List>
+    </div>
+    );
+}
+
+function NewEmployee() {
+    return (
+        <div>
+            <List>
+                <Link href="/employee/new">
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="New Employee"></ListItemText>
+                    </ListItem>
+                </Link>
+            </List>
+        </div>
+    );
+}
+
+function NewStudent() {
+    return (
+        <div>
+            <List>
+                <Link href="/student/new">
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="New Student"></ListItemText>
+                    </ListItem>
+                </Link>
+            </List>
+        </div>
+    );
+}
+
+function Logout() {
+    return (
+        <div>
+            <List>
+                <Link href="/api/auth/logout">
+                    <ListItem button>
+                        <ListItemIcon>
+                            <ExitToAppIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Logout"></ListItemText>
+                    </ListItem>
+                </Link>
+            </List>
+        </div>
+    );
+}
+
+const Navbar = (props: { pageTitle; role; window?; children }) => {
+    const { pageTitle, role, window, children } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -69,85 +194,54 @@ const Navbar = (props: { pageTitle; window?; children }) => {
         setMobileOpen(!mobileOpen);
     };
     
+    //render components based on user's role
     const drawer = (
-        <div>
-            <div className={classes.toolbar} />
-                <div style={{marginLeft:"15px"}}>
-                    <img src="/logo.jpeg" alt="logo" />
-            </div>
-            <Divider />
-            <List>
-                {[
-                    ["Student Search", "/student/search"],
-                    ["New Student", "/student/new"],
-                ].map((item, index) => (
-                    <Link href={item[1]} key={item[0]}>
-                        <ListItem button>
-                            <ListItemIcon>
-                                {
-                                    {
-                                        "Student Search": <SearchIcon />,
-                                        "New Student": <AddIcon />,
-                                    }[item[0]]
-                                }
-                            </ListItemIcon>
-                            <ListItemText primary={item[0]} />
-                        </ListItem>
-                    </Link>
-                ))}
-            </List>
-            <Divider />
-            <List>
-                {[
-                    ["Employee Search", "/employee/search"],
-                    ["New Employee", "/employee/new"],
-                ].map((item, index) => (
-                    <Link href={item[1]} key={item[0]}>
-                        <ListItem button>
-                            <ListItemIcon>
-                                {
-                                    {
-                                        "Employee Search": <SearchIcon />,
-                                        "New Employee": <AddIcon />,
-                                    }[item[0]]
-                                }
-                            </ListItemIcon>
-                            <ListItemText primary={item[0]} />
-                        </ListItem>
-                    </Link>
-                ))}
-            </List>
-            <Divider />
-            <List>
-                <Link href="/behaviors/manage">
-                    <ListItem button>
-                        <ListItemIcon>
-                            <MenuIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Manage Behaviors"></ListItemText>
-                    </ListItem>
-                </Link>
-            </List>
-            <Divider />
-            <List>
-                {[["Logout", "/api/auth/logout"]].map((item, index) => (
-                    <Link href={item[1]} key={item[0]}>
-                        <ListItem button>
-                            <ListItemIcon>
-                                {
-                                    {
-                                        Logout: <ExitToAppIcon />,
-                                    }[item[0]]
-                                }
-                            </ListItemIcon>
-                            <ListItemText primary={item[0]} />
-                        </ListItem>
-                    </Link>
-                ))}
-            </List>
-        </div>
-    );
-
+                role == "Admin" ? (
+                <div>
+                        <Logo />
+                    <Divider/>
+                        <ManageBehaviors />
+                    <Divider/>
+                        <List>
+                            <StudentSearch />
+                            <NewStudent></NewStudent>
+                        </List>
+                    <Divider/>
+                        <List>
+                            <EmployeeSearch />
+                            <NewEmployee />
+                        </List>
+                    <Divider/>
+                        <Logout></Logout>
+                </div>) 
+                : role == "BCBA" ? (
+                <div>
+                        <Logo />
+                    <Divider/>
+                        <ManageBehaviors />
+                    <Divider/>
+                        <StudentSearch />
+                    <Divider/>
+                        <Logout></Logout>
+                </div>)
+                : role == "Technician" ? (
+                <div>
+                        <Logo />
+                    <Divider/>
+                        <StudentSearch />
+                    <Divider/>
+                        <Logout></Logout>
+                </div>)
+                : role == "Guardian" ? (
+                <div>
+                    <Logo />
+                <Divider/>
+                    <Logout></Logout>
+                </div>)
+                : null
+    )
+    
+    //Container and css for navbar (the left-side of homescreens)
     const container =
         window !== undefined ? () => window().document.body : undefined;
 
@@ -185,8 +279,8 @@ const Navbar = (props: { pageTitle; window?; children }) => {
                         ModalProps={{
                             keepMounted: true, // Better open performance on mobile.
                         }}
-                    >
-                        {drawer}
+                    > 
+                        {drawer} 
                     </Drawer>
                 </Hidden>
                 <Hidden xsDown implementation="css">

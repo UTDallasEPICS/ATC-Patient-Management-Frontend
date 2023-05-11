@@ -1,12 +1,25 @@
 import CheckUser  from '../auth0CheckUser';
+import { useRouter } from 'next/router';
 
 export default function Home()
 {
-    if(!CheckUser()) return(<div>Redirecting...</div>);
+    const {allowed, role} = CheckUser(["Admin", "BCBA", "Technician", "Guardian"])
+    if(!allowed) return(<div>Redirecting...</div>);
 
-    return(
-        <body>
-           It's where you want to be :)
-        </body>
-    );
+    const router = useRouter();
+
+    /*
+        Ideally some code would go here that sends user to correct location
+    */
+
+    // Here would go fetch for a parent's student
+    // Right now, since our MongoDB backend can't do that, this is hardcoded
+    const studentID = "64546bd1018a8713c39974a8"
+
+    if(role == "Guardian")
+        router.push("/student/profile?id=64546bd1018a8713c39974a8")
+    else 
+        router.push('student/search')
+
+    return(null);
 };

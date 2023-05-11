@@ -11,7 +11,8 @@ type PatientWithIdAndImg = Patient & { id: string; img: string };
 
 const editStudent = (props: { student: PatientWithIdAndImg }) => {
     // Verifies if user has the correct permissions
-    if(!CheckUser()) return(<div>Redirecting...</div>);
+    const {allowed, role} = CheckUser(["Admin"])
+    if(!allowed) return(<div>Redirecting...</div>);
     
     const { student } = props;
     const router = useRouter();
@@ -117,7 +118,7 @@ const editStudent = (props: { student: PatientWithIdAndImg }) => {
                 <link rel="icon" href="/atc-logo.png" />
             </Head>
 
-            <Navbar pageTitle="Edit Student">
+            <Navbar pageTitle="Edit Student" role={role}>
                 <div>
                     <NewEntity
                         textFields={textInputs}

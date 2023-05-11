@@ -35,7 +35,8 @@ interface BehaviorAsProps {
 
 export default function manageBehaviorsPage({ behaviors }) {
     // Verifies if user has the correct permissions
-    if(!CheckUser()) return(<div>Redirecting...</div>);
+    const {allowed, role} = CheckUser(["Admin", "BCBA"])
+    if(!allowed) return(<div>Redirecting...</div>);
 
     const [behaviorList, setBehaviorList] = useState<BehaviorAsProps[]>(
         behaviors.map((behavior: Behavior, idx: number) => ({
@@ -71,7 +72,7 @@ export default function manageBehaviorsPage({ behaviors }) {
                 <title>Manage Behavior</title>
                 <link rel="icon" href="/atc-logo.png" />
             </Head>
-            <Navbar pageTitle="Manage Behavior">
+            <Navbar pageTitle="Manage Behavior" role={role}>
                 <div
                     style={{
                         width: "100%",
@@ -122,15 +123,16 @@ export default function manageBehaviorsPage({ behaviors }) {
                                                     <Button
                                                         variant="contained"
                                                         color="primary"
+                                                        style={{width: "100px", marginRight:"1em",}}
                                                     >
-                                                        Click to view details
+                                                        View Details
                                                     </Button>
                                                 </Link>
                                                 <Button
                                                     variant="contained"
                                                     style={{
-                                                        backgroundColor:
-                                                            "#ff604f",
+                                                        backgroundColor: "#ff604f",
+                                                        width: "100px",
                                                         color: "white",
                                                     }}
                                                     onClick={() => {

@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import styles from "../../../styles/AddSession.module.css";
 
-const Stopwatch = () => {
+const Stopwatch = ({getTime}) => {
   const [timerOn, setTimerOn] = useState(false);
   const [timerTime, setTimerTime] = useState(0); //keeps track of elapsed time in milliseconds
 
@@ -27,10 +27,18 @@ const Stopwatch = () => {
   const stop = () => {
     setTimerOn(false);
     clearInterval(timer);
+    if(typeof(getTime) == "function") {
+      getTime(timerTime);
+    }
   };
   const reset = () => {
     setTimerTime(0);
+    if(typeof(getTime) == "function") {
+      getTime(timerTime);
+    }
   };
+
+
 
   return (
     <Card className={styles.durationInputBox}>

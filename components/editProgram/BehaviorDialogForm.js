@@ -68,6 +68,8 @@ export default function BehaviorDialogForm({ behavior, setBehavior }) {
           </MenuItem>
           <MenuItem value="trial">Trial</MenuItem>
           <MenuItem value="probe">Probe</MenuItem>
+          <MenuItem value="duration">Duration</MenuItem>
+          <MenuItem value="frequency">Frequency</MenuItem>
         </Select>
         <FormHelperText id="my-helper-text">
           Choose a behavior type

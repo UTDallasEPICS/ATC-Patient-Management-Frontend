@@ -10,7 +10,8 @@ import CheckUser  from '../../auth0CheckUser';
 
 const newEmployee = () => {
   // Verifies if user has the correct permissions
-  if(!CheckUser()) return(<div>Redirecting...</div>);
+  const {allowed, role} = CheckUser(["Admin"])
+  if(!allowed) return(<div>Redirecting...</div>);
 
   const router = useRouter();
   const firstNameInput: Input = {
@@ -91,7 +92,7 @@ const newEmployee = () => {
       email,
       otherInfo,
     };
-    await fetch("http://localhost:8080/therapist/", {
+    await fetch("http://localhost:8080/employee/", {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
@@ -111,8 +112,8 @@ const newEmployee = () => {
         <link rel="icon" href="/atc-logo.png" />
       </Head>
 
-      <Navbar pageTitle="New Employee">   
-          <Link href="/employeeSearch">
+      <Navbar pageTitle="New Employee" role={role}>   
+          <Link href="/employee/search">
                 <Button className="primaryButton">Go Back</Button>
           </Link>         
                 <div>

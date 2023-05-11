@@ -30,7 +30,8 @@ const theme = createTheme({
 
 export default function studentSearch({ students }) {
     // Verifies if user has the correct permissions
-    if(!CheckUser()) return(<div>Redirecting...</div>);
+    const {allowed, role} = CheckUser(["Admin", "BCBA", "Technician"])
+    if(!allowed) return(<div>Redirecting...</div>);
 
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -41,7 +42,7 @@ export default function studentSearch({ students }) {
                 <link rel="icon" href="/atc-logo.png" />
             </Head>
 
-            <Navbar pageTitle="Student Search">
+            <Navbar pageTitle="Student Search" role={role}>
                 <div className={styles.searchPage}>
                     <FormControl>
                         <TextField

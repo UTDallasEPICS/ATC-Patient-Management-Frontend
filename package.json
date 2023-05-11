@@ -9,9 +9,12 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^2.4.0",
+    "@emotion/react": "^11.10.8",
+    "@emotion/styled": "^11.10.8",
     "@material-ui/core": "^4.12.3",
     "@material-ui/data-grid": "^4.0.0-alpha.37",
     "@material-ui/icons": "^4.11.2",
+    "@mui/material": "^5.12.3",
     "@next/env": "^13.2.4",
     "client": "link:@auth0/nextjs-auth0/client",
     "mongoose": "^6.2.9",

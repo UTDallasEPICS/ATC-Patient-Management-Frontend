@@ -15,7 +15,8 @@ import CheckUser from "../../auth0CheckUser";
 
 export default function addBehavior() {
     // Verifies if user has the correct permissions
-    if(!CheckUser()) return(<div>Redirecting...</div>);
+    const {allowed, role} = CheckUser(["Admin", "BCBA"])
+    if(!allowed) return(<div>Redirecting...</div>);
 
     const [behaviorData, setBehaviorData] = useState({
         behaviorName: "",
@@ -57,7 +58,7 @@ export default function addBehavior() {
                 <title>Add Behavior</title>
                 <link rel="icon" href="/atc-logo.png" />
             </Head>
-            <Navbar pageTitle="Add Behavior">
+            <Navbar pageTitle="Add Behavior" role={role}>
                 <div style={{ padding: "1rem 2rem 1rem 2rem" }}>
                     <FormControl fullWidth>
                         <InputLabel htmlFor="my-input">
@@ -120,6 +121,8 @@ export default function addBehavior() {
                             </MenuItem>
                             <MenuItem value="trial">Trial</MenuItem>
                             <MenuItem value="probe">Probe</MenuItem>
+                            <MenuItem value="duration">Duration</MenuItem>
+                            <MenuItem value="frequency">Frequency</MenuItem>
                         </Select>
                         <FormHelperText id="my-helper-text">
                             Choose a behavior type

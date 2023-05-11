@@ -7,7 +7,8 @@ import CheckUser from "../../auth0CheckUser";
 
 function BehaviorPage({ behaviorData: { data } }) {
     // Verifies if user has the correct permissions
-    if(!CheckUser()) return(<div>Redirecting...</div>);
+    const {allowed, role} = CheckUser(["Admin", "BCBA"])
+    if(!allowed) return(<div>Redirecting...</div>);
     
     return (
         <>
@@ -15,8 +16,8 @@ function BehaviorPage({ behaviorData: { data } }) {
                 <title>Behavior</title>
                 <link rel="icon" href="/atc-logo.png" />
             </Head>
-            <Navbar pageTitle={data.name}>
-                <Link href="/manageBehaviors">
+            <Navbar pageTitle={data.name} role={role}>
+                <Link href="/behaviors/manage">
                     <Button variant="contained" color="secondary">
                         Back to Manage Behaviors
                     </Button>
