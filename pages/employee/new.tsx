@@ -1,13 +1,18 @@
-import NewEntity from "../components/NewEntity/NewEntity";
-import { Input, InputType } from "../components/NewEntity/Interfaces";
-import Navbar from "../components/Navbar";
+import NewEntity from "../../components/NewEntity/NewEntity";
+import { Input, InputType } from "../../components/NewEntity/Interfaces";
+import Navbar from "../../components/Navbar";
 import Head from "next/head";
 import Link from "next/link";
 import Button from "@material-ui/core/Button";
-import { Employee } from "../interfaces/Employee";
+import { Employee } from "../../interfaces/Employee";
 import { useRouter } from "next/router";
+import CheckUser  from '../../auth0CheckUser';
 
 const newEmployee = () => {
+  // Verifies if user has the correct permissions
+  const {allowed, role} = CheckUser(["Admin"])
+  if(!allowed) return(<div>Redirecting...</div>);
+
   const router = useRouter();
   const firstNameInput: Input = {
     attributeName: "first_name",
@@ -87,7 +92,7 @@ const newEmployee = () => {
       email,
       otherInfo,
     };
-    await fetch("http://localhost:8080/therapist/", {
+    await fetch("http://localhost:8080/employee/", {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
@@ -95,7 +100,7 @@ const newEmployee = () => {
             body: JSON.stringify(newUser),
         });
 
-        router.push("/employeeSearch");
+        router.push("/employee/search");
   };
   
 
@@ -107,8 +112,8 @@ const newEmployee = () => {
         <link rel="icon" href="/atc-logo.png" />
       </Head>
 
-      <Navbar pageTitle="New Employee">   
-          <Link href="/employeeSearch">
+      <Navbar pageTitle="New Employee" role={role}>   
+          <Link href="/employee/search">
                 <Button className="primaryButton">Go Back</Button>
           </Link>         
                 <div>

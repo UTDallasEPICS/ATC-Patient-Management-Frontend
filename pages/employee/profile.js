@@ -1,38 +1,27 @@
-import React from "react";
-import Navbar from "../components/Navbar";
+import React, { useState } from "react";
+import { OutlinedInput, MenuItem, FormControl, ListItemText, Select, Checkbox } from '@mui/material';
+import Navbar from "../../components/Navbar";
 import Head from "next/head";
-import Avatar from "../components/Avatar";
-import styles from "../styles/EmployeeProfile.module.css";
+import Avatar from "../../components/Avatar";
+import styles from "../../styles/EmployeeProfile.module.css";
 import Divider from "@material-ui/core/Divider";
-import OtherInfo from "../components/OtherInfo";
 import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import MuiDialogContent from "@material-ui/core/DialogContent";
-import MuiDialogActions from "@material-ui/core/DialogActions";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Link from "next/link";
-import Typography from "@material-ui/core/Typography";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from "@material-ui/core/Checkbox";
-import CommentIcon from "@material-ui/icons/Comment";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import CheckUser  from '../../auth0CheckUser';
 
+const employeeProfile = ({students, employee, currentStudent}) => {
+  // Verifies if user has the correct permissions
+  const {allowed, role} = CheckUser(["Admin"])
+  if(!allowed) return(<div>Redirecting...</div>);
 
-const employeeProfile = ({ employee, students }) => {
+  // prevents current students from being null, which causes HELLA erorros
+  currentStudent = (currentStudent[0] == null) ? [] : currentStudent
+
   //State handles the notifications for when the archive is clicked
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -119,10 +108,90 @@ const employeeProfile = ({ employee, students }) => {
   };
 
   const formatDate = (d) => {
-    return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+    return d.toLocaleDateString('en-us', { year:"numeric", month:"short", day: 'numeric'})
+    //return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
   };
 
+  const handleArchive = async() => {
+    const response = await fetch(`http://localhost:8080/employee/${employee._id}`, {
+      method: "DELETE"
+    })
+    const data = await response.json()
+    console.log(data)
+    handleClose()
+  }
 
+  /*
+    --------------------------
+    For Updating Student Access
+    --------------------------
+  */ 
+  const [selectedStudents, setSelectedStudents] = useState(currentStudent);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
+  };
+  const handleCancelDialog = () => {
+    setDialogOpen(false);
+  };
+
+  const handleSaveStudents = async () => {
+    const response = await fetch(`http://localhost:8080/employee/${employee._id}`, {
+      method: "PATCH",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        patients: selectedStudents
+      }),
+    })
+    const data = await response.json()
+    console.log(data)
+    setDialogOpen(false);
+  }
+
+  // is attached to Select, value contains all salected content in Select
+  const handleChangeSelect = (event) => {
+    const {
+      target: { value },
+    } = event;
+
+    //console.log(selectedStudents)
+
+    // checks for duplicates
+    var distinctStudents = new Set();
+    var duplicates = false;
+    for (const selectedStudent of value) {
+      if(distinctStudents.has(selectedStudent._id)) {
+        distinctStudents.delete(selectedStudent._id)
+        duplicates = true
+      }
+      else {
+        distinctStudents.add(selectedStudent._id)
+      }
+    }
+
+    // removes the duplicated from the selection
+    if(duplicates) {
+      var newSelection = []
+      for (const selectedStudent of value) {
+        if (distinctStudents.has(selectedStudent._id))
+        newSelection.push(selectedStudent)
+      }
+      console.log(newSelection)
+      setSelectedStudents(newSelection);
+    }
+    else {
+      setSelectedStudents(value);
+    }
+  };
+
+  /*
+    ----------------------
+    React Component Begins
+    ----------------------
+  */
   return (
     <div>
       <Head>
@@ -131,8 +200,8 @@ const employeeProfile = ({ employee, students }) => {
       </Head>
       
 
-      <Navbar pageTitle="Employee Profile">
-        <Link href="/employeeSearch">
+      <Navbar pageTitle="Employee Profile" role={role}>
+        <Link href="/employee/search">
           <Button>Go Back</Button>
         </Link>
         <div className={styles.picture}>
@@ -145,75 +214,61 @@ const employeeProfile = ({ employee, students }) => {
           <Button
             variant="outlined"
             color="primary"
-            onClick={openList}
+            onClick={handleOpenDialog}
             className={styles.buttonGroup}
           >
             Update Student Access
           </Button>
-          { /*This Dialog box is the check list of students */}
-          <Dialog
-            onClose={closeList}
-            aria-labelledby="customized-dialog-title"
-            open={listOpen}
-          >
-            <DialogTitle id="customized-dialog-title" onClose={closeList}>
-              Student List
-              <IconButton
-                aria-label="close"
-                onClick={openXValidation}
-                className={styles.closeButton}
-              >
-                <CloseIcon />
-              </IconButton>
-            </DialogTitle>
 
-            <DialogContent dividers>
-              <List>
-                {students.map((index) => {
-                  const labelId = `checkbox-list-label-${index.id - 1}`;
+          { /*
+            This Dialog box is the check list of students 
+          */}
 
-                  return (
-                    <ListItem
-                      key={index.id}
-                      role={undefined}
-                      dense
-                      button
-                      onClick={handleToggle(index)}
-                    >
-                      <ListItemIcon>
-                        <Checkbox
-                          edge="start"
-                          checked={checked.indexOf(index.id - 1) !== -1}
-                          tabIndex={-1}
-                          disableRipple
-                          inputProps={{ "aria-labelledby": labelId }}
-                          className={styles.buttonGroup}
-                        />
-                      </ListItemIcon>
-                      <ListItemText
-                        id={labelId}
-                        primary={` ${index.firstName} ${index.lastName}`}
-                      />
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          edge="end"
-                          aria-label="comments"
-                        ></IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                  );
-                })}
-              </List>
+          <Dialog disableEnforceFocus disableEscapeKeyDown open={dialogOpen} onClose={handleCancelDialog}>
+            <DialogTitle>Update Student Access</DialogTitle>
+            <DialogContent>
+              <FormControl sx={{ m: 1, width: 300 }}>
+                <Select
+                  multiple
+                  value={selectedStudents}
+                  onChange={handleChangeSelect}
+                  input={<OutlinedInput />}
+                  renderValue={(selected) => (selected.map((student) => {
+                    try {
+                      return (`${student.firstName} ${student.lastName}`)
+                    }
+                    catch (err) {
+                      console.log(err.message)
+                      return '';
+                    }
+                  }).join(', '))}
+                  MenuProps={{
+                      PaperProps: {
+                        style: {
+                          maxHeight: 48 * 4.5 + 8,
+                          width: 250,
+                        },
+                      },
+                    }}
+                >
+                  {students.map((student) => {
+                    const name = `${student.firstName} ${student.lastName}`
+                    var checked = false
+                    for(const selectedStudent of selectedStudents) 
+                      if (selectedStudent._id == student._id) checked = true;
+                    return(
+                      <MenuItem style={{width: '100%',}} key={name} value={student}>
+                        <Checkbox style={{color: '#105688'}} checked={checked} />
+                        <ListItemText primary={name} />
+                      </MenuItem>
+                    )
+                  })}
+                </Select>
+              </FormControl>
             </DialogContent>
             <DialogActions>
-              <Button
-                className={styles.buttonGroup}
-                autoFocus
-                onClick={openSubmitCheck}
-                color="primary"
-              >
-                Save changes
-              </Button>
+              <Button onClick={handleCancelDialog}>Cancel</Button>
+              <Button onClick={handleSaveStudents}>Save</Button>
             </DialogActions>
           </Dialog>
         </div>
@@ -222,10 +277,10 @@ const employeeProfile = ({ employee, students }) => {
         <p className={styles.label}>Date of Birth:</p>{" "}
         <p className={styles.info}>
                         {" "}
-                        {formatDate(new Date(employee.dob))}
+                        {formatDate(new Date(employee.birthday))}
                     </p>
         <p className={styles.label}>Phone Number:</p>{" "}
-        <p className={styles.info}> {employee.phone}</p>
+        <p className={styles.info}> {`(${employee.phoneNumber.slice(0,3)}) ${employee.phoneNumber.slice(3,6)}-${employee.phoneNumber.slice(6,10)}`}</p>
         <p className={styles.label}>Email: </p>{" "}
         <p className={styles.info}> {employee.email}</p>
         <Divider variant="middle" />
@@ -240,9 +295,13 @@ const employeeProfile = ({ employee, students }) => {
             Other Info
           </Button>
         </div>
-        {/*<OtherInfo info = {props.employee.otherInfo}/> */}
+
+        {/*
+        <OtherInfo info = {props.employee.otherInfo}/> 
+        */}
+
         <div className={styles.bg}>
-          <Link href={{pathname:"/editEmployee", query: {employeeID: employee.id}}}>
+          <Link href={{pathname:"/employee/edit", query: {employeeID: employee._id}}}>
             <Button className={styles.menuButtonGroup}>Edit</Button>
           </Link>
           <Button className={styles.menuButtonGroup} onClick={handleClickOpen}>
@@ -274,12 +333,12 @@ const employeeProfile = ({ employee, students }) => {
               No
             </Button>
             <Button
-              onClick={handleClose}
+              onClick={handleArchive}
               color="primary"
               autoFocus
               className={styles.buttonGroup}
             >
-              <Link href="/studentSearch">Yes</Link>
+              <Link href="/employee/search">Yes</Link>
             </Button>
           </DialogActions>
         </Dialog>
@@ -380,137 +439,26 @@ const employeeProfile = ({ employee, students }) => {
 export default employeeProfile;
 
 export const getServerSideProps = async ({ query }) => {
-  const temp = await fetch(`http://localhost:8080/therapist/${query.id}`, {
-        method: "get",
-    });
-    console.log( temp );
-  const { data } = await temp.json();
-  const temp2 = await fetch(`http://localhost:8080/patient/${query.id2}`, {
-        method: "get",
-    });
-    console.log( temp2 );
-  const { data2 } = await temp2.json();
-  
-  const employee = {
-    id: query.id,
-    firstName: data.firstName,
-    lastName: data.lastName,
-    img: "",
-    dob: data.birthday,
-    phone: data.phoneNumber,
-    email: data.email,
-    otherInfo: data.otherInfo,
-  };
-  
-  const students1 = {
-    id: query.id,
-    firstName: data.firstName,
-    lastName: data.lastName,
-    img: "",
-  };
-  
-  const students = [
-    {
-      id: 1,
-      firstName: "Billy",
-      lastName: "Doe",
-      img: "",
-    },
-    {
-      id: 2,
-      firstName: "Alison",
-      lastName: "Cooper",
-      img: "https://picsum.photos/200/300",
-    },
-    {
-      id: 3,
-      firstName: "Johnny",
-      lastName: "Lennon",
-      img: "https://picsum.photos/200",
-    },
-    {
-      id: 4,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-    {
-      id: 5,
-      firstName: "Alice",
-      lastName: "Marshall",
-    },
-    {
-      id: 6,
-      firstName: "Lily",
-      lastName: "Cooper",
-    },
-    {
-      id: 7,
-      firstName: "Billie",
-      lastName: "Doe",
-    },
-    {
-      id: 8,
-      firstName: "Billy",
-      lastName: "Elrond",
-    },
-    {
-      id: 9,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-    {
-      id: 10,
-      firstName: "Billy",
-      lastName: "Doe",
-      img: "",
-    },
-    {
-      id: 11,
-      firstName: "Alison",
-      lastName: "Cooper",
-      img: "https://picsum.photos/200/300",
-    },
-    {
-      id: 12,
-      firstName: "Johnny",
-      lastName: "Lennon",
-      img: "https://picsum.photos/200",
-    },
-    {
-      id: 13,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-    {
-      id: 14,
-      firstName: "Alice",
-      lastName: "Marshall",
-    },
-    {
-      id: 15,
-      firstName: "Lily",
-      lastName: "Cooper",
-    },
-    {
-      id: 16,
-      firstName: "Billie",
-      lastName: "Doe",
-    },
-    {
-      id: 17,
-      firstName: "Billy",
-      lastName: "Elrond",
-    },
-    {
-      id: 18,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-  ];
+  const allPatientsRes = await fetch(`http://localhost:8080/patient`);
+  const allPatients = await allPatientsRes.json()
+
+  const employeeID = query.id
+  const employeeRes = await fetch(`http://localhost:8080/employee/${employeeID}`);
+  const employee = await employeeRes.json()
+
+  const { data: { patients},} = employee
+  var currentStudents = []
+  for(const patientID of patients) {
+    const currentStudentRes = await fetch(`http://localhost:8080/patient/${patientID}`)
+    const currentStudent = await currentStudentRes.json()
+    currentStudents.push(currentStudent['data'])
+  }
+
   return {
     props: {
-      employee,
-      students,
-    },
+      students: allPatients['data'],
+      employee: employee['data'],
+      currentStudent: currentStudents,
+    }
   };
 };

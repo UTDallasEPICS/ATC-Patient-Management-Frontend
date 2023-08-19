@@ -9,10 +9,15 @@ import {
 } from "@material-ui/core";
 import Head from "next/head";
 import { useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar";
 import { useRouter } from "next/router";
+import CheckUser from "../../auth0CheckUser";
 
 export default function addBehavior() {
+    // Verifies if user has the correct permissions
+    const {allowed, role} = CheckUser(["Admin", "BCBA"])
+    if(!allowed) return(<div>Redirecting...</div>);
+
     const [behaviorData, setBehaviorData] = useState({
         behaviorName: "",
         description: "",
@@ -44,7 +49,7 @@ export default function addBehavior() {
             description: "",
             datatype: "",
         });
-        router.push("/manageBehaviors");
+        router.push("/behaviors/manage");
     };
 
     return (
@@ -53,7 +58,7 @@ export default function addBehavior() {
                 <title>Add Behavior</title>
                 <link rel="icon" href="/atc-logo.png" />
             </Head>
-            <Navbar pageTitle="Add Behavior">
+            <Navbar pageTitle="Add Behavior" role={role}>
                 <div style={{ padding: "1rem 2rem 1rem 2rem" }}>
                     <FormControl fullWidth>
                         <InputLabel htmlFor="my-input">
@@ -116,6 +121,8 @@ export default function addBehavior() {
                             </MenuItem>
                             <MenuItem value="trial">Trial</MenuItem>
                             <MenuItem value="probe">Probe</MenuItem>
+                            <MenuItem value="duration">Duration</MenuItem>
+                            <MenuItem value="frequency">Frequency</MenuItem>
                         </Select>
                         <FormHelperText id="my-helper-text">
                             Choose a behavior type

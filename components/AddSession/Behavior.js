@@ -7,49 +7,54 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Chip from "@material-ui/core/Chip";
 import Divider from "@material-ui/core/Divider";
 
-export default function Behavior({ data }) {
-  const {title, description, type } = data;
+//Displays behaviour info and inputs on page
+//Behaviours taken from a student's unique program in /pages/session/add
+
+export default function Behavior({ behaviorCount, data, returnData }) {
+  //console.log(behaviorCount);
+  const {title, description, datatype } = data;
   const trialsPerEntry = data.trialsPerEntry || 1;
   const entries = data.entries || [""];
   const tags = data.tags || [""];
-  console.log(type);
+  let entryCounter = 0;
+  const responses = [];
 
-  const generateInput = (entry) => {
-    switch (type) {
+  const setResponse = (response, entryNumber) =>
+  {
+    responses[entryNumber] = response;
+    returnData(behaviorCount, responses)
+  }
+  
+  //Generates an input field depending on the type of behaviour
+  const generateInput = (entry, entryNumber) => {
+    entryCounter++;
+    switch (datatype) {
       case "probe":
-        return <ProbeInput title={entry} trialsPerEntry={trialsPerEntry} />;
+        return <ProbeInput title={entry} trialsPerEntry={trialsPerEntry} entryNumber={entryNumber} setResponses={setResponse}/>;
+      case "trial":
+          return <ProbeInput title={entry} trialsPerEntry={1} entryNumber={entryNumber} setResponses={setResponse}/>;
       case "duration":
-        return <DurationInput title={entry} trialsPerEntry={trialsPerEntry} />;
+        return <DurationInput title={entry} trialsPerEntry={trialsPerEntry} entryNumber={entryNumber} setResponses={setResponse}/>;
       case "frequency":
-        return <FrenquencyInput title={entry} />;
+        return <FrenquencyInput title={entry} entryNumber={entryNumber} setResponses={setResponse}/>;
     }
   };
 
   return (
     <div className={styles.behaviorBox}>
       <p className={styles.behaviorTitle}>{title}</p>
-
-      <Accordion style={{ marginBottom: "10px" }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Description</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+      <p>
+          <Typography>Description:</Typography>
           <Typography>{description}</Typography>
-        </AccordionDetails>
-      </Accordion>
+      </p>
 
       <Grid container justify="center" spacing={2}>
         {entries.map((entry) => (
           <Grid item key={entry}>
-            {generateInput(entry)}
+            {generateInput(entry, entryCounter)}
           </Grid>
         ))}
       </Grid>

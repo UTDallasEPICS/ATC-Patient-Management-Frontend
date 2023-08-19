@@ -1,13 +1,14 @@
-import styles from "../styles/SearchList.module.css";
+import styles from "../../styles/SearchList.module.css";
 import Link from "next/link";
-import SearchList from "../components/SearchList";
+import SearchList from "../../components/SearchList";
 import { useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar";
 import Head from "next/head";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
+import CheckUser  from '../../auth0CheckUser';
 
 // import theme from '../src/theme';
 
@@ -28,6 +29,10 @@ const theme = createTheme({
 });
 
 export default function studentSearch({ students }) {
+    // Verifies if user has the correct permissions
+    const {allowed, role} = CheckUser(["Admin", "BCBA", "Technician"])
+    if(!allowed) return(<div>Redirecting...</div>);
+
     const [searchTerm, setSearchTerm] = useState("");
 
     return (
@@ -37,7 +42,7 @@ export default function studentSearch({ students }) {
                 <link rel="icon" href="/atc-logo.png" />
             </Head>
 
-            <Navbar pageTitle="Student Search">
+            <Navbar pageTitle="Student Search" role={role}>
                 <div className={styles.searchPage}>
                     <FormControl>
                         <TextField
@@ -55,12 +60,12 @@ export default function studentSearch({ students }) {
                         <SearchList
                             students={students}
                             searchTerm={searchTerm}
-                            destinationPath="/studentProfile"
+                            destinationPath="/student/profile"
                         />
                     </div>
 
                     <div className={styles.buttonWrapper}>
-                        <Link href="/newStudent">
+                        <Link href="/student/new">
                             <Button className="primaryButton">Add New</Button>
                         </Link>
                     </div>
@@ -88,58 +93,6 @@ export const getServerSideProps = async () => {
             img: "",
         };
     });
-
-    // students = [
-    //     ...students,
-    //     {
-    //         id: 1,
-    //         firstName: "Billy",
-    //         lastName: "Doe",
-    //         img: "",
-    //     },
-    //     {
-    //         id: 2,
-    //         firstName: "Alison",
-    //         lastName: "Cooper",
-    //         img: "https://picsum.photos/200/300",
-    //     },
-    //     {
-    //         id: 3,
-    //         firstName: "Johnny",
-    //         lastName: "Lennon",
-    //         img: "https://picsum.photos/300/300",
-    //     },
-    //     {
-    //         id: 4,
-    //         firstName: "Lily",
-    //         lastName: "Marshall",
-    //     },
-    //     {
-    //         id: 5,
-    //         firstName: "Alice",
-    //         lastName: "Marshall",
-    //     },
-    //     {
-    //         id: 6,
-    //         firstName: "Lily",
-    //         lastName: "Cooper",
-    //     },
-    //     {
-    //         id: 7,
-    //         firstName: "Billie",
-    //         lastName: "Doe",
-    //     },
-    //     {
-    //         id: 8,
-    //         firstName: "Billy",
-    //         lastName: "Elrond",
-    //     },
-    //     {
-    //         id: 9,
-    //         firstName: "Lily",
-    //         lastName: "Marshall",
-    //     },
-    // ];
 
     students.sort(function (a, b) {
         const aName = a.firstName + a.lastName;

@@ -1,11 +1,11 @@
 import styles from "../../styles/AddSession.module.css";
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
-
 import Button from "@material-ui/core/Button";
 import { useState, useEffect } from "react";
+import React from "react";
 
-const ProbeInput = ({ title, trialsPerEntry }) => {
+const ProbeInput = ({ title, trialsPerEntry, entryNumber, setResponses}) => {
   const [checkedData, setCheckedData] = useState([]);
   useEffect(() => initializeArray(trialsPerEntry), [trialsPerEntry]);
   const initializeArray = (trialsPerEntry) => {
@@ -13,6 +13,12 @@ const ProbeInput = ({ title, trialsPerEntry }) => {
       setCheckedData((checkedData) => [...checkedData, " "]);
     }
   };
+
+  useEffect(() => {
+    if(typeof(setResponses) == "function") {
+      setResponses(checkedData, entryNumber)
+    }
+  }, [checkedData])
 
   const switchValue = (value, i) => {
     setCheckedData((checkedData) => {

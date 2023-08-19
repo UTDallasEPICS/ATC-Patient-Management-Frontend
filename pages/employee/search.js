@@ -1,17 +1,22 @@
-import styles from "../styles/SearchList.module.css";
+import styles from "../../styles/SearchList.module.css";
 import Link from "next/link";
-import SearchList from "../components/SearchList";
+import SearchList from "../../components/SearchList";
 import { useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar";
 import Head from "next/head";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import CheckUser  from '../../auth0CheckUser';
 
 const buttonColor = "#0F5787";
 
 export default function EmployeeSearch({ employees }) {
+  // Verifies if user has the correct permissions
+  const {allowed, role} = CheckUser(["Admin"])
+  if(!allowed) return(<div>Redirecting...</div>);
+
   const [searchTerm, setSearchTerm] = useState("");
   return (
     <div>
@@ -20,7 +25,7 @@ export default function EmployeeSearch({ employees }) {
         <link rel="icon" href="/atc-logo.png" />
       </Head>
 
-      <Navbar pageTitle="Employee Search">
+      <Navbar pageTitle="Employee Search" role={role}>
         <div className={styles.searchPage}>
           <FormControl>
             <TextField
@@ -38,12 +43,12 @@ export default function EmployeeSearch({ employees }) {
             <SearchList
               students={employees}
               searchTerm={searchTerm}
-              destinationPath="/employeeProfile"
+              destinationPath="/employee/profile"
             />
           </div>
 
           <div className={styles.buttonWrapper}>
-            <Link href="/newEmployee">
+            <Link href="/employee/new">
               <Button className="primaryButton">Add New</Button>
             </Link>
           </div>
@@ -56,16 +61,15 @@ export default function EmployeeSearch({ employees }) {
 export const getServerSideProps = async () => {
   // const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=6`)
   // // const res = await fetch(`https://randomuser.me/api/`)
-  // const Employees = await res.json()
-
-  let temp = await fetch("http://localhost:8080/therapist", {
-    method: "get",
+  // const employees = await res.json()
+  let temp = await fetch("http://localhost:8080/employee", {
+      method: "get",
   });
 
   const { data } = await temp.json();
 
   let employees = data.map((employee) => {
-     employee.id = employee._id;
+    employee.id = employee._id;
       delete employee._id;
       return {
           ...employee,
@@ -73,73 +77,21 @@ export const getServerSideProps = async () => {
       };
   });
 
-
-  const employees1 = [
-    {
-      id: 1,
-      firstName: "Billy",
-      lastName: "Doe",
-      img: "",
-    },
-    {
-      id: 2,
-      firstName: "Alison",
-      lastName: "Cooper",
-      img: "https://picsum.photos/200/300",
-    },
-    {
-      id: 3,
-      firstName: "Johnny",
-      lastName: "Lennon",
-      img: "https://picsum.photos/200",
-    },
-    {
-      id: 4,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-    {
-      id: 5,
-      firstName: "Alice",
-      lastName: "Marshall",
-    },
-    {
-      id: 6,
-      firstName: "Lily",
-      lastName: "Cooper",
-    },
-    {
-      id: 7,
-      firstName: "Billie",
-      lastName: "Doe",
-    },
-    {
-      id: 8,
-      firstName: "Billy",
-      lastName: "Elrond",
-    },
-    {
-      id: 9,
-      firstName: "Lily",
-      lastName: "Marshall",
-    },
-  ];
-
   employees.sort(function (a, b) {
-    const aName = a.firstName + a.lastName;
-    const bName = b.firstName + b.lastName;
-    if (aName < bName) {
-      return -1;
-    }
-    if (aName > bName) {
-      return 1;
-    }
-    return 0;
+      const aName = a.firstName + a.lastName;
+      const bName = b.firstName + b.lastName;
+      if (aName < bName) {
+          return -1;
+      }
+      if (aName > bName) {
+          return 1;
+      }
+      return 0;
   });
 
   return {
-    props: {
-      employees,
-    },
+      props: {
+        employees,
+      },
   };
 };

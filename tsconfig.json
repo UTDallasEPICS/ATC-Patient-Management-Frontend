@@ -16,13 +16,15 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-  ],
+    "**/*.tsx",
+    "pages/test/index.tsx"
+, "auth0CheckUser.tsx", "pages/add-user-test.js", "pages/employee/test.jsx"  ],
   "exclude": [
     "node_modules"
   ]

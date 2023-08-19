@@ -64,11 +64,16 @@ const ProbeGraph = ({ data, title }) => {
           //   // return "color-failure";
         }}
         tooltipDataAttrs={(value) => {
-          return {
-            "data-tip": `${value.date.toISOString().slice(0, 10)} ${
-              value.result === 1 ? "success" : "failure"
-            }`,
-          };
+          try {
+            return {
+              "data-tip": `${value.date.toISOString().slice(0, 10)} ${
+                value.result === 1 ? "success" : "failure"
+              }`,
+            }
+          }
+          catch (error) {
+            console.log(error)
+          }
         }}
         showWeekdayLabels={true}
         onClick={(value) =>

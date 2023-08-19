@@ -1,24 +1,16 @@
 import Head from "next/head";
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
-import {
-    Button,
-    makeStyles,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
+import { Button, makeStyles, Paper,
+        Table, TableBody, TableCell,
+        TableContainer, TableHead,
+        TableRow, Dialog, DialogActions,
+        DialogContent, DialogContentText,
+        DialogTitle,
 } from "@material-ui/core";
 import { useState } from "react";
+import CheckUser from "../../auth0CheckUser";
 
 const useStyles = makeStyles({
     table: {
@@ -42,6 +34,10 @@ interface BehaviorAsProps {
 }
 
 export default function manageBehaviorsPage({ behaviors }) {
+    // Verifies if user has the correct permissions
+    const {allowed, role} = CheckUser(["Admin", "BCBA"])
+    if(!allowed) return(<div>Redirecting...</div>);
+
     const [behaviorList, setBehaviorList] = useState<BehaviorAsProps[]>(
         behaviors.map((behavior: Behavior, idx: number) => ({
             behaviorName: behavior.name,
@@ -76,7 +72,7 @@ export default function manageBehaviorsPage({ behaviors }) {
                 <title>Manage Behavior</title>
                 <link rel="icon" href="/atc-logo.png" />
             </Head>
-            <Navbar pageTitle="Manage Behavior">
+            <Navbar pageTitle="Manage Behavior" role={role}>
                 <div
                     style={{
                         width: "100%",
@@ -127,15 +123,16 @@ export default function manageBehaviorsPage({ behaviors }) {
                                                     <Button
                                                         variant="contained"
                                                         color="primary"
+                                                        style={{width: "100px", marginRight:"1em",}}
                                                     >
-                                                        Click to view details
+                                                        View Details
                                                     </Button>
                                                 </Link>
                                                 <Button
                                                     variant="contained"
                                                     style={{
-                                                        backgroundColor:
-                                                            "#ff604f",
+                                                        backgroundColor: "#ff604f",
+                                                        width: "100px",
                                                         color: "white",
                                                     }}
                                                     onClick={() => {
@@ -188,7 +185,7 @@ export default function manageBehaviorsPage({ behaviors }) {
                     </DialogActions>
                 </Dialog>
 
-                <Link href="/addBehavior">
+                <Link href="/behaviors/add">
                     <Button variant="contained" color="primary">
                         Add Behavior
                     </Button>

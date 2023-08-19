@@ -3,16 +3,21 @@ import { GetServerSideProps } from "next";
 import Navbar from "../../components/Navbar";
 import Link from "next/link";
 import { Button } from "@material-ui/core";
+import CheckUser from "../../auth0CheckUser";
 
 function BehaviorPage({ behaviorData: { data } }) {
+    // Verifies if user has the correct permissions
+    const {allowed, role} = CheckUser(["Admin", "BCBA"])
+    if(!allowed) return(<div>Redirecting...</div>);
+    
     return (
         <>
             <Head>
                 <title>Behavior</title>
                 <link rel="icon" href="/atc-logo.png" />
             </Head>
-            <Navbar pageTitle={data.name}>
-                <Link href="/manageBehaviors">
+            <Navbar pageTitle={data.name} role={role}>
+                <Link href="/behaviors/manage">
                     <Button variant="contained" color="secondary">
                         Back to Manage Behaviors
                     </Button>

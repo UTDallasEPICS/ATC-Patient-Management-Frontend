@@ -3,6 +3,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import theme from '../src/theme';
 
+// does some aligning, ONLY here so we can use material-ui
 export default class MyDocument extends Document {
   render() {
     return (
